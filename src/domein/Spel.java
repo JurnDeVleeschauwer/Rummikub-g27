@@ -1,5 +1,5 @@
 package domein;
 
 public class Spel {
-	 String a = "test";
+	 String test = "test";
 }
