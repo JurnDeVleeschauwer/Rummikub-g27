@@ -1,5 +1,5 @@
 package domein;
 
 public class Spel {
-	 qsdfsqf qsdf s
+	 String a = "test";
 }
