@@ -1,10 +1,12 @@
 package domein;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 
 public class Connectie {
 	/**
@@ -22,8 +24,10 @@ public class Connectie {
 		 {
 			 Connection cn = DriverManager.getConnection(url, user, password);
 			 
-			 String sql = "SELECT * FROM Speler";
+			 String sql = "SELECT * FROM ID344025_g27.Speler";
+			 
 			 Statement statement = cn.createStatement();
+		
 			 ResultSet result = statement.executeQuery(sql);
 			 
 			 int count = 0;
@@ -31,19 +35,26 @@ public class Connectie {
 				 String naam = result.getString(2);
 				 String wachtwoord = result.getString(5);
 				 count++;
-				 System.out.printf("naam: %s en wachtwoord: %s", naam, wachtwoord);
+				 System.out.printf("naam: %s en wachtwoord: %s%n", naam, wachtwoord);
 			 }
 			 cn.close();
-			// String sql = "insert into Speler(naam, wachtwoord) values(?, ?)";
-			// PreparedStatement stat = cn.prepareStatement(sql);
-			// stat.setString(1, "Piet");
-			// stat.setString(2, "ProbeerUitEclipse");
 			 
-			// int rows = stat.executeUpdate();		// Hier klopt iets niet want deze regel zorgt ervoor dat er geen connectie meer is.
-			// if (rows > 0 )
-			//	 System.out.println("Er is iets gebeurt");
-			// stat.close();
-			// cn.close();
+//			 String sql = "insert into ID344025_g27.Speler(naam, voornaam, wachtwoord, emailadres, geboortedatum, adminrechten, krediet) values(?, ?, ?, ?, ?, ?, ?)";
+//			 PreparedStatement stat = cn.prepareStatement(sql);
+//			 stat.setString(1, "Pieters");
+//			 stat.setString(2, "Piet");
+//			 stat.setString(3, "ProbeerUitEclipse");
+//			 stat.setString(4, "Piet.Pieters@gmail.com");
+//			 stat.setString(5, "2002-5-7");
+//			 stat.setString(6, "0");
+//			 stat.setString(7, "0");
+//			 
+//			
+//			 int rows = stat.executeUpdate();		// Hier klopt iets niet want deze regel zorgt ervoor dat er geen connectie meer is.
+//			 if (rows > 0 )
+//				 System.out.println("Er is iets gebeurt");
+//			 stat.close();
+//			 cn.close();
 			 
 			 
 		 }catch(SQLException e) {
