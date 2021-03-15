@@ -5,16 +5,16 @@ public class Speler {
 	private String wachtwoord;
 	
 	public Speler(String gebruikersnaam, String wachtwoord) {
-		setGebruikersnaaam(gebruikersnaam);
+		setGebruikersnaam(gebruikersnaam);
 		setWachtwoord(wachtwoord);
 	}
-	public String getGebruikersnaaam() {
+	public String getGebruikersnaam() {
 		return gebruikersnaam;
 	}
 	public String getWachtwoord() {
 		return wachtwoord;
 	}
-	public void setGebruikersnaaam(String gebruikersnaam) {
+	public void setGebruikersnaam(String gebruikersnaam) {
 		this.gebruikersnaam = gebruikersnaam;
 	}
 	public void setWachtwoord(String wachtwoord) {

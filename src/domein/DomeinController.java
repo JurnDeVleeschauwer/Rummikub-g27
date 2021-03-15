@@ -1,19 +1,19 @@
 package domein;
 
-import java.util.List;
+import persistentie.SpelerRepo;
 
 public class DomeinController {
 	
-	private SpelerRepo spelerRepo;
-	private List<Speler> spelers;
+	private SpelerRepo spelerRepo = new SpelerRepo();
 	
-	public void spelersAanmelden(int aantal) {
-		
-	}
 	
-	public String[] geefGebruikersnamen() {
-		
-		return ;
+	
+	
+	
+	
+
+	public SpelerRepo getSpelerRepo() {
+		return spelerRepo;
 	}
 	
 }
