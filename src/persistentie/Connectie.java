@@ -3,6 +3,7 @@ package persistentie;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,11 +23,13 @@ public class Connectie {
 		 {
 			 Connection cn = DriverManager.getConnection(JDBC_URL);
 			 
-			 String sql = "SELECT * FROM ID344025_g27.Speler";
-			 
+			 //String sql = "SELECT * FROM ID344025_g27.Speler WHERE naam = '?' and wachtwoord = '?'";
+			 PreparedStatement query = cn.prepareStatement("SELECT * FROM ID344025_g27.Speler WHERE naam = ? and wachtwoord = ?");
+		            query.setString(1, "Kobe");
+		            query.setString(2, "Kobe123");
 			 Statement statement = cn.createStatement();
 		
-			 ResultSet result = statement.executeQuery(sql);
+			 ResultSet result = query.executeQuery();
 			 
 			 int count = 0;
 			 while (result.next()) {
