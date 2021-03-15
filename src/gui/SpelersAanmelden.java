@@ -7,6 +7,7 @@ import java.util.Scanner;
 import domein.DomeinController;
 import domein.Speler;
 import exceptions.ExceptieSpelerAanmelden;
+import i18n.UITextHelper;
 
 public class SpelersAanmelden {
 
@@ -16,7 +17,7 @@ public class SpelersAanmelden {
 		int aantal = 0;
 		Scanner sc = new Scanner(System.in);
 		do {
-		System.out.println("Hoeveel spelers spelen er mee? (2-4 Spelers) ");
+		System.out.println(UITextHelper.UIText("Hoeveel.spelers.spelen.er.mee?.2-4.Spelers"));
 		aantal = sc.nextInt();
 		} while (aantal <2 || aantal >4);
 		
