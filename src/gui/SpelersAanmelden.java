@@ -24,11 +24,13 @@ public class SpelersAanmelden {
 		int aantalIngelogd = 0;
 		List<Speler> spelers = new ArrayList<>();
 		while (aantalIngelogd < aantal) {
-			System.out.printf("Speler %d logt nu in%n", aantalIngelogd+1);
-			System.out.println("Geef je gebruikersnaam in: ");
+			System.out.print(UITextHelper.UIText("Speler"));
+            System.out.printf(" %d ", aantalIngelogd+1);
+            System.out.println(UITextHelper.UIText("logt.nu.in"));
+			System.out.println(UITextHelper.UIText("Geef.je.gebruikersnaam.in"));
 			String gebruikersnaam = sc.next();
 			
-			System.out.println("Geef je wachtwoord in: ");
+			System.out.println(UITextHelper.UIText("Geef.je.wachtwoord.in"));
 			String wachtwoord = sc.next();
 			Speler speler = dc.getSpelerRepo().controleerSpeler(gebruikersnaam, wachtwoord);
 			if (speler != null) {
@@ -36,7 +38,7 @@ public class SpelersAanmelden {
 				aantalIngelogd++;
 			}
 			else {
-				System.out.println("Gegevens zijn niet correct, probeer opnieuw.");
+				System.out.println(UITextHelper.UIText("Gegevens.zijn.niet.correct.probeer.opnieuw"));
 				//throw new ExceptieSpelerAanmelden("gebruiker.wachtwoord.voldoet.niet.aan.de.voorwaarden");
 			}
 			
@@ -44,9 +46,10 @@ public class SpelersAanmelden {
 		for(Speler speler : spelers) {
 			System.out.printf("%s ",speler.getGebruikersnaam());
 		}
-		
-		System.out.printf("%nSpeel spel%n");
-		System.out.println("Toon overzicht");
+		System.out.printf("\n");
+		System.out.printf(UITextHelper.UIText("Speel.spel"));
+		System.out.printf("\n");
+		System.out.println(UITextHelper.UIText("Toon.overzicht"));
 		
 	}
 		
