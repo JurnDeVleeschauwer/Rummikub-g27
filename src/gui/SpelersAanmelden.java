@@ -22,7 +22,6 @@ public class SpelersAanmelden {
 		} while (aantal <2 || aantal >4);
 		
 		int aantalIngelogd = 0;
-		List<Speler> spelers = new ArrayList<>();
 		while (aantalIngelogd < aantal) {
 			System.out.print(UITextHelper.UIText("Speler"));
             System.out.printf(" %d ", aantalIngelogd+1);
@@ -32,9 +31,8 @@ public class SpelersAanmelden {
 			
 			System.out.println(UITextHelper.UIText("Geef.je.wachtwoord.in"));
 			String wachtwoord = sc.next();
-			Speler speler = dc.getSpelerRepo().controleerSpeler(gebruikersnaam, wachtwoord);
-			if (speler != null) {
-				spelers.add(speler);
+			if (dc.controleerSpeler(gebruikersnaam, wachtwoord)) {
+				dc.addSpelerAanLijst();
 				aantalIngelogd++;
 			}
 			else {
@@ -43,8 +41,9 @@ public class SpelersAanmelden {
 			}
 			
 		}
-		for(Speler speler : spelers) {
-			System.out.printf("%s ",speler.getGebruikersnaam());
+		
+		for(String gebruikersnaam : dc.getGebruikersnamen()) {
+			System.out.printf("%s ", gebruikersnaam);
 		}
 		System.out.printf("\n");
 		System.out.printf(UITextHelper.UIText("Speel.spel"));
