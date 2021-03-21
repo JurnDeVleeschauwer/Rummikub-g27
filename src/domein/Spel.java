@@ -9,7 +9,6 @@ public class Spel {
 	public Spel(List<Speler> spelers) {
 		this.pot = new Pot();
 		this.spelers = spelers;
-		geefEerste14Stenen();
 	}
 
 	public List<Speler> getSpelers() {
@@ -19,7 +18,7 @@ public class Spel {
 		return pot;
 	}
 	
-	private void geefEerste14Stenen() {
+	public void geefEerste14Stenen() {
 		for (Speler speler : spelers) {
 			for (int i=0;i<14;i++) {
 				speler.krijgtSteen(steenUitPotHalen());
@@ -29,6 +28,34 @@ public class Spel {
 	
 	private RummiSteen steenUitPotHalen() {
 		return pot.verwijderSteen();
+	}
+	
+	public void toonStenen() {
+		for (Speler speler : spelers) {
+			System.out.println(speler.getGebruikersnaam());
+			System.out.println(speler.getStenenInBezit().toString());
+		}
+		System.out.println("pot");
+		System.out.println(pot.getStenen().toString());
+	}
+	
+	public void testWinst() {
+		boolean test=true;
+		do {
+			for (Speler speler : spelers) {
+			
+				for (int i=0;i<(Math.random()*(speler.getStenenInBezit().size()+1));i++) {
+					speler.verwijderSteen();
+				}
+				if (speler.getStenenInBezit().isEmpty()) {
+					System.out.print(speler.getGebruikersnaam());
+					test=false;
+					break;
+				}
+				toonStenen();
+			}
+		} while (test);
+		
 	}
 	
 }

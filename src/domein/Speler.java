@@ -52,6 +52,11 @@ public class Speler {
 	public void krijgtSteen(RummiSteen steen) {
 		stenenInBezit.add(steen);
 	}
-
+	
+	public RummiSteen verwijderSteen() {
+		RummiSteen steen = stenenInBezit.get(0);
+		stenenInBezit.remove(0);
+		return steen;
+	}
 	
 }

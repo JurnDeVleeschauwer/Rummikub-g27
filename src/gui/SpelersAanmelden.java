@@ -50,6 +50,7 @@ public class SpelersAanmelden {
 		System.out.printf("\n");
 		System.out.println(UITextHelper.UIText("Toon.overzicht"));
 		
+		
 	}
 		
 		 

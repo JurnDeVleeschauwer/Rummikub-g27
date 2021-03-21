@@ -10,7 +10,7 @@ public class DomeinController {
 	private SpelerRepo spelerRepo = new SpelerRepo();
 	List<Speler> spelers = new ArrayList<>();
 	Speler speler = null;
-	
+	private Spel spel;
 	
 	
 	
@@ -39,14 +39,19 @@ public class DomeinController {
 		 }
 	}
 
-
-
 	public List<String> getGebruikersnamen() {
 		List<String> gebruikersnamen = new ArrayList<>();
 		for(Speler speler : spelers) {
 			gebruikersnamen.add(speler.getGebruikersnaam());
 		}
 		return gebruikersnamen;
+	}
+	
+	public void startSpel() {
+		this.spel = new Spel(spelers);
+		spel.geefEerste14Stenen();
+		spel.toonStenen();
+		spel.testWinst();
 	}
 	
 }

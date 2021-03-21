@@ -25,4 +25,11 @@ public class RummiSteen {
 	public String getNaam() {
 		return naam;
 	}
+
+	@Override
+	public String toString() {
+		return naam;
+	}
+	
+	
 }

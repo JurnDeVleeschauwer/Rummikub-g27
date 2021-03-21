@@ -13,6 +13,7 @@ public class Pot {
 		for (int j=0;j<4;j++) {
 			for (int i=1;i<=13;i++) {
 				stenen.add(new RummiSteen(i,kleuren[j]));
+				stenen.add(new RummiSteen(i,kleuren[j]));
 			}
 		}
 		for (int i=0;i<2;i++) {
@@ -21,6 +22,10 @@ public class Pot {
 		Collections.shuffle(stenen);
 	}
 	
+	public List<RummiSteen> getStenen() {
+		return stenen;
+	}
+
 	public RummiSteen verwijderSteen() {
 		RummiSteen steen = stenen.get(0);
 		stenen.remove(0);

@@ -30,7 +30,7 @@ public class StartUp {
 		
 		new SpelersAanmelden().spelersAanmelden(dc);
 		
-		
+		dc.startSpel();
 		
 	}
 
