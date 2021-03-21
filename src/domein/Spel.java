@@ -41,6 +41,7 @@ public class Spel {
 	
 	public void testWinst() {
 		boolean test=true;
+		Speler winnaar = null;
 		do {
 			for (Speler speler : spelers) {
 			
@@ -48,14 +49,31 @@ public class Spel {
 					speler.verwijderSteen();
 				}
 				if (speler.getStenenInBezit().isEmpty()) {
-					System.out.print(speler.getGebruikersnaam());
+					System.out.println(speler.getGebruikersnaam());
+					winnaar = speler;
 					test=false;
 					break;
 				}
 				toonStenen();
 			}
 		} while (test);
-		
+		berekenScore(winnaar);
+		for (Speler speler : spelers) {
+			System.out.printf("%s heeft score van %d%n",speler.getGebruikersnaam(),speler.getScore());
+		}
+	}
+	
+	public void berekenScore(Speler winnaar) {
+		int winscore = 0;
+		for (Speler speler : spelers) {
+			int score = 0;
+			for (RummiSteen steen : speler.getStenenInBezit()) {
+				score -= steen.getWaarde();
+				winscore += steen.getWaarde();
+			}
+			speler.setScore(score);
+		}
+		winnaar.setScore(winscore);
 	}
 	
 }
