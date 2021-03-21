@@ -1,6 +1,7 @@
 package domein;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import persistentie.SpelerRepo;
@@ -13,18 +14,10 @@ public class DomeinController {
 	private Spel spel;
 	
 	
-	
-	
-
 	public SpelerRepo getSpelerRepo() {
 		return spelerRepo;
 	}
 
-
-
-	public void addSpelerAanLijst() {
-	  spelers.add(speler);
-	}
 
 
 
@@ -39,6 +32,8 @@ public class DomeinController {
 		 }
 	}
 
+	
+	
 	public List<String> getGebruikersnamen() {
 		List<String> gebruikersnamen = new ArrayList<>();
 		for(Speler speler : spelers) {
@@ -47,11 +42,24 @@ public class DomeinController {
 		return gebruikersnamen;
 	}
 	
+	
+	
+	public void addSpelerAanLijst() {
+	  spelers.add(speler);
+	}
+
+
+	
+	
 	public void startSpel() {
 		this.spel = new Spel(spelers);
 		spel.geefEerste14Stenen();
 		spel.toonStenen();
-		spel.testWinst();
+		spel.speelSpel();
+		//spel.testWinst();
 	}
 	
+	public void bepaalVolgordeSpelers() {
+		Collections.shuffle(spelers);
+	}
 }
