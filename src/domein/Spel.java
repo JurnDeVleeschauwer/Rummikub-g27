@@ -91,17 +91,12 @@ public class Spel {
 	}
 	
 	public Speler bepaalWinnaar() {
-		int indexVolgendeSpeler = -1;
-		for (int i = 0 ; i<this.spelers.size();i++) {
-			if (this.spelerAanZet == this.spelers.get(i)) {
-				indexVolgendeSpeler = i;
-			}
+		for (Speler speler : spelers) {
+			if (speler.getStenenInBezit().size() == 0)
+				return speler;
 		}
-		if (indexVolgendeSpeler == 0) {
-			return this.spelers.get(this.spelers.size()-1);
-		}
-		else
-			return this.spelers.get(indexVolgendeSpeler-1);
+		return null;
+		
 	}
 	
 //	public void testWinst() {
