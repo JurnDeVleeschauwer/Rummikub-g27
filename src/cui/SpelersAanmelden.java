@@ -1,4 +1,4 @@
-package gui;
+package cui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +11,10 @@ import i18n.UITextHelper;
 
 public class SpelersAanmelden {
 
-	public void spelersAanmelden(DomeinController dc) throws ExceptieSpelerAanmelden {
+	public void spelersAanmelden(DomeinController dc, Scanner sc) throws ExceptieSpelerAanmelden {
 		
 		
 		int aantal = 0;
-		Scanner sc = new Scanner(System.in);
 		do {
 		System.out.println(UITextHelper.UIText("Hoeveel.spelers.spelen.er.mee?.2-4.Spelers"));
 		aantal = sc.nextInt();
@@ -45,10 +44,6 @@ public class SpelersAanmelden {
 		for(String gebruikersnaam : dc.getGebruikersnamen()) {
 			System.out.printf("%s ", gebruikersnaam);
 		}
-		System.out.printf("\n");
-		System.out.printf(UITextHelper.UIText("Speel.spel"));
-		System.out.printf("\n");
-		System.out.println(UITextHelper.UIText("Toon.overzicht"));
 		
 		
 	}
