@@ -19,7 +19,7 @@ public class SpelCui {
 				dc.beeindigBeurt();
 				break;
 			case 2:
-				
+				dc.steenAanleggen();
 				break;
 			case 3:
 				

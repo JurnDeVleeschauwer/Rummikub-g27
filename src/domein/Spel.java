@@ -2,6 +2,7 @@ package domein;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 public class Spel {
 	private final List<Speler> spelers;
@@ -13,6 +14,7 @@ public class Spel {
 	public Spel(List<Speler> spelers) {
 		this.pot = new Pot();
 		this.vasteTafel = new Tafel();
+		this.tijdelijkeTafel = new Tafel();
 		this.spelers = spelers;
 		Collections.shuffle(spelers);
 		geefEerste14Stenen();
@@ -125,5 +127,21 @@ public class Spel {
 
 	public void bepaalSpelerAanZet() {
 		setSpelerAanZet(spelers.get((spelers.indexOf(spelerAanZet)+1)%spelers.size()));
+	}
+	
+	public void steenOpTafelLeggen(RummiSteen steen) {
+		this.tijdelijkeTafel.legSteenOpTafel(steen);
+	}
+	
+	public void steenAanleggen() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Geef de naam van de steen die je wil leggen");
+		String naam = sc.next();
+		RummiSteen steen = this.spelerAanZet.geefSteenMetNaam(naam);
+		if(steen != null) {
+			this.spelerAanZet.verwijderSteen(steen);
+			this.steenOpTafelLeggen(steen);
+			this.zetNeemSteen(false);
+		} else System.out.println("Deze steen heb je niet in je bezit");
 	}
 }

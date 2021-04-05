@@ -72,10 +72,9 @@ public class Speler {
 		stenenInBezit.add(steen);
 	}
 	
-	public RummiSteen verwijderSteen() {
-		RummiSteen steen = stenenInBezit.get(0);
-		stenenInBezit.remove(0);
-		return steen;
+	public void verwijderSteen(RummiSteen steen) {
+		int index = stenenInBezit.indexOf(steen);
+		stenenInBezit.remove(index);
 	}
 	
 	public String toonStenen() {
@@ -85,5 +84,13 @@ public class Speler {
 			}
 		return returnString;
 	}
+	
+	public RummiSteen geefSteenMetNaam(String naam) {
+		for(RummiSteen s : this.stenenInBezit) {
+			if(s.getNaam().equals(naam)) return s;
+		}
+		return null;
+	}
+	
 	
 }

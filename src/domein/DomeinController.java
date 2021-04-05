@@ -74,4 +74,8 @@ public class DomeinController {
 		spel.beeindigBeurt();
 	}
 	
+	public void steenAanleggen() {
+		spel.steenAanleggen();
+	}
+	
 }

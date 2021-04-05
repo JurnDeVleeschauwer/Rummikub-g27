@@ -33,14 +33,14 @@ public class StartUp extends Application {
 	public static void main(String[] args) throws ExceptieSpelerAanmelden{
         Locale.setDefault(LOCALE_NL);
 
-        if (args[0].contentEquals("c")) {
+//        if (args[0].contentEquals("c")) {
             DomeinController domeinController = new DomeinController();
             new Rummikub().start(domeinController);
 
-        } else {
-            launch(args);
-        }
-        
+//        } else {
+//            launch(args);
+//        }
+//        
 
 	}
 

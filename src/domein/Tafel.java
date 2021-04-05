@@ -1,18 +1,19 @@
 package domein;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Tafel {
 	private List<List<RummiSteen>> stenenOpTafel;
 
 	public Tafel() {
-		stenenOpTafel= new ArrayList<>();
+		this.stenenOpTafel= new ArrayList<List<RummiSteen>>();
 		
 	}
 	
 	public void legSteenOpTafel(RummiSteen steen) {
-		stenenOpTafel.get(0).add(steen);
+		this.stenenOpTafel.add(Arrays.asList(steen));
 	}
 	
 	public List<List<RummiSteen>> getStenenOpTafel() {
