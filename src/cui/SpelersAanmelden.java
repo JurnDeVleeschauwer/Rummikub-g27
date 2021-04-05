@@ -11,7 +11,7 @@ import i18n.UITextHelper;
 
 public class SpelersAanmelden {
 
-	public void spelersAanmelden(DomeinController dc, Scanner sc) throws ExceptieSpelerAanmelden {
+	public static void spelersAanmelden(DomeinController dc, Scanner sc) throws ExceptieSpelerAanmelden {
 		
 		
 		int aantal = 0;

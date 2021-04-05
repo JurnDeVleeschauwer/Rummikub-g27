@@ -1,58 +1,47 @@
 package main;
 
 import java.util.Locale;
-import java.util.Scanner;
 
+import cui.Rummikub;
 import domein.DomeinController;
 import exceptions.ExceptieSpelerAanmelden;
-import cui.SpelersAanmelden;
-import cui.SpelCui;
-import i18n.UITextHelper;
+import gui.HoofdPaneel;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class StartUp {
+public class StartUp extends Application {
 	
+	/**
+	 * Maak land en dus taal nederlands als basis.
+	 */
 	private static final Locale LOCALE_NL = new Locale("nl");
+	
+	 @Override
+	    public void start(Stage Stage) {
+	        DomeinController domeinController = new DomeinController();
+	        
 
-	public static void main(String[] args) throws ExceptieSpelerAanmelden {
-		// TODO Auto-generated method stub
-		Scanner sc = new Scanner(System.in);
-		 Locale.setDefault(LOCALE_NL);
-		 
-		 
-		 System.out.println("nl");
-		 System.out.println("fr");
-		 System.out.println("en");
-		 String taal = sc.next();
-		 System.out.println(taal);
-		 
-		 UITextHelper.setLocale(taal);
-		DomeinController dc = new DomeinController();
-		
-		
-		new SpelersAanmelden().spelersAanmelden(dc, sc);
-		
-		boolean einde = true;
-		do {
-			System.out.printf("\n");
-			System.out.printf("1. %s%n",UITextHelper.UIText("Speel.spel"));
-			System.out.printf("2. %s%n",UITextHelper.UIText("Toon.overzicht"));
-			System.out.printf("3. %s%n",UITextHelper.UIText("Stop.met.spelen"));
-			System.out.println(UITextHelper.UIText("Kies.optie"));
-			switch (sc.nextInt()) {
-				case 1:
-					new SpelCui().spelCui(dc, sc);
-					break;
-				case 2:
-					System.out.println(dc.toonOverzicht());
-					break;
-				case 3:
-					einde=false;
-					break;
-//				default:
-//					;
-			}
-		} while (einde);
-		sc.close();
+	        HoofdPaneel root = new HoofdPaneel(domeinController);
+
+	        Scene scene = new Scene(root, 800, 800);
+
+	        Stage.setScene(scene);
+	        Stage.setTitle("Rummikub");
+	        Stage.show();
+	    }
+	public static void main(String[] args) throws ExceptieSpelerAanmelden{
+        Locale.setDefault(LOCALE_NL);
+
+        if (args[0].contentEquals("c")) {
+            DomeinController domeinController = new DomeinController();
+            new Rummikub().start(domeinController);
+
+        } else {
+            launch(args);
+        }
+        
+
 	}
 
 }

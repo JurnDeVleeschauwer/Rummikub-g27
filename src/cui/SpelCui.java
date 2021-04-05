@@ -7,7 +7,7 @@ import i18n.UITextHelper;
 
 public class SpelCui {
 	
-	public void spelCui(DomeinController dc, Scanner sc) {
+	public static void spelCui(DomeinController dc, Scanner sc) {
 		dc.startSpel();
 		do {
 			System.out.println(dc.toonStenen());
