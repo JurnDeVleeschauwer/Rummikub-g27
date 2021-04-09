@@ -55,7 +55,7 @@ public class TaalMenu extends GridPane
     {
     	hoofdPaneel.setLocale(new Locale("nl"));
     	hoofdPaneel.createPanelen();
-    	hoofdPaneel.toonAanmeldPaneel();
+    	hoofdPaneel.toonHoeveelSpelersPaneel();
     	
     	
     }
@@ -63,7 +63,7 @@ public class TaalMenu extends GridPane
     {
     	hoofdPaneel.setLocale(new Locale("fr"));
     	hoofdPaneel.createPanelen();
-    	hoofdPaneel.toonAanmeldPaneel();
+    	hoofdPaneel.toonHoeveelSpelersPaneel();
 
     }
     
@@ -71,7 +71,7 @@ public class TaalMenu extends GridPane
     {
     	hoofdPaneel.setLocale(new Locale("en"));
     	hoofdPaneel.createPanelen();
-    	hoofdPaneel.toonAanmeldPaneel();
+    	hoofdPaneel.toonHoeveelSpelersPaneel();
 
     }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Speler {
+	private int id;
 	private String gebruikersnaam;
 	private String wachtwoord;
 	private int score;
@@ -13,10 +14,11 @@ public class Speler {
 	private boolean neemSteen;
 	
 
-	public Speler(String gebruikersnaam, String wachtwoord) {
+	public Speler(int id, String gebruikersnaam, String wachtwoord , int score) {
+		this.id = id;
 		setGebruikersnaam(gebruikersnaam);
 		setWachtwoord(wachtwoord);
-		setScore(0);
+		setScore(score);
 		setIsEersteBeurt(true);
 		setNeemSteen(true);
 		stenenInBezit = new ArrayList<>();

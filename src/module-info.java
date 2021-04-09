@@ -9,4 +9,5 @@ module Rummikub {
 	
 	opens gui to javafx.graphics,javafx.fxml; 
 	opens cui to javafx.graphics,javafx.fxml; 
+	opens domein to javafx.base;
 }

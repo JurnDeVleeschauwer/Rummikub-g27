@@ -78,4 +78,8 @@ public class DomeinController {
 		spel.steenAanleggen();
 	}
 	
+	public List<Speler> getSpelers(){
+		return spelers;
+	}
+	
 }

@@ -15,8 +15,12 @@ public class HoofdPaneel extends BorderPane {
 	//private SpelPaneel spel;
 	private HoofdMenu hoofdMenu;
 	private TaalMenu taalMenu;
+	private HoeveelSpelersPaneel hoeveelSpelers;
+	private ToonOverzichtPaneel toonOverzicht;
 	private Locale locale;
 	private ResourceBundle bundle;
+	private int aantalSpelers;
+	private int aantalSpelersIngelogt = 0;
 
 	public HoofdPaneel(DomeinController domeinController) {
 		this.domeinController = domeinController;
@@ -39,8 +43,26 @@ public class HoofdPaneel extends BorderPane {
 		this.bundle = ResourceBundle.getBundle("i18n.Rummikub", locale);
 		this.aanmelden = new AanmeldPaneel(domeinController, this);
 		this.hoofdMenu = new HoofdMenu(domeinController, this);
+		this.hoeveelSpelers = new HoeveelSpelersPaneel(domeinController, this);
+		
 		//this.spel = new SpelPaneel(domeinController, this);
 
+	}
+	
+	public void setAantalSpelers(int aantalSpelers) {
+		this.aantalSpelers = aantalSpelers;
+	}
+	
+	public int getAantalSpelers() {
+		return this.aantalSpelers;
+	}
+	
+	public int getAantalSpelersIngelogt() {
+		return aantalSpelersIngelogt;
+	}
+
+	public void setAantalSpelersIngelogt(int aantalSpelersIngelogt) {
+		this.aantalSpelersIngelogt = aantalSpelersIngelogt;
 	}
 
 	//public void toonSpelPaneel() {
@@ -57,6 +79,15 @@ public class HoofdPaneel extends BorderPane {
 	public void toonHoofdMenu() {
 		setCenter(hoofdMenu);
 	}
+	public void toonHoeveelSpelersPaneel() {
+		setCenter(hoeveelSpelers);
+	}
+	
+	public void toonToonOverzichtPaneel() {
+		this.toonOverzicht = new ToonOverzichtPaneel(domeinController, this);
+		setCenter(toonOverzicht);
+	}
+	
 	
 
 	public void setLocale(Locale locale) {

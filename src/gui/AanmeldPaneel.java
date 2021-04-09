@@ -85,15 +85,21 @@ public class AanmeldPaneel extends GridPane
             return;
         }
         
-        domeinController.controleerSpeler(naam.getText().trim(), wachtwoord.getText().trim());
-        
-        if (domeinController.getGebruikersnamen() == null) { //TODO
-            foutbericht.setText(hoofdPaneel.getBundle().getString("Deze.speler.bestaat.niet.of.het.wachtwoord.is.verkeerd"));
+        if (!domeinController.controleerSpeler(naam.getText().trim(), wachtwoord.getText().trim())) {
+        	foutbericht.setText(hoofdPaneel.getBundle().getString("Deze.speler.bestaat.niet.of.het.wachtwoord.is.verkeerd"));
             return;
+        	
         }
-        
+        foutbericht.setText(hoofdPaneel.getBundle().getString("Gelieve.uw.wachtwoord.op.te.geven"));
+        domeinController.addSpelerAanLijst();
         foutbericht.setText(null);
-        hoofdPaneel.toonHoofdMenu();
+        hoofdPaneel.setAantalSpelersIngelogt(hoofdPaneel.getAantalSpelersIngelogt() + 1);
+        if(hoofdPaneel.getAantalSpelersIngelogt() == hoofdPaneel.getAantalSpelers()) {
+        	hoofdPaneel.toonHoofdMenu();
+        } else {
+            hoofdPaneel.toonAanmeldPaneel();
+            }
+
     }
     
 }

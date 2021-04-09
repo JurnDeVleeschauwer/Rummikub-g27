@@ -11,7 +11,6 @@ import javafx.scene.layout.GridPane;
 public class HoofdMenu extends GridPane {
 	private final DomeinController domeinController;
 	private final HoofdPaneel hoofdPaneel;
-	private boolean admin = false;
 
 	public HoofdMenu(DomeinController domeinController, HoofdPaneel hoofdPaneel) {
 		this.domeinController = domeinController;
@@ -48,7 +47,7 @@ public class HoofdMenu extends GridPane {
 	}
 	
 	private void toonOverzicht(ActionEvent event) {
-		//TODO
+		hoofdPaneel.toonToonOverzichtPaneel();
 	}
 
 	private void stoppen(ActionEvent event) {
