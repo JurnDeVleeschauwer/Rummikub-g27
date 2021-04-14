@@ -22,7 +22,7 @@ public class SpelCui {
 				dc.steenAanleggen();
 				break;
 			case 3:
-				
+				dc.steenNaarWerkveld();
 				break;
 			case 4:
 				

@@ -54,7 +54,7 @@ public class DomeinController {
 	}
 	
 	public String toonStenen() {
-		return String.format("Tafel:%n%s%n%s:%n%s", spel.toonStenenTafel(),spel.getSpelerAanZet().getGebruikersnaam(), spel.toonStenenSpeler());
+		return String.format("Tafel:%n%s%nWerkveld: %s%n%s:%n%s", spel.toonStenenTafel(), spel.toonWerkveld(),spel.getSpelerAanZet().getGebruikersnaam(), spel.toonStenenSpeler());
 	}
 	
 	public boolean checkWinst() {
@@ -76,6 +76,10 @@ public class DomeinController {
 	
 	public void steenAanleggen() {
 		spel.steenAanleggen();
+	}
+	
+	public void steenNaarWerkveld() {
+		spel.steenNaarWerkveld();
 	}
 	
 	public List<Speler> getSpelers(){

@@ -1,19 +1,22 @@
 package domein;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Tafel {
 	private List<List<RummiSteen>> stenenOpTafel;
 
 	public Tafel() {
-		this.stenenOpTafel= new ArrayList<List<RummiSteen>>();
+		this.stenenOpTafel= new ArrayList<>(10);
+		for(int i=0; i <10 ; i++) {
+		    stenenOpTafel.add(new ArrayList());
+		}
+		
 		
 	}
 	
-	public void legSteenOpTafel(RummiSteen steen) {
-		this.stenenOpTafel.add(Arrays.asList(steen));
+	public void legSteenOpTafel(RummiSteen steen, int rij) {
+		this.stenenOpTafel.get(rij).add(steen);
 	}
 	
 	public List<List<RummiSteen>> getStenenOpTafel() {
@@ -38,6 +41,26 @@ public class Tafel {
 //			}
 //		}
 		return true;
+	}
+	public RummiSteen geefSteenMetNaam(String naam) {
+		for(List<RummiSteen> r : this.stenenOpTafel) {
+			for(RummiSteen s : r) {
+				if(s.getNaam().equals(naam)) return s;
+			}
+		}
+		return null;
+		
+	}
+	
+	public void verwijderSteen(RummiSteen steen) {
+		for(List<RummiSteen> r : this.stenenOpTafel) {
+			for(RummiSteen s : r) {
+				if(s.equals(steen)) {
+					r.remove(s);
+					break;
+				}
+			}
+		}
 	}
 
 }
