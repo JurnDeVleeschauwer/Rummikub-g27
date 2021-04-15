@@ -58,7 +58,6 @@ public class Tafel {
 	}
 
 	public boolean controleerTafel() {
-		//Slordig
 		for (List<RummiSteen> steenGroep:stenenOpTafel) {
 			RummiSteen vorigeSteen = null;
 			List<String> kleuren = new ArrayList<>();
