@@ -28,6 +28,8 @@ public class SpelCui {
 				dc.SteenVervangenDoorJoker();
 				break;
 			case 5:
+				dc.jokerVervangen();
+			case 6:
 				dc.reset();
 				break;
 			}

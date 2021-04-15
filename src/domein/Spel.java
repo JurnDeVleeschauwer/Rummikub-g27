@@ -151,7 +151,7 @@ public class Spel {
 	}
 	
 	private boolean controleerTafel() {
-		return tijdelijkeTafel.controleerTafel();
+		return true;//tijdelijkeTafel.controleerTafel();
 	}
 
 	public void bepaalSpelerAanZet() {
@@ -209,6 +209,65 @@ public class Spel {
 		} else System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.ligt.niet.op.tafel"));
 	}
 	
+	public void jokerVervangen() {
+		System.out.printf("%s%n", UITextHelper.UIText("Op.welke.rij.ligt.de.joker?"));
+		int rij = sc.nextInt();
+		int aantalJokers = 0;
+		for(RummiSteen steen : this.tijdelijkeTafel.getStenenOpTafel().get(rij)) {
+			if(steen.getKleur().equals("Groen")) aantalJokers++;
+		}
+		int hoeveelste = 0;
+		if(aantalJokers<1) 
+			System.out.printf("%s%n", UITextHelper.UIText("Er.ligt.geen.Joker.in.deze.rij"));
+		else if(aantalJokers > 1) {
+			System.out.printf("%s%n", UITextHelper.UIText("De.hoeveelste.Joker.in.deze.rij.wil.je.vervangen?"));
+			hoeveelste = sc.nextInt();
+			if(aantalJokers == 1) 
+				hoeveelste = 1;
+		}
+		if(!(aantalJokers<1)) {
+			System.out.printf("%s%n", UITextHelper.UIText("Geef.de.naam.van.de.steen.die.je.wil.leggen"));
+			String naam = sc.next();
+			
+			boolean vanWerkveld = true;
+			RummiSteen steenOmTeLeggen = this.geefSteenMetNaam(naam);
+			if(steenOmTeLeggen==null) {
+				steenOmTeLeggen = this.spelerAanZet.geefSteenMetNaam(naam);
+				vanWerkveld = false;
+			}
+			if(steenOmTeLeggen != null) {
+				if(vanWerkveld) {
+					this.werkveld.remove(steenOmTeLeggen);
+				}else {
+					this.spelerAanZet.verwijderSteen(steenOmTeLeggen);
+					this.zetNeemSteen(false);
+				}
+				int hoeveelsteJokerIsHet = 0;
+				List<RummiSteen> nieuweRij = new ArrayList();
+				for (RummiSteen rummisteen : this.tijdelijkeTafel.getStenenOpTafel().get(rij)) { //Dit werkt blijkbaar niet
+					if(rummisteen.getKleur().equals("Groen")) {
+						hoeveelsteJokerIsHet++;
+						if(hoeveelste == hoeveelsteJokerIsHet) {
+							
+							nieuweRij.add(steenOmTeLeggen);
+						}else {
+							nieuweRij.add(rummisteen);
+						}
+					}	
+					else
+						nieuweRij.add(rummisteen);
+					this.tijdelijkeTafel.getStenenOpTafel().get(rij).remove(rummisteen);
+				}
+					
+				for(RummiSteen rummisteen: nieuweRij) {
+					this.tijdelijkeTafel.getStenenOpTafel().get(rij).add(rummisteen);
+				}
+			}
+			else System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.heb.je.niet.in.je.bezit"));
+		}
+		
+	}
+	
 	public void SteenVervangenDoorJoker() {
 		RummiSteen joker = this.spelerAanZet.geefSteenMetNaam("Joker");
 		if(joker!=null) {
@@ -223,7 +282,7 @@ public class Spel {
 				List<RummiSteen> rij = new ArrayList();
 				for (List<RummiSteen> r : this.tijdelijkeTafel.getStenenOpTafel()) {
 					if (r.contains(s)) {
-						for (RummiSteen steen : r) {
+						for (RummiSteen steen : r) {  //En dit blijkbaar ook niet
 							if(steen != s)
 								rij.add(steen);
 							else
