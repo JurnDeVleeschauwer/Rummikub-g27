@@ -58,11 +58,78 @@ public class Tafel {
 	}
 
 	public boolean controleerTafel() {
-//		for (List<RummiSteen> steenGroep:stenenOpTafel) {
-//			for (RummiSteen steen: steenGroep) {
-//				
-//			}
-//		}
+		for (List<RummiSteen> steenGroep:stenenOpTafel) {
+			RummiSteen vorigeSteen = null;
+			List<String> kleuren = new ArrayList<>();
+			int laatsteWaarde = 0;
+			String laatsteKleur = "";
+			int aantalStenen =0;
+			boolean straat = false;
+			boolean gelijkeNummers = false;
+			for (RummiSteen steen: steenGroep) {
+				if (straat == true | gelijkeNummers == true) {
+					if (straat) {
+						if (steen.getKleur() == vorigeSteen.getKleur() & steen.getWaarde() == vorigeSteen.getWaarde()+1) {
+							laatsteWaarde = steen.getWaarde();
+							laatsteKleur = steen.getKleur();
+						}
+						else if (vorigeSteen.getKleur()=="Groen"|steen.getKleur()=="Groen") {
+							if (steen.getKleur() == laatsteKleur & steen.getWaarde() == laatsteWaarde+2) {
+								laatsteWaarde = steen.getWaarde();
+								laatsteKleur = steen.getKleur();
+							}
+						}
+						else {
+							return false;
+						}
+					}
+					if (gelijkeNummers) {
+						if (aantalStenen<=4) {
+							if ((steen.getWaarde() == vorigeSteen.getWaarde() & !(kleuren.contains(steen.getKleur())))) {
+								kleuren.add(steen.getKleur());
+								laatsteWaarde = steen.getWaarde();
+							}
+							else if (vorigeSteen.getKleur()=="Groen"|steen.getKleur()=="Groen") {
+								if (steen.getWaarde() == laatsteWaarde & !(kleuren.contains(steen.getKleur()))) {
+									laatsteWaarde = steen.getWaarde();
+									laatsteKleur = steen.getKleur();
+								}
+							}
+							else {
+								return false;
+							}
+						}
+						else {
+							return false;
+						}
+					}
+				}
+				else if (!(vorigeSteen == null)) {
+					if (!(vorigeSteen.getKleur()=="Groen"|steen.getKleur()=="Groen")) {
+						if (steen.getKleur() == vorigeSteen.getKleur() & steen.getWaarde() == vorigeSteen.getWaarde()+1) {
+							laatsteWaarde = steen.getWaarde();
+							laatsteKleur = steen.getKleur();
+							straat = true;
+						}
+						else if ((steen.getWaarde() == vorigeSteen.getWaarde() & !(kleuren.contains(steen.getKleur())))||aantalStenen<=4) {
+							kleuren.add(steen.getKleur());
+							gelijkeNummers = true;
+						}
+						else {
+							return false;
+						}
+					}
+				}
+				else {
+					kleuren.add(steen.getKleur());
+				}
+				vorigeSteen = steen;
+				aantalStenen++;
+			}
+			if (!steenGroep.isEmpty() & aantalStenen < 3) {
+				return false;
+			}
+		}
 		return true;
 	}
 	public RummiSteen geefSteenMetNaam(String naam) {
