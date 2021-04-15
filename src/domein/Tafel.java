@@ -58,6 +58,8 @@ public class Tafel {
 	}
 
 	public boolean controleerTafel() {
+		//test
+		
 		for (List<RummiSteen> steenGroep:stenenOpTafel) {
 			RummiSteen vorigeSteen = null;
 			List<String> kleuren = new ArrayList<>();
