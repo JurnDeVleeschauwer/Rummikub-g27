@@ -120,8 +120,12 @@ public class Spel {
 		return spelerAanZet.getStenenInBezit().isEmpty();
 	}
 
-	public String toonStenenTafel() {
-		return tijdelijkeTafel.toonStenen();
+	public String toonStenenTafel(int tafel) {
+		if (tafel<10) {
+			return vasteTafel.toonStenen();
+		}
+		else
+			return tijdelijkeTafel.toonStenen();
 	}
 	
 	public void zetNeemSteen(boolean b) {
