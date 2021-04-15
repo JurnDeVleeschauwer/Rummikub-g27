@@ -23,6 +23,29 @@ public class Tafel {
 		return stenenOpTafel;
 	}
 
+	public void reset(List<List<RummiSteen>> stenenVasteTafel, Speler spelerAanZet) {
+		for (List<RummiSteen> l:this.stenenOpTafel) {
+			for (RummiSteen s: l) {
+				spelerAanZet.krijgtSteen(s);
+			}
+		}
+		
+		List<List<RummiSteen>> stenenOpTafel = new ArrayList<>(10);
+		for(int i=0; i <10 ; i++) {
+		    stenenOpTafel.add(new ArrayList());
+		}
+		
+		int tellerRij = 0;
+		for (List<RummiSteen> l:stenenVasteTafel) {
+			for (RummiSteen s: l) {
+				stenenOpTafel.get(tellerRij).add(s);
+			}
+			tellerRij++;
+		}
+		this.stenenOpTafel = stenenOpTafel;
+		
+	}
+	
 	public String toonStenen() {
 		String returnString = "";
 		for (List<RummiSteen> steenGroep:stenenOpTafel) {

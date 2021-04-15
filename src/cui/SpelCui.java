@@ -25,7 +25,7 @@ public class SpelCui {
 				dc.steenNaarWerkveld();
 				break;
 			case 4:
-				
+				dc.SteenVervangenDoorJoker();
 				break;
 			case 5:
 				dc.reset();

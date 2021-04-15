@@ -1,11 +1,15 @@
 package domein;
 
 import java.util.ArrayList;
+//import org.apache.commons.lang.SerializationUtils;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import i18n.UITextHelper;
+
 public class Spel {
+	Scanner sc = new Scanner(System.in);
 	private final List<Speler> spelers;
 	private final Pot pot;
 	private Speler spelerAanZet;
@@ -47,7 +51,9 @@ public class Spel {
 		this.vasteTafel = tijdelijkeTafel;
 	}
 	public void resetTijdelijkeTafel() {
-		setTijdelijkeTafel(vasteTafel);
+		//this.tijdelijkeTafel = SerializationUtils.clone(this.vasteTafel)
+		this.tijdelijkeTafel.reset(this.vasteTafel.getStenenOpTafel(), this.spelerAanZet);
+		
 	}
 	
 	public void geefEerste14Stenen() {
@@ -164,12 +170,11 @@ public class Spel {
 	}
 	
 	public void steenAanleggen() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Geef de naam van de steen die je wil leggen");
+		System.out.printf("%s%n",UITextHelper.UIText("Geef.de.naam.van.de.steen.die.je.wil.leggen"));
 		String naam = sc.next();
 		int rij = 11;
 		do {
-			System.out.println("Geef de rij waaraan je deze steen wilt leggen");
+			System.out.printf("%s%n",UITextHelper.UIText("Geef.de.rij.waaraan.je.deze.steen.wilt.leggen"));
 			rij = sc.nextInt();
 		}while(rij > 10);
 		
@@ -189,18 +194,52 @@ public class Spel {
 				this.steenOpTafelLeggen(steen, rij);
 				this.zetNeemSteen(false);
 			}
-		} else System.out.println("Deze steen heb je niet in je bezit");
+		} else System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.heb.je.niet.in.je.bezit"));
+		
 	}
 	
 	public void steenNaarWerkveld() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Geef de naam van de steen die je naar het werkveld wil brengen");
+		System.out.printf("%s%n", UITextHelper.UIText("Geef.de.naam.van.de.steen.die.je.naar.het.werkveld.wil.brengen"));
 		String naam = sc.next();
 				
 		RummiSteen steen = this.tijdelijkeTafel.geefSteenMetNaam(naam);
 		if(steen != null) {
 			this.tijdelijkeTafel.verwijderSteen(steen);
 			this.werkveld.add(steen);
-		} else System.out.println("Deze steen ligt niet op tafel");
+		} else System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.ligt.niet.op.tafel"));
+	}
+	
+	public void SteenVervangenDoorJoker() {
+		RummiSteen joker = this.spelerAanZet.geefSteenMetNaam("Joker");
+		if(joker!=null) {
+			System.out.printf("%s%n", UITextHelper.UIText("Geef.de.naam.van.de.steen.die.je.wil.vervangen"));
+			String naam = sc.next();
+			RummiSteen s = this.tijdelijkeTafel.geefSteenMetNaam(naam);
+			
+			if (s==null) {
+				System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.ligt.niet.op.tafel"));
+			}
+			else {
+				List<RummiSteen> rij = new ArrayList();
+				for (List<RummiSteen> r : this.tijdelijkeTafel.getStenenOpTafel()) {
+					if (r.contains(s)) {
+						for (RummiSteen steen : r) {
+							if(steen != s)
+								rij.add(steen);
+							else
+								rij.add(joker);
+							this.tijdelijkeTafel.verwijderSteen(steen);
+						}
+					}
+					for(RummiSteen rummisteen: rij) {
+					r.add(rummisteen);
+				}
+				}
+				this.werkveld.add(s);
+			}
+		} 
+		else {
+			System.out.printf("%s%n", UITextHelper.UIText("Je.hebt.geen.Joker"));
+		}
 	}
 }
