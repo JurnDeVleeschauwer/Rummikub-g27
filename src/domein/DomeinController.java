@@ -82,6 +82,10 @@ public class DomeinController {
 		spel.SteenVervangenDoorJoker();
 	}
 	
+	public void rijSplitsen() {
+		spel.rijSplitsen();
+	}
+	
 	public void jokerVervangen() {
 		spel.jokerVervangen();
 	}

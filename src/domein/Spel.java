@@ -143,7 +143,7 @@ public class Spel {
 			if (spelerAanZet.getNeemSteen())
 				spelerAanZet.krijgtSteen(steenUitPotHalen());
 			bepaalSpelerAanZet();
-			setVasteTafel(this.tijdelijkeTafel);
+			this.vasteTafel.reset(this.tijdelijkeTafel.getStenenOpTafel(), this.spelerAanZet);
 		}
 		else {
 			
@@ -300,5 +300,43 @@ public class Spel {
 		else {
 			System.out.printf("%s%n", UITextHelper.UIText("Je.hebt.geen.Joker"));
 		}
+	}
+	
+	public void rijSplitsen(){
+		System.out.printf("%s%n", UITextHelper.UIText("Welke.rij.wil.je.splitsen?"));
+		int rij = sc.nextInt();
+		System.out.printf("%s%n", UITextHelper.UIText("Geef.de.naam.van.de.steen.waarachter.je.de.rij.wil.splitsen"));
+		String naam = sc.next();
+		int splitsing = 0;
+		int index = 0;
+		List<RummiSteen> naSplitsing = new ArrayList();
+		List<RummiSteen> voorSplitsing = new ArrayList();
+		for(RummiSteen rummisteen : this.tijdelijkeTafel.getStenenOpTafel().get(rij)) { //en hier dus ook niet
+			if (splitsing <1) {
+				voorSplitsing.add(rummisteen);
+				if(rummisteen.getNaam().equals(naam)) {
+				splitsing++;
+				index = this.tijdelijkeTafel.getStenenOpTafel().get(rij).indexOf(rummisteen);
+				}
+			}
+			else {
+				naSplitsing.add(rummisteen);
+			}
+			this.tijdelijkeTafel.getStenenOpTafel().get(rij).remove(rummisteen);
+		}
+		if(splitsing == 0)
+			System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.ligt.niet.op.deze.rij"));
+		else {
+			for(RummiSteen rummisteen : voorSplitsing)
+				this.tijdelijkeTafel.getStenenOpTafel().get(rij).add(rummisteen);
+			this.tijdelijkeTafel.getStenenOpTafel().get(rij).add(null);
+			this.tijdelijkeTafel.getStenenOpTafel().get(rij).add(null);
+			for(RummiSteen rummisteen : naSplitsing)
+				this.tijdelijkeTafel.getStenenOpTafel().get(rij).add(rummisteen);
+			
+		}
+
+		
+		
 	}
 }

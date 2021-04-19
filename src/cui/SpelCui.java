@@ -29,7 +29,11 @@ public class SpelCui {
 				break;
 			case 5:
 				dc.jokerVervangen();
+				break;
 			case 6:
+				dc.rijSplitsen();
+				break;
+			case 7:
 				dc.reset();
 				break;
 			}
