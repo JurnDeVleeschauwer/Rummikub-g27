@@ -50,7 +50,8 @@ public class Tafel {
 		String returnString = "";
 		for (List<RummiSteen> steenGroep:stenenOpTafel) {
 			for (RummiSteen steen: steenGroep) {
-				returnString +=  String.format("%s, ",steen.toString());
+				if (steen != null)
+					returnString +=  String.format("%s, ",steen.toString());
 			}
 			returnString += String.format("%n");
 		}

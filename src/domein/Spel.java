@@ -322,7 +322,7 @@ public class Spel {
 			else {
 				naSplitsing.add(rummisteen);
 			}
-			this.tijdelijkeTafel.getStenenOpTafel().get(rij).remove(rummisteen);
+			this.tijdelijkeTafel.getStenenOpTafel().get(rij).remove(rummisteen); //!!!!!Exception
 		}
 		if(splitsing == 0)
 			System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.ligt.niet.op.deze.rij"));
