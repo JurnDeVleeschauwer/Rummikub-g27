@@ -222,9 +222,10 @@ public class Spel {
 		else if(aantalJokers > 1) {
 			System.out.printf("%s%n", UITextHelper.UIText("De.hoeveelste.Joker.in.deze.rij.wil.je.vervangen?"));
 			hoeveelste = sc.nextInt();
-			if(aantalJokers == 1) 
-				hoeveelste = 1;
+			
 		}
+		if(aantalJokers == 1) 
+			hoeveelste = 1;
 		if(!(aantalJokers<1)) {
 			System.out.printf("%s%n", UITextHelper.UIText("Geef.de.naam.van.de.steen.die.je.wil.leggen"));
 			String naam = sc.next();
@@ -250,18 +251,20 @@ public class Spel {
 						if(hoeveelste == hoeveelsteJokerIsHet) {
 							
 							nieuweRij.add(steenOmTeLeggen);
+							this.werkveld.add(rummisteen);
 						}else {
 							nieuweRij.add(rummisteen);
 						}
 					}	
 					else
 						nieuweRij.add(rummisteen);
-					this.tijdelijkeTafel.getStenenOpTafel().get(rij).remove(rummisteen);
 				}
+				this.tijdelijkeTafel.getStenenOpTafel().get(rij).clear();
 					
 				for(RummiSteen rummisteen: nieuweRij) {
 					this.tijdelijkeTafel.getStenenOpTafel().get(rij).add(rummisteen);
 				}
+				
 			}
 			else System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.heb.je.niet.in.je.bezit"));
 		}
@@ -287,12 +290,13 @@ public class Spel {
 								rij.add(steen);
 							else
 								rij.add(joker);
-							this.tijdelijkeTafel.verwijderSteen(steen);
 						}
+						r.clear();
 					}
 					for(RummiSteen rummisteen: rij) {
 					r.add(rummisteen);
 				}
+				rij.clear();
 				}
 				this.werkveld.add(s);
 			}
@@ -322,17 +326,18 @@ public class Spel {
 			else {
 				naSplitsing.add(rummisteen);
 			}
-			this.tijdelijkeTafel.getStenenOpTafel().get(rij).remove(rummisteen); //!!!!!Exception
 		}
+		this.tijdelijkeTafel.getStenenOpTafel().get(rij).clear();
+
 		if(splitsing == 0)
 			System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.ligt.niet.op.deze.rij"));
 		else {
 			for(RummiSteen rummisteen : voorSplitsing)
 				this.tijdelijkeTafel.getStenenOpTafel().get(rij).add(rummisteen);
-			this.tijdelijkeTafel.getStenenOpTafel().get(rij).add(null);
-			this.tijdelijkeTafel.getStenenOpTafel().get(rij).add(null);
+//			this.tijdelijkeTafel.getStenenOpTafel().get(rij).add(null);
+//			this.tijdelijkeTafel.getStenenOpTafel().get(rij).add(null);
 			for(RummiSteen rummisteen : naSplitsing)
-				this.tijdelijkeTafel.getStenenOpTafel().get(rij).add(rummisteen);
+				this.tijdelijkeTafel.getStenenOpTafel().get(rij+1).add(rummisteen);
 			
 		}
 
