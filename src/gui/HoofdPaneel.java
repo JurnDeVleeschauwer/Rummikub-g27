@@ -2,12 +2,9 @@ package gui;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
+
 import domein.DomeinController;
-import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 public class HoofdPaneel extends BorderPane {
 	private DomeinController domeinController;
@@ -74,6 +71,7 @@ public class HoofdPaneel extends BorderPane {
 
 
 	public void toonAanmeldPaneel() {
+		this.aanmelden = new AanmeldPaneel(domeinController, this);
 		setCenter(aanmelden);
 	}
 	public void toonHoofdMenu() {

@@ -1,13 +1,10 @@
 package gui;
 
-import java.util.ResourceBundle;
-
 import domein.DomeinController;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -54,7 +51,22 @@ public class AanmeldPaneel extends GridPane
     
     private void voegComponentenToe()
     {
-        Text header = new Text(hoofdPaneel.getBundle().getString("Aanmelden"));
+    	Text header = new Text();
+    	switch (hoofdPaneel.getAantalSpelersIngelogt()) {
+		case 0:
+			header.setText(hoofdPaneel.getBundle().getString("Aanmelden.speler.1"));
+			break;
+		case 1:
+			header.setText(hoofdPaneel.getBundle().getString("Aanmelden.speler.2"));
+			break;
+		case 2:
+			header.setText(hoofdPaneel.getBundle().getString("Aanmelden.speler.3"));
+			break;
+		case 3:
+			header.setText(hoofdPaneel.getBundle().getString("Aanmelden.speler.4"));
+			break;
+    	}
+        
         GridPane.setHalignment(header, HPos.LEFT);
         add(header, 0, 0, 2, 1);
         
@@ -87,6 +99,8 @@ public class AanmeldPaneel extends GridPane
         
         if (!domeinController.controleerSpeler(naam.getText().trim(), wachtwoord.getText().trim())) {
         	foutbericht.setText(hoofdPaneel.getBundle().getString("Deze.speler.bestaat.niet.of.het.wachtwoord.is.verkeerd"));
+        	wachtwoord.setText("");
+        	naam.setText("");
             return;
         	
         }
@@ -97,6 +111,8 @@ public class AanmeldPaneel extends GridPane
         if(hoofdPaneel.getAantalSpelersIngelogt() == hoofdPaneel.getAantalSpelers()) {
         	hoofdPaneel.toonHoofdMenu();
         } else {
+        	wachtwoord.setText("");
+        	naam.setText("");
             hoofdPaneel.toonAanmeldPaneel();
             }
 
