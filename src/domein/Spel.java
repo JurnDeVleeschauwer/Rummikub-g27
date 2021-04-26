@@ -28,16 +28,29 @@ public class Spel {
 		setSpelerAanZet(spelers.get(0));
 		resetTijdelijkeTafel();
 	}
-
+	
+	/** Haalt lijst van aangemelde spelers op
+	 * @return lijst van spelers.
+	 */
 	public List<Speler> getSpelers() {
 		return spelers;
 	}
+	
+	/** Haalt de pot op
+	 * @return pot voor in het huidig spel.
+	 */
 	public Pot getPot() {
 		return pot;
 	}
+	
+	/** Haalt speler die aan de beurt is.
+	 * @return Speler die aan de beurt is.
+	 */
 	public Speler getSpelerAanZet() {
 		return spelerAanZet;
 	}
+	
+	
 	public Tafel getTijdelijkeTafel() {
 		return tijdelijkeTafel;
 	}
@@ -50,12 +63,16 @@ public class Spel {
 	public void setVasteTafel(Tafel tijdelijkeTafel) {
 		this.vasteTafel = tijdelijkeTafel;
 	}
+	
+	/** Verwijdert alle stenen gelegd door de speler op de tijdelijke tafel
+	 */
 	public void resetTijdelijkeTafel() {
 		//this.tijdelijkeTafel = SerializationUtils.clone(this.vasteTafel)
 		this.tijdelijkeTafel.reset(this.vasteTafel.getStenenOpTafel(), this.spelerAanZet);
 		
 	}
-	
+	/** Haalt voor elke speler 14 stenen uit de pot
+	 */
 	public void geefEerste14Stenen() {
 		for (Speler speler : spelers) {
 			for (int i=0;i<14;i++) {
@@ -109,6 +126,9 @@ public class Spel {
 //		}
 //	}
 	
+	/** 
+	 * Berekent de scores van alle spelers
+	 */
 	public void berekenScore(Speler winnaar) {
 		int winscore = 0;
 		for (Speler speler : spelers) {
@@ -122,6 +142,9 @@ public class Spel {
 		winnaar.setScore(winscore);
 	}
 	
+	/** 
+	 * Kijkt of de speler aan zet gewonnen is of niet
+	 * */
 	public boolean checkWinst() {
 		return spelerAanZet.getStenenInBezit().isEmpty();
 	}
@@ -137,7 +160,10 @@ public class Spel {
 	public void zetNeemSteen(boolean b) {
 		spelerAanZet.setNeemSteen(b);
 	}
-
+	
+	/**
+	 * Beëindigt beurt van speler die momenteel aan de beurt is
+	 */ 
 	public void beeindigBeurt() {
 		if (controleerTafel()) {
 			if (spelerAanZet.getNeemSteen())
@@ -153,11 +179,19 @@ public class Spel {
 	private boolean controleerTafel() {
 		return true;//tijdelijkeTafel.controleerTafel();
 	}
-
+	
+	/** 
+	 * Bepaalt welke speler aan beurt is
+	 */
 	public void bepaalSpelerAanZet() {
 		setSpelerAanZet(spelers.get((spelers.indexOf(spelerAanZet)+1)%spelers.size()));
 	}
 	
+	/** 
+	 * Legt een gekozen steen op tafel
+	 * @param steen gekozen steen
+	 * @param rij waar de speler de steen wil leggen op tafel
+	 */
 	public void steenOpTafelLeggen(RummiSteen steen, int rij) {
 		this.tijdelijkeTafel.legSteenOpTafel(steen, rij);
 	}
@@ -169,6 +203,9 @@ public class Spel {
 		return null;
 	}
 	
+	/** 
+	 * Legt een gekozen steen bij aan de gekozen rij
+	 */
 	public void steenAanleggen() {
 		System.out.printf("%s%n",UITextHelper.UIText("Geef.de.naam.van.de.steen.die.je.wil.leggen"));
 		String naam = sc.next();
@@ -198,6 +235,9 @@ public class Spel {
 		
 	}
 	
+	/**
+	 * Neemt een steen van de tafel en verplaatst deze naar het werkveld
+	 */
 	public void steenNaarWerkveld() {
 		System.out.printf("%s%n", UITextHelper.UIText("Geef.de.naam.van.de.steen.die.je.naar.het.werkveld.wil.brengen"));
 		String naam = sc.next();
@@ -209,6 +249,9 @@ public class Spel {
 		} else System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.ligt.niet.op.tafel"));
 	}
 	
+	/** 
+	 * Vervangt de joker door een door de speler gekozen steen
+	 */
 	public void jokerVervangen() {
 		System.out.printf("%s%n", UITextHelper.UIText("Op.welke.rij.ligt.de.joker?"));
 		int rij = sc.nextInt();
@@ -270,7 +313,9 @@ public class Spel {
 		}
 		
 	}
-	
+	/**
+	 * Vervangt een door de speler gekozen steen door een joker
+	 */
 	public void SteenVervangenDoorJoker() {
 		RummiSteen joker = this.spelerAanZet.geefSteenMetNaam("Joker");
 		if(joker!=null) {
@@ -305,7 +350,9 @@ public class Spel {
 			System.out.printf("%s%n", UITextHelper.UIText("Je.hebt.geen.Joker"));
 		}
 	}
-	
+	/**
+	 * Methode om rij te splitsen
+	 */
 	public void rijSplitsen(){
 		System.out.printf("%s%n", UITextHelper.UIText("Welke.rij.wil.je.splitsen?"));
 		int rij = sc.nextInt();

@@ -7,6 +7,7 @@ import java.util.List;
 public class Pot {
 	private List<RummiSteen> stenen;
 	
+	/** maakt pot aan met 106 door elkaar geschudde Rummistenen.*/
 	public Pot() {
 		String[] kleuren = {"Rood","Zwart","Blauw","Geel"};
 		stenen = new ArrayList<RummiSteen>(106);
@@ -25,7 +26,9 @@ public class Pot {
 	public List<RummiSteen> getStenen() {
 		return stenen;
 	}
-
+	/** Verwijdert eerste steen uit de pot.
+	 * @return geeft de verwijderde steen.
+	 */
 	public RummiSteen verwijderSteen() {
 		RummiSteen steen = stenen.get(0);
 		stenen.remove(0);
