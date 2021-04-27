@@ -16,6 +16,9 @@ public class DomeinController {
 //	  spelers.add(new Speler(naam,wachtwoord));
 //	}
 
+	public Speler getSpelerAanZet() {
+		return this.spel.getSpelerAanZet();
+	}
 	public SpelerRepo getSpelerRepo() {
 		return spelerRepo;
 	}

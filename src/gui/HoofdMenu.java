@@ -1,7 +1,5 @@
 package gui;
 
-import java.util.ResourceBundle;
-
 import domein.DomeinController;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -43,7 +41,8 @@ public class HoofdMenu extends GridPane {
 	}
 
 	private void speelSpel(ActionEvent event) {
-		//TODO
+		this.domeinController.startSpel();
+		hoofdPaneel.toonSpelPaneel();
 	}
 	
 	private void toonOverzicht(ActionEvent event) {

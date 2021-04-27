@@ -9,7 +9,7 @@ import javafx.scene.layout.BorderPane;
 public class HoofdPaneel extends BorderPane {
 	private DomeinController domeinController;
 	private AanmeldPaneel aanmelden;
-	//private SpelPaneel spel;
+	private SpelPaneel spel;
 	private HoofdMenu hoofdMenu;
 	private TaalMenu taalMenu;
 	private HoeveelSpelersPaneel hoeveelSpelers;
@@ -22,7 +22,11 @@ public class HoofdPaneel extends BorderPane {
 	public HoofdPaneel(DomeinController domeinController) {
 		this.domeinController = domeinController;
 		this.taalMenu = new TaalMenu(this);
-
+		
+		
+		
+		
+		
 		voegComponentenToe();
 	}
 
@@ -31,7 +35,7 @@ public class HoofdPaneel extends BorderPane {
 	private void voegComponentenToe() {
 
 		setCenter(taalMenu);
-//        setCenter(aanmelden);
+//        setCenter(hoofdMenu);
 
 	}
 	
@@ -41,8 +45,6 @@ public class HoofdPaneel extends BorderPane {
 		this.aanmelden = new AanmeldPaneel(domeinController, this);
 		this.hoofdMenu = new HoofdMenu(domeinController, this);
 		this.hoeveelSpelers = new HoeveelSpelersPaneel(domeinController, this);
-		
-		//this.spel = new SpelPaneel(domeinController, this);
 
 	}
 	
@@ -62,12 +64,10 @@ public class HoofdPaneel extends BorderPane {
 		this.aantalSpelersIngelogt = aantalSpelersIngelogt;
 	}
 
-	//public void toonSpelPaneel() {
-
-	//	setCenter(spel);
-		// spel.controleerKrediet();
-		// vernieuwStatus();
-	//}
+	public void toonSpelPaneel() {
+		this.spel = new SpelPaneel(domeinController, this);
+		setCenter(spel);
+	}
 
 
 	public void toonAanmeldPaneel() {

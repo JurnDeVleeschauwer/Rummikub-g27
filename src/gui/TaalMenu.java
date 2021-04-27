@@ -1,9 +1,7 @@
 package gui;
 
 import java.util.Locale;
-import java.util.ResourceBundle;
 
-import domein.DomeinController;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
