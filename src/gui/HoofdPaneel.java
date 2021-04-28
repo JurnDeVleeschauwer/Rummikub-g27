@@ -22,11 +22,7 @@ public class HoofdPaneel extends BorderPane {
 	public HoofdPaneel(DomeinController domeinController) {
 		this.domeinController = domeinController;
 		this.taalMenu = new TaalMenu(this);
-		
-		
-		
-		
-		
+				
 		voegComponentenToe();
 	}
 
