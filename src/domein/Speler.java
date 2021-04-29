@@ -57,11 +57,11 @@ public class Speler {
 	 */ 
 	public void setIsEersteBeurt(boolean b) {
 		this.isEersteBeurt = b;
-		
+	}
+	
 	/** Haalt op of het de eerste beurt van de speler is
 	 * @return boolean die aantoont of het de eerste beurt is of niet
 	 */
-	}
 	public boolean getIsEersteBeurt() {
 		return isEersteBeurt;
 	}
