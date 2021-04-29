@@ -5,6 +5,7 @@ import java.util.List;
 
 import domein.DomeinController;
 import domein.RummiSteen;
+import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -12,6 +13,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class SpelPaneel extends GridPane {
 	
@@ -21,34 +23,72 @@ public class SpelPaneel extends GridPane {
     private GridPane werkveldPaneel;
     private GridPane spelerPaneel;
     private GridPane optiesPaneel;
+    
+    
+	
+    private Button btnBeurtBeëindigen = new Button("Beurt beëindigen");
+	private Button btnSteenAanleggen = new Button("Steen aanleggen");
+	private Button btnJokerVervangen = new Button("Joker vervangen");
+	private Button btnSteenNaarWerkveld = new Button("Steen naar werkveld brengen");
+	private Button btnRijSplitsen = new Button("Rij splitsen");
+	private Button btnReset = new Button("Reset tafel");
+    
+    
 	
     public SpelPaneel(DomeinController domeinController, HoofdPaneel hoofdPaneel)
 	    {
 	        this.domeinController = domeinController;
 	        this.hoofdPaneel = hoofdPaneel;
-//			this.tafelPaneel = new TafelPaneel(domeinController, hoofdPaneel);
-//			this.werkveldPaneel = new WerkveldPaneel(domeinController, hoofdPaneel);
-//			this.spelerPaneel = new SpelerPaneel(domeinController, hoofdPaneel);
-//			this.optiesPaneel = new OptiesPaneel(domeinController, hoofdPaneel);
 	        this.tafelPaneel = new GridPane();
 	        this.werkveldPaneel = new GridPane();
 	        this.spelerPaneel = new GridPane();
 	        this.optiesPaneel = new GridPane();
 	        
-	        Button test = new Button("test");
-	        this.tafelPaneel.add(test, 0, 0);
 	        
-
-	        Button test2 = new Button("test2");
-	        this.werkveldPaneel.add(test2, 0, 0);
-	        
-	        
-	        
-			SpelerStenenGeven();
-		    OptiesGeven();
+	        stenenOpTafelLeggen();
+	        werkveldLeggen();
+			spelerStenenGeven();
+		    optiesGeven();
 	        configureerGrid();
 	        voegComponentenToe();
+	        
+
+			btnBeurtBeëindigen.setOnAction(this::beurtBeëindigen);
+			btnSteenAanleggen.setOnAction(this::steenAanleggen);
+			btnJokerVervangen.setOnAction(this::jokerVervangen);
+			btnSteenNaarWerkveld.setOnAction(this::steenNaarWerkveld);
+			btnRijSplitsen.setOnAction(this::rijSplitsen);
+			btnReset.setOnAction(this::reset);
+			
+			spelerStenenGeven();
+			
 	    }
+    
+    private void werkveldLeggen() {
+    	int XIndex=0;
+		for(RummiSteen steen : domeinController.getSpel().getWerkveld()) {
+			Button btnSteen = this.vanSteenEenButtonMaken(steen);
+			this.werkveldPaneel.add(btnSteen, XIndex, 0);
+			XIndex++;
+		}
+		XIndex=0;
+    	
+    }
+
+	private void stenenOpTafelLeggen() {
+		int XIndex=0;
+		int YIndex=0;
+		for(List<RummiSteen> rij : domeinController.getSpel().getTijdelijkeTafel().getStenenOpTafel()) {
+			for(RummiSteen steen : rij) {
+				Button btnSteen = this.vanSteenEenButtonMaken(steen);
+				this.tafelPaneel.add(btnSteen, XIndex, YIndex);
+				XIndex++;
+			}
+			YIndex++;
+			XIndex=0;
+		}
+		
+	}
 
 	private void voegComponentenToe() {
 		add(this.tafelPaneel, 0, 0);
@@ -73,41 +113,46 @@ public class SpelPaneel extends GridPane {
 		
 	}
 	
-	private void SpelerStenenGeven() {
+	private Button vanSteenEenButtonMaken(RummiSteen steen) {
+		String kleur = steen.getKleur();
+		String naam = steen.getNaam();
+		Button btnSteen = new Button(naam);
+
+		switch (kleur){
+		case "Rood": 
+			btnSteen.setTextFill(Color.RED);
+			break;
+		case "Blauw":
+			btnSteen.setTextFill(Color.BLUE);
+			break;
+		case "Geel":
+			btnSteen.setTextFill(Color.ORANGE);
+			break;
+		case "Zwart":
+			btnSteen.setTextFill(Color.BLACK);
+			break;
+		case "Groen":
+			btnSteen.setTextFill(Color.GREEN);
+			break;
+		default:
+			btnSteen.setTextFill(Color.CYAN);  // hier moet een exceptie: als de kleur cyan is klopt er iets niet!
+			break;
+		}
+		btnSteen.setFont(new Font(10));
+		btnSteen.setMinSize(50, 70);
+		btnSteen.setMaxSize(50, 70);
+		btnSteen.setPrefSize(50,70);
+		btnSteen.setPadding(new Insets(0, 4, 20, 0));
+		return btnSteen;
+	}
+	
+	private void spelerStenenGeven() {
 		List<RummiSteen> stenen = new ArrayList<>();
-		stenen = this.domeinController.getSpelerAanZet().getStenenInBezit();
+		stenen = this.domeinController.getSpel().getSpelerAanZet().getStenenInBezit();
 		int index = 0;
 		
 		for(RummiSteen steen : stenen) {
-			String kleur = steen.getKleur();
-			String naam = steen.getNaam();
-			Button btnSteen = new Button(naam);
-
-			switch (kleur){
-			case "Rood": 
-				btnSteen.setTextFill(Color.RED);
-				break;
-			case "Blauw":
-				btnSteen.setTextFill(Color.BLUE);
-				break;
-			case "Geel":
-				btnSteen.setTextFill(Color.ORANGE);
-				break;
-			case "Zwart":
-				btnSteen.setTextFill(Color.BLACK);
-				break;
-			case "Groen":
-				btnSteen.setTextFill(Color.GREEN);
-				break;
-			default:
-				btnSteen.setTextFill(Color.CYAN);  // hier moet een exceptie: als de kleur cyan is klopt er iets niet!
-				break;
-			}
-			btnSteen.setMinSize(60, 90);
-			btnSteen.setMaxSize(60, 90);
-			btnSteen.setPrefSize(60,90);
-			btnSteen.setPadding(new Insets(0, 4, 20, 0));
-		
+			Button btnSteen = this.vanSteenEenButtonMaken(steen);
 			if(index < stenen.size()/2) {
 				this.spelerPaneel.add(btnSteen, index, 0);
 			}else
@@ -116,22 +161,15 @@ public class SpelPaneel extends GridPane {
 		}
 	}
 	
-	private void OptiesGeven() {
+	private void optiesGeven() {
 		List<Button> opties = new ArrayList<>();
-		
-		Button btnBeurtBeëindigen = new Button("Beurt beëindigen");
 		opties.add(btnBeurtBeëindigen);
-		Button btnSteenAanleggen = new Button("Steen aanleggen");
 		opties.add(btnSteenAanleggen);
-		Button btnJokerVervangen = new Button("Joker vervangen");
 		opties.add(btnJokerVervangen);
-		Button btnSteenNaarWerkveld = new Button("Steen naar werkveld brengen");
 		opties.add(btnSteenNaarWerkveld);
-		Button btnRijSplitsen = new Button("Rij splitsen");
 		opties.add(btnRijSplitsen);
-		Button btnReset = new Button("Reset tafel");
 		opties.add(btnReset);
-
+		
 		this.optiesPaneel.add(btnBeurtBeëindigen, 0, 0);
 		this.optiesPaneel.add(btnSteenAanleggen, 0, 1);
 		this.optiesPaneel.add(btnJokerVervangen, 0, 2);
@@ -141,6 +179,25 @@ public class SpelPaneel extends GridPane {
 		
 		this.optiesPaneel.setVgap(5);
 		opties.forEach(button -> button.setPrefWidth(200)); 
+	}
+
+	private void beurtBeëindigen(ActionEvent event) {
+		domeinController.beeindigBeurt();
+	}
+	private void jokerVervangen(ActionEvent event) {
+		domeinController.jokerVervangen();
+	}
+	private void steenAanleggen(ActionEvent event) {
+		domeinController.steenAanleggen();
+	}
+	private void steenNaarWerkveld(ActionEvent event) {
+		domeinController.steenNaarWerkveld();
+	}
+	private void rijSplitsen(ActionEvent event) {
+		domeinController.rijSplitsen();
+	}
+	private void reset(ActionEvent event) {
+		domeinController.reset();
 	}
 
 }

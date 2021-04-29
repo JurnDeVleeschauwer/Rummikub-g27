@@ -27,6 +27,12 @@ public class Spel {
 		geefEerste14Stenen();
 		setSpelerAanZet(spelers.get(0));
 		resetTijdelijkeTafel();
+		
+		for(int i=0;i<7;i++) {
+			steenOpTafelLeggen(this.spelerAanZet.getStenenInBezit().get(i), i);
+//			steenNaarWerkveld(this.spelerAanZet.getStenenInBezit().get(i+7));
+		}
+		
 	}
 	
 	/** Haalt lijst van aangemelde spelers op
@@ -34,6 +40,10 @@ public class Spel {
 	 */
 	public List<Speler> getSpelers() {
 		return spelers;
+	}
+	
+	public List<RummiSteen> getWerkveld(){
+		return this.werkveld;
 	}
 	
 	/** Haalt de pot op
