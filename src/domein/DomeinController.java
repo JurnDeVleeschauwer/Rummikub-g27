@@ -3,6 +3,8 @@ package domein;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.ExceptieSpelerAanmelden;
+import i18n.UITextHelper;
 import persistentie.SpelerRepo;
 
 public class DomeinController {
@@ -23,14 +25,19 @@ public class DomeinController {
 		return spelerRepo;
 	}
 	
-	public boolean controleerSpeler(String gebruikersnaam, String wachtwoord) {
+	public boolean controleerSpeler(String gebruikersnaam, String wachtwoord) throws ExceptieSpelerAanmelden {
 	     speler = null;
 		 this.speler = spelerRepo.controleerSpeler(gebruikersnaam, wachtwoord);
 		 
 		 if (speler != null) {
+		        for(Speler spelerList : this.spelers) {
+		        	if(spelerList.getID() == speler.getID()) {
+		        		throw new ExceptieSpelerAanmelden(UITextHelper.UIText("Deze.speler.bestaat.niet.of.het.wachtwoord.is.verkeerd"));
+		        	}
+		        }
 			 return true;
 		 }else {
-			 return false;
+			 throw new ExceptieSpelerAanmelden(UITextHelper.UIText("Deze.speler.bestaat.niet.of.het.wachtwoord.is.verkeerd"));
 		 }
 	}
 	public void addSpelerAanLijst() {

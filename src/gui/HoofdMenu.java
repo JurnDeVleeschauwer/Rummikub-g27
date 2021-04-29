@@ -1,6 +1,7 @@
 package gui;
 
 import domein.DomeinController;
+import i18n.UITextHelper;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -27,15 +28,15 @@ public class HoofdMenu extends GridPane {
 
 	private void voegComponentenToe() {
 
-		Button speelSpel = new Button(hoofdPaneel.getBundle().getString("Speel.spel"));
+		Button speelSpel = new Button(UITextHelper.UIText("Speel.spel"));
 		speelSpel.setOnAction(this::speelSpel);
 		add(speelSpel, 0, 0, 2, 1);
 		
-		Button toonOverzicht = new Button(hoofdPaneel.getBundle().getString("Toon.overzicht"));
+		Button toonOverzicht = new Button(UITextHelper.UIText("Toon.overzicht"));
 		toonOverzicht.setOnAction(this::toonOverzicht);
 		add(toonOverzicht, 0, 1, 2, 1);
 
-		Button stoppen = new Button(hoofdPaneel.getBundle().getString("Stop.met.spelen"));
+		Button stoppen = new Button(UITextHelper.UIText("Stop.met.spelen"));
 		stoppen.setOnAction(this::stoppen);
 		add(stoppen, 0, 2, 2, 1);
 	}

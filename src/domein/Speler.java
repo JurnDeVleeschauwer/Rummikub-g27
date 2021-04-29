@@ -153,6 +153,10 @@ public class Speler {
 		}
 		return null;
 	}
+
+	public int getID() {
+		return this.id;
+	}
 	
 	
 }

@@ -1,5 +1,9 @@
 package gui;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import domein.DomeinController;
 import domein.Speler;
 import i18n.UITextHelper;
@@ -54,20 +58,32 @@ public class ToonOverzichtPaneel extends GridPane {
         tableView = new TableView();
 
     
-        TableColumn<Speler, String> column1 = new TableColumn<>("gebruikersnaam");
-        column1.setCellValueFactory(new PropertyValueFactory<>("gebruikersnaam"));
+        TableColumn<Speler, String> column1 = new TableColumn<>(UITextHelper.UIText("gebruikersnaam"));
+        column1.setCellValueFactory(new PropertyValueFactory<>(UITextHelper.UIText("gebruikersnaam")));
 
 
-        TableColumn<Speler, Integer> column2 = new TableColumn<>("score");
-        column2.setCellValueFactory(new PropertyValueFactory<>("score"));
+        TableColumn<Speler, Integer> column2 = new TableColumn<>(UITextHelper.UIText("score"));
+        column2.setCellValueFactory(new PropertyValueFactory<>(UITextHelper.UIText("score")));
 
         tableView.getColumns().add(column1);
         tableView.getColumns().add(column2);
 
+        List<Speler> spelers = domeinController.getSpelers();
         
-       
+        Collections.sort(spelers, new Comparator<Speler>() {
+		    public int compare(Speler o1, Speler o2) {
+		        if(0 != -(Integer.compare(o1.getScore(), o2.getScore()))) {
+		        	System.out.println(Integer.compare(o1.getScore(), o2.getScore()));
+		        	return -(Integer.compare(o1.getScore(), o2.getScore()));
+		        }else {
+		        	return o1.getGebruikersnaam().compareTo(o2.getGebruikersnaam());
+		          
+		    }
+		    }
+		});
         
-        for(Speler speler : domeinController.getSpelers()) {
+        
+        for(Speler speler : spelers) {
         	tableView.getItems().add(speler);
         }
 
@@ -82,4 +98,7 @@ public class ToonOverzichtPaneel extends GridPane {
 	  private void exit(ActionEvent event) {
 	          hoofdPaneel.toonHoofdMenu();;
 	    }
+	  
+	  
+
 }

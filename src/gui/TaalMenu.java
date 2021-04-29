@@ -2,6 +2,7 @@ package gui;
 
 import java.util.Locale;
 
+import i18n.UITextHelper;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -37,39 +38,34 @@ public class TaalMenu extends GridPane
 
         
         Button nl = new Button("nl");
-        nl.setOnAction(this::nl);
-        add(nl, 0, 0, 2, 1);
+        nl.setOnAction(this::taalkeuze);
+        nl.setUserData("nl");
+        nl.setPrefHeight(250);
+        nl.setPrefWidth(300);
+        add(nl, 1, 3);
         
         Button fr = new Button("fr");
-        fr.setOnAction(this::fr);
-        add(fr, 0, 1, 2, 1);
+        fr.setOnAction(this::taalkeuze);
+        fr.setUserData("fr");
+        fr.setPrefHeight(250);
+        fr.setPrefWidth(300);
+        add(fr, 2, 3);
         
         Button en = new Button("en");
-        en.setOnAction(this::en);
-        add(en, 0, 2, 2, 1);
+        en.setOnAction(this::taalkeuze);
+        en.setUserData("en");
+        en.setPrefHeight(250);
+        en.setPrefWidth(300);
+        add(en, 3, 3);
     }
     
-    private void nl(ActionEvent event)
-    {
-    	hoofdPaneel.setLocale(new Locale("nl"));
-    	hoofdPaneel.createPanelen();
-    	hoofdPaneel.toonHoeveelSpelersPaneel();
-    	
-    	
-    }
-    private void fr(ActionEvent event)
-    {
-    	hoofdPaneel.setLocale(new Locale("fr"));
-    	hoofdPaneel.createPanelen();
-    	hoofdPaneel.toonHoeveelSpelersPaneel();
+    private void taalkeuze(ActionEvent event) {
+        final Button button = (Button) event.getSource();
+        final String taal = (String) button.getUserData();
 
-    }
-    
-    private void en(ActionEvent event)
-    {
-    	hoofdPaneel.setLocale(new Locale("en"));
-    	hoofdPaneel.createPanelen();
-    	hoofdPaneel.toonHoeveelSpelersPaneel();
+        UITextHelper.setLocale(taal);
 
+        hoofdPaneel.createPanelen();
+        hoofdPaneel.toonHoeveelSpelersPaneel();
     }
 }

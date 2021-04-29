@@ -14,7 +14,6 @@ public class HoofdPaneel extends BorderPane {
 	private TaalMenu taalMenu;
 	private HoeveelSpelersPaneel hoeveelSpelers;
 	private ToonOverzichtPaneel toonOverzicht;
-	private Locale locale;
 	private ResourceBundle bundle;
 	private int aantalSpelers;
 	private int aantalSpelersIngelogt = 0;
@@ -37,7 +36,6 @@ public class HoofdPaneel extends BorderPane {
 	
 	
 	public void createPanelen() {
-		this.bundle = ResourceBundle.getBundle("i18n.Rummikub", locale);
 		this.aanmelden = new AanmeldPaneel(domeinController, this);
 		this.hoofdMenu = new HoofdMenu(domeinController, this);
 		this.hoeveelSpelers = new HoeveelSpelersPaneel(domeinController, this);
@@ -81,14 +79,5 @@ public class HoofdPaneel extends BorderPane {
 		this.toonOverzicht = new ToonOverzichtPaneel(domeinController, this);
 		setCenter(toonOverzicht);
 	}
-	
-	
 
-	public void setLocale(Locale locale) {
-		this.locale = locale;
-	}
-
-	public ResourceBundle getBundle() {
-		return bundle;
-	}
 }

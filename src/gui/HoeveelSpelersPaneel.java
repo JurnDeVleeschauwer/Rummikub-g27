@@ -54,35 +54,26 @@ public class HoeveelSpelersPaneel extends GridPane {
         spelers4.setOnAction(this::spelers4);
         add(spelers4, 2, 2, 1, 1);
         
-        Button toevoegen = new Button(UITextHelper.UIText("ok"));
-        toevoegen.setOnAction(this::toevoegen);
-        add(toevoegen, 0, 4, 2, 1);
 
     }
 
     private void spelers2(ActionEvent event) {
-    	this.aantalSpelers = 2;
+		hoofdPaneel.setAantalSpelers(2);
+        hoofdPaneel.toonAanmeldPaneel();;
+
     }
     
     private void spelers3(ActionEvent event) {
-    	this.aantalSpelers = 3;
+		hoofdPaneel.setAantalSpelers(3);
+        hoofdPaneel.toonAanmeldPaneel();;
     }
     
     private void spelers4(ActionEvent event) {
-    	this.aantalSpelers = 4;
+		hoofdPaneel.setAantalSpelers(4);
+        hoofdPaneel.toonAanmeldPaneel();;
     }
     
     
-    private void toevoegen(ActionEvent event) {
-        if (aantalSpelers == 0) {
-            foutbericht.setText(UITextHelper.UIText("Gelieve.een.numer.op.te.geven"));
-            return;
-
-        } else {
-        		hoofdPaneel.setAantalSpelers(aantalSpelers);
-                hoofdPaneel.toonAanmeldPaneel();;
-                foutbericht.setText(null);
-        }
-    }
+  
 
 }

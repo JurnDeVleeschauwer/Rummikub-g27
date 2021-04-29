@@ -1,6 +1,8 @@
 package gui;
 
 import domein.DomeinController;
+import exceptions.ExceptieSpelerAanmelden;
+import i18n.UITextHelper;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -54,29 +56,29 @@ public class AanmeldPaneel extends GridPane
     	Text header = new Text();
     	switch (hoofdPaneel.getAantalSpelersIngelogt()) {
 		case 0:
-			header.setText(hoofdPaneel.getBundle().getString("Aanmelden.speler.1"));
+			header.setText(UITextHelper.UIText("Aanmelden.speler.1"));
 			break;
 		case 1:
-			header.setText(hoofdPaneel.getBundle().getString("Aanmelden.speler.2"));
+			header.setText(UITextHelper.UIText("Aanmelden.speler.2"));
 			break;
 		case 2:
-			header.setText(hoofdPaneel.getBundle().getString("Aanmelden.speler.3"));
+			header.setText(UITextHelper.UIText("Aanmelden.speler.3"));
 			break;
 		case 3:
-			header.setText(hoofdPaneel.getBundle().getString("Aanmelden.speler.4"));
+			header.setText(UITextHelper.UIText("Aanmelden.speler.4"));
 			break;
     	}
         
         GridPane.setHalignment(header, HPos.LEFT);
         add(header, 0, 0, 2, 1);
         
-        add(new Label(hoofdPaneel.getBundle().getString("Geef.je.gebruikersnaam.in")), 0, 1, 1, 1);
+        add(new Label(UITextHelper.UIText("Geef.je.gebruikersnaam.in")), 0, 1, 1, 1);
         add(naam, 1, 1, 1, 1);
         
-        add(new Label(hoofdPaneel.getBundle().getString("Geef.je.wachtwoord.in")), 0, 2, 1, 1);
+        add(new Label(UITextHelper.UIText("Geef.je.wachtwoord.in")), 0, 2, 1, 1);
         add(wachtwoord, 1, 2, 1, 1);
         
-        Button aanmelden = new Button(hoofdPaneel.getBundle().getString("Aanmelden"));
+        Button aanmelden = new Button(UITextHelper.UIText("Aanmelden"));
         aanmelden.setOnAction(this::aanmelden);
         aanmelden.setDefaultButton(true);
         HBox controls = new HBox(aanmelden, foutbericht);
@@ -89,22 +91,23 @@ public class AanmeldPaneel extends GridPane
     private void aanmelden(ActionEvent event)
     {
         if (naam.getText().trim().isEmpty()) {
-            foutbericht.setText(hoofdPaneel.getBundle().getString("Gelieve.uw.naam.op.te.geven"));
+            foutbericht.setText(UITextHelper.UIText("Gelieve.uw.naam.op.te.geven"));
             return;
         }
         if (wachtwoord.getText().trim().isEmpty()) {
-            foutbericht.setText(hoofdPaneel.getBundle().getString("Gelieve.uw.wachtwoord.op.te.geven"));
+            foutbericht.setText(UITextHelper.UIText("Gelieve.uw.wachtwoord.op.te.geven"));
             return;
         }
+         	
+        try {
+            domeinController.controleerSpeler(naam.getText().trim(), wachtwoord.getText().trim());
+            foutbericht.setText(null);
+
+        } catch (ExceptieSpelerAanmelden e) {
+            foutbericht.setText(e.getMessage());
+            return;
+            }
         
-        if (!domeinController.controleerSpeler(naam.getText().trim(), wachtwoord.getText().trim())) {
-        	foutbericht.setText(hoofdPaneel.getBundle().getString("Deze.speler.bestaat.niet.of.het.wachtwoord.is.verkeerd"));
-        	wachtwoord.setText("");
-        	naam.setText("");
-            return;
-        	
-        }
-        foutbericht.setText(hoofdPaneel.getBundle().getString("Gelieve.uw.wachtwoord.op.te.geven"));
         domeinController.addSpelerAanLijst();
         foutbericht.setText(null);
         hoofdPaneel.setAantalSpelersIngelogt(hoofdPaneel.getAantalSpelersIngelogt() + 1);

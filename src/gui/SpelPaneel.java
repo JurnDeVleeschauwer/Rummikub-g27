@@ -45,10 +45,15 @@ public class SpelPaneel extends GridPane {
 	        this.optiesPaneel = new GridPane();
 	        
 	        
+<<<<<<< HEAD
 	        stenenOpTafelLeggen();
 	        werkveldLeggen();
 			spelerStenenGeven();
 		    optiesGeven();
+=======
+			SpelerStenenGeven();
+		    OptiesGeven();
+>>>>>>> 108a5ac (OVerzicht sort, aanmelden controleerspeler verbetert, except en taaal)
 	        configureerGrid();
 	        voegComponentenToe();
 	        
