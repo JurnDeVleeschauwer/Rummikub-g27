@@ -28,10 +28,10 @@ public class Spel {
 		setSpelerAanZet(spelers.get(0));
 		resetTijdelijkeTafel();
 		
-		for(int i=0;i<7;i++) {
-			steenOpTafelLeggen(this.spelerAanZet.getStenenInBezit().get(i), i);
-//			steenNaarWerkveld(this.spelerAanZet.getStenenInBezit().get(i+7));
-		}
+//		for(int i=0;i<3;i++) {
+//			steenOpTafelLeggen(this.spelerAanZet.getStenenInBezit().get(i), i);
+////			steenNaarWerkveld(this.spelerAanZet.getStenenInBezit().get(i+7));
+//		}
 		
 	}
 	

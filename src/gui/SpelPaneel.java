@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -32,6 +33,7 @@ public class SpelPaneel extends GridPane {
 	private Button btnSteenNaarWerkveld = new Button("Steen naar werkveld brengen");
 	private Button btnRijSplitsen = new Button("Rij splitsen");
 	private Button btnReset = new Button("Reset tafel");
+	private Label lbl = new Label("Kies een actie");
     
     
 	
@@ -45,15 +47,11 @@ public class SpelPaneel extends GridPane {
 	        this.optiesPaneel = new GridPane();
 	        
 	        
-<<<<<<< HEAD
+//<<<<<<< HEAD=======>>>>>>> 108a5ac (OVerzicht sort, aanmelden controleerspeler verbetert, except en taaal)
 	        stenenOpTafelLeggen();
 	        werkveldLeggen();
 			spelerStenenGeven();
 		    optiesGeven();
-=======
-			SpelerStenenGeven();
-		    OptiesGeven();
->>>>>>> 108a5ac (OVerzicht sort, aanmelden controleerspeler verbetert, except en taaal)
 	        configureerGrid();
 	        voegComponentenToe();
 	        
@@ -65,7 +63,6 @@ public class SpelPaneel extends GridPane {
 			btnRijSplitsen.setOnAction(this::rijSplitsen);
 			btnReset.setOnAction(this::reset);
 			
-			spelerStenenGeven();
 			
 	    }
     
@@ -89,8 +86,22 @@ public class SpelPaneel extends GridPane {
 				this.tafelPaneel.add(btnSteen, XIndex, YIndex);
 				XIndex++;
 			}
-			YIndex++;
-			XIndex=0;
+//ik wil 2 rijen steentjes op dezelfde rij laten zien met wat ruimte tussen, het lukt me niet
+			
+//			if (domeinController.getSpel().getTijdelijkeTafel().getStenenOpTafel().indexOf(rij) %2!=0) {
+				YIndex++;
+				XIndex=0;
+//			}
+//			else {
+//				Label leegLbl = new Label("");
+//				this.tafelPaneel.add(leegLbl, XIndex, YIndex);
+//				this.tafelPaneel.add(leegLbl, XIndex+1, YIndex);
+//				this.tafelPaneel.add(leegLbl, XIndex+2, YIndex);
+//				XIndex+=3;
+//			}
+
+				
+			
 		}
 		
 	}
@@ -100,6 +111,7 @@ public class SpelPaneel extends GridPane {
 		add(this.werkveldPaneel, 1, 0);
 		add(this.spelerPaneel, 0, 1);
 		add(this.optiesPaneel, 1, 1);
+		add(this.lbl,1, 2 );
 		
 	}
 
@@ -148,10 +160,15 @@ public class SpelPaneel extends GridPane {
 		btnSteen.setMaxSize(50, 70);
 		btnSteen.setPrefSize(50,70);
 		btnSteen.setPadding(new Insets(0, 4, 20, 0));
+		btnSteen.setOnAction(this::opSteenGeklikt);
 		return btnSteen;
 	}
 	
 	private void spelerStenenGeven() {
+		this.spelerPaneel.getChildren().clear();
+		String label = domeinController.getSpel().getSpelerAanZet().getGebruikersnaam()+ " is aan de beurt";
+		Label spelerAanZet = new Label(label);
+		this.spelerPaneel.add(spelerAanZet, 0, 0, 5, 1);
 		List<RummiSteen> stenen = new ArrayList<>();
 		stenen = this.domeinController.getSpel().getSpelerAanZet().getStenenInBezit();
 		int index = 0;
@@ -159,11 +176,15 @@ public class SpelPaneel extends GridPane {
 		for(RummiSteen steen : stenen) {
 			Button btnSteen = this.vanSteenEenButtonMaken(steen);
 			if(index < stenen.size()/2) {
-				this.spelerPaneel.add(btnSteen, index, 0);
+				this.spelerPaneel.add(btnSteen, index, 1);
 			}else
-				this.spelerPaneel.add(btnSteen, index-(stenen.size()/2), 1);
+				this.spelerPaneel.add(btnSteen, index-(stenen.size()/2), 2);
 			index++;
 		}
+	}
+	
+	private RummiSteen opSteenGeklikt(ActionEvent event) { //geen idee hoe ik dit laat werken
+		return null;
 	}
 	
 	private void optiesGeven() {
@@ -188,11 +209,18 @@ public class SpelPaneel extends GridPane {
 
 	private void beurtBeëindigen(ActionEvent event) {
 		domeinController.beeindigBeurt();
+		spelerStenenGeven();
 	}
 	private void jokerVervangen(ActionEvent event) {
 		domeinController.jokerVervangen();
 	}
 	private void steenAanleggen(ActionEvent event) {
+		lbl.setText("Klik op de steen die je wilt leggen");
+		List<Button> btns;
+		for(int i=0;i<this.spelerPaneel.getChildren().size();i++) {
+			btns.add((Button) this.spelerPaneel.getChildren().get(i));
+		}
+		Button btn = 
 		domeinController.steenAanleggen();
 	}
 	private void steenNaarWerkveld(ActionEvent event) {

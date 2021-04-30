@@ -24,7 +24,7 @@ public class StartUp extends Application {
 
 	        HoofdPaneel root = new HoofdPaneel(domeinController);
 
-	        Scene scene = new Scene(root, 1530, 835);
+	        Scene scene = new Scene(root, 1535, 800);
 
 	        Stage.setScene(scene);
 	        Stage.setTitle("Rummikub");

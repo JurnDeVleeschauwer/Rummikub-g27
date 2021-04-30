@@ -1,12 +1,11 @@
 package gui;
 
-import java.util.Locale;
-
 import i18n.UITextHelper;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 
 public class TaalMenu extends GridPane
 {
@@ -37,26 +36,29 @@ public class TaalMenu extends GridPane
         
 
         
-        Button nl = new Button("nl");
+        Button nl = new Button("Nederlands");
         nl.setOnAction(this::taalkeuze);
         nl.setUserData("nl");
-        nl.setPrefHeight(250);
-        nl.setPrefWidth(300);
+        nl.setPrefHeight(150);
+        nl.setPrefWidth(200);
+        nl.setFont(new Font(30));
         add(nl, 1, 3);
         
-        Button fr = new Button("fr");
+        Button fr = new Button("Français");
         fr.setOnAction(this::taalkeuze);
         fr.setUserData("fr");
-        fr.setPrefHeight(250);
-        fr.setPrefWidth(300);
-        add(fr, 2, 3);
+        fr.setPrefHeight(150);
+        fr.setPrefWidth(200);
+        fr.setFont(new Font(40));
+        add(fr, 1, 4);
         
-        Button en = new Button("en");
+        Button en = new Button("English");
         en.setOnAction(this::taalkeuze);
         en.setUserData("en");
-        en.setPrefHeight(250);
-        en.setPrefWidth(300);
-        add(en, 3, 3);
+        en.setPrefHeight(150);
+        en.setPrefWidth(200);
+        en.setFont(new Font(40));
+        add(en, 1, 5);
     }
     
     private void taalkeuze(ActionEvent event) {
