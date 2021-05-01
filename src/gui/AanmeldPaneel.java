@@ -6,6 +6,7 @@ import i18n.UITextHelper;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -51,6 +52,12 @@ public class AanmeldPaneel extends GridPane
         col2.setHgrow(Priority.ALWAYS);
         
         getColumnConstraints().addAll(col1, col2);
+
+        BackgroundImage myBI= new BackgroundImage(new Image(getClass().getResourceAsStream("/images/Achtergrond_Poker.jpg")),
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                  BackgroundSize.DEFAULT);
+        this.setBackground(new Background(myBI));
+        
     }
 
     private final TextField naam = new TextField();

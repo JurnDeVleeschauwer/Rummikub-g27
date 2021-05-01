@@ -4,7 +4,14 @@ import domein.DomeinController;
 import i18n.UITextHelper;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 
 public class HoofdMenu extends GridPane {
@@ -23,6 +30,11 @@ public class HoofdMenu extends GridPane {
 		setPadding(new Insets(10));
 		setHgap(10);
 		setVgap(10);
+		this.setAlignment(Pos.CENTER);
+        BackgroundImage myBI= new BackgroundImage(new Image(getClass().getResourceAsStream("/images/Achtergrond_Poker.jpg")),
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                  BackgroundSize.DEFAULT);
+        this.setBackground(new Background(myBI));
 
 	}
 
