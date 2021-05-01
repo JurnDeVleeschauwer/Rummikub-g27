@@ -6,7 +6,10 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -31,7 +34,11 @@ public class TaalMenu extends GridPane
         setPadding(new Insets(10));
         setHgap(10);
         setVgap(10);
-        this.setStyle("-fx-background-color: #136032");
+        BackgroundImage myBI= new BackgroundImage(new Image(getClass().getResourceAsStream("/images/achtergrond_Poker.jpg")),
+                BackgroundRepeat.ROUND, BackgroundRepeat.ROUND, BackgroundPosition.CENTER,
+                  BackgroundSize.DEFAULT);
+        this.setBackground(new Background(myBI));
+//        this.setStyle("-fx-background-color: #136032");
     }
 
     
