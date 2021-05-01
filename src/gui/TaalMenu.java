@@ -34,8 +34,8 @@ public class TaalMenu extends GridPane
         setPadding(new Insets(10));
         setHgap(10);
         setVgap(10);
-        BackgroundImage myBI= new BackgroundImage(new Image(getClass().getResourceAsStream("/images/achtergrond_Poker.jpg")),
-                BackgroundRepeat.ROUND, BackgroundRepeat.ROUND, BackgroundPosition.CENTER,
+        BackgroundImage myBI= new BackgroundImage(new Image(getClass().getResourceAsStream("/images/Achtergrond_Poker.jpg")),
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                   BackgroundSize.DEFAULT);
         this.setBackground(new Background(myBI));
 //        this.setStyle("-fx-background-color: #136032");
