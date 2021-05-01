@@ -34,6 +34,7 @@ public class SpelPaneel extends GridPane {
 	private Button btnRijSplitsen = new Button("Rij splitsen");
 	private Button btnReset = new Button("Reset tafel");
 	private Label lbl = new Label("Kies een actie");
+	
     
     
 	
@@ -41,13 +42,24 @@ public class SpelPaneel extends GridPane {
 	    {
 	        this.domeinController = domeinController;
 	        this.hoofdPaneel = hoofdPaneel;
+	        
 	        this.tafelPaneel = new GridPane();
+	        for(int i=0; i<10; i++) {
+	        	for(int a=0; a<10; a++) {
+		        	Button legeButton = new Button();
+		        	legeButton.setMinSize(50, 70);
+		        	legeButton.setMaxSize(50, 70);
+		        	legeButton.setPrefSize(50,70);
+		        	legeButton.setPadding(new Insets(0, 4, 20, 0));
+		        	this.tafelPaneel.add(legeButton, a, i);
+		        }
+	        }
+	        
 	        this.werkveldPaneel = new GridPane();
 	        this.spelerPaneel = new GridPane();
 	        this.optiesPaneel = new GridPane();
+	        this.lbl.setFont(new Font(20));
 	        
-	        
-//<<<<<<< HEAD=======>>>>>>> 108a5ac (OVerzicht sort, aanmelden controleerspeler verbetert, except en taaal)
 	        stenenOpTafelLeggen();
 	        werkveldLeggen();
 			spelerStenenGeven();
@@ -78,6 +90,7 @@ public class SpelPaneel extends GridPane {
     }
 
 	private void stenenOpTafelLeggen() {
+		
 		int XIndex=0;
 		int YIndex=0;
 		for(List<RummiSteen> rij : domeinController.getSpel().getTijdelijkeTafel().getStenenOpTafel()) {
@@ -107,12 +120,19 @@ public class SpelPaneel extends GridPane {
 	}
 
 	private void voegComponentenToe() {
-		add(this.tafelPaneel, 0, 0);
+		add(this.tafelPaneel, 0, 0, 1, 4);
 		add(this.werkveldPaneel, 1, 0);
-		add(this.spelerPaneel, 0, 1);
-		add(this.optiesPaneel, 1, 1);
+		add(this.spelerPaneel, 1, 1, 2, 1);
+		add(this.optiesPaneel, 2, 0);
 		add(this.lbl,1, 2 );
 		
+	}
+	
+	private void reloadScherm() {
+		spelerStenenGeven();
+		stenenOpTafelLeggen();
+		werkveldLeggen();
+		resetLabel();
 	}
 
 	private void configureerGrid() {
@@ -160,6 +180,7 @@ public class SpelPaneel extends GridPane {
 		btnSteen.setMaxSize(50, 70);
 		btnSteen.setPrefSize(50,70);
 		btnSteen.setPadding(new Insets(0, 4, 20, 0));
+		btnSteen.setId(naam);
 		btnSteen.setOnAction(this::opSteenGeklikt);
 		return btnSteen;
 	}
@@ -175,16 +196,22 @@ public class SpelPaneel extends GridPane {
 		
 		for(RummiSteen steen : stenen) {
 			Button btnSteen = this.vanSteenEenButtonMaken(steen);
-			if(index < stenen.size()/2) {
+			if(index < (stenen.size()%2 == 0? stenen.size()/2 : stenen.size()/2+1)) {
 				this.spelerPaneel.add(btnSteen, index, 1);
 			}else
-				this.spelerPaneel.add(btnSteen, index-(stenen.size()/2), 2);
+				this.spelerPaneel.add(btnSteen, index-(stenen.size()%2 == 0? stenen.size()/2 : stenen.size()/2+1), 2);
 			index++;
 		}
 	}
 	
-	private RummiSteen opSteenGeklikt(ActionEvent event) { //geen idee hoe ik dit laat werken
-		return null;
+	private void opSteenGeklikt(ActionEvent event) { //geen idee hoe ik dit laat werken
+		Button btn = (Button) event.getSource();
+		String naam = btn.getId();
+		steenOmAanTeLeggenIsGekozen(naam);
+	}
+	
+	private void resetLabel() {
+		lbl.setText("Kies een actie");
 	}
 	
 	private void optiesGeven() {
@@ -209,19 +236,25 @@ public class SpelPaneel extends GridPane {
 
 	private void beurtBeëindigen(ActionEvent event) {
 		domeinController.beeindigBeurt();
-		spelerStenenGeven();
+		reloadScherm();
 	}
 	private void jokerVervangen(ActionEvent event) {
 		domeinController.jokerVervangen();
 	}
+	private void steenOmAanTeLeggenIsGekozen(String naam) {
+		if(lbl.getText().equals("Klik op de steen die je wilt leggen")) {
+			String label = domeinController.steenAanleggen(naam);
+			reloadScherm();
+			if(!(label.equals(null))) {
+				lbl.setText(label+", kies een actie");
+			} 
+				
+			
+		}
+		
+	}
 	private void steenAanleggen(ActionEvent event) {
 		lbl.setText("Klik op de steen die je wilt leggen");
-		List<Button> btns;
-		for(int i=0;i<this.spelerPaneel.getChildren().size();i++) {
-			btns.add((Button) this.spelerPaneel.getChildren().get(i));
-		}
-		Button btn = 
-		domeinController.steenAanleggen();
 	}
 	private void steenNaarWerkveld(ActionEvent event) {
 		domeinController.steenNaarWerkveld();

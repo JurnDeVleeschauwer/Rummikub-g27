@@ -28,10 +28,10 @@ public class Spel {
 		setSpelerAanZet(spelers.get(0));
 		resetTijdelijkeTafel();
 		
-//		for(int i=0;i<3;i++) {
-//			steenOpTafelLeggen(this.spelerAanZet.getStenenInBezit().get(i), i);
-////			steenNaarWerkveld(this.spelerAanZet.getStenenInBezit().get(i+7));
-//		}
+		for(int i=0;i<3;i++) {
+			steenOpTafelLeggen(this.spelerAanZet.getStenenInBezit().get(i), i);
+//			steenNaarWerkveld(this.spelerAanZet.getStenenInBezit().get(i+7));
+		}
 		
 	}
 	
@@ -245,6 +245,29 @@ public class Spel {
 		
 	}
 	
+	public String steenAanleggen(String naam) {
+				
+		boolean vanWerkveld = true;
+		RummiSteen steen = this.geefSteenMetNaam(naam);
+		if(steen==null) {
+			steen = this.spelerAanZet.geefSteenMetNaam(naam);
+			vanWerkveld = false;
+		}
+		
+		if(steen != null) {
+			if(vanWerkveld) {
+				this.werkveld.remove(steen);
+				this.steenOpTafelLeggen(steen, 1/*rij*/);
+			}else {
+				this.spelerAanZet.verwijderSteen(steen);
+				this.steenOpTafelLeggen(steen, 1/*rij*/);
+				this.zetNeemSteen(false);
+			}
+		}else {
+			return UITextHelper.UIText("Deze.steen.heb.je.niet.in.je.bezit");
+		}
+		return null;
+	}
 	/**
 	 * Neemt een steen van de tafel en verplaatst deze naar het werkveld
 	 */

@@ -24,11 +24,11 @@ public class Tafel {
 	}
 
 	public void reset(List<List<RummiSteen>> stenenVasteTafel, Speler spelerAanZet) {
-		for (List<RummiSteen> l:this.stenenOpTafel) {
-			for (RummiSteen s: l) {
-				spelerAanZet.krijgtSteen(s);
-			}
-		}
+//		for (List<RummiSteen> l:this.stenenOpTafel) {
+//			for (RummiSteen s: l) {
+//				spelerAanZet.krijgtSteen(s);
+//			}
+//		}
 		
 		List<List<RummiSteen>> stenenOpTafel = new ArrayList<>(10);
 		for(int i=0; i <10 ; i++) {

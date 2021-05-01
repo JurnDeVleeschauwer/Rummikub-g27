@@ -83,9 +83,11 @@ public class DomeinController {
 	public void beeindigBeurt() {
 		spel.beeindigBeurt();
 	}
-	
 	public void steenAanleggen() {
 		spel.steenAanleggen();
+	}
+	public String steenAanleggen(String naam) {
+		return spel.steenAanleggen(naam);
 	}
 	
 	public void SteenVervangenDoorJoker() {
