@@ -3,6 +3,7 @@ package gui;
 import i18n.UITextHelper;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,8 +33,9 @@ public class TaalMenu extends GridPane
     private void configureerGrid()
     {
         setPadding(new Insets(10));
-        setHgap(10);
+        setHgap(30);
         setVgap(10);
+        this.setAlignment(Pos.CENTER);
         BackgroundImage myBI= new BackgroundImage(new Image(getClass().getResourceAsStream("/images/Achtergrond_Poker.jpg")),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                   BackgroundSize.DEFAULT);
