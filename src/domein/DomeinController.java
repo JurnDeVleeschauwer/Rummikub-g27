@@ -86,8 +86,8 @@ public class DomeinController {
 	public void steenAanleggen() {
 		spel.steenAanleggen();
 	}
-	public String steenAanleggen(String naam) {
-		return spel.steenAanleggen(naam);
+	public String steenAanleggen(String naam, String positie) {
+		return spel.steenAanleggen(naam, positie);
 	}
 	
 	public void SteenVervangenDoorJoker() {

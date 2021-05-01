@@ -9,6 +9,12 @@ public class RummiSteen {
 	 * @param waarde het getal van de steen
 	 * @param kleur van de steen waarbij groen = joker
 	 * */
+	public RummiSteen() {
+		this.waarde = 0;
+		this.kleur = "";
+		this.naam = "";
+		
+	}
 	public RummiSteen(int waarde, String kleur) {
 		this.waarde=waarde;
 		this.kleur=kleur;

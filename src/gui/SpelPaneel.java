@@ -53,10 +53,14 @@ public class SpelPaneel extends GridPane {
 	        for(int i=0; i<10; i++) {
 	        	for(int a=0; a<10; a++) {
 		        	Button legeButton = new Button();
+		        	String str = "";
+		        	str=str + i + "," + a;
+		        	legeButton.setId(str);
 		        	legeButton.setMinSize(50, 70);
 		        	legeButton.setMaxSize(50, 70);
 		        	legeButton.setPrefSize(50,70);
 		        	legeButton.setPadding(new Insets(0, 4, 20, 0));
+		        	legeButton.setOnAction(this::opLegePlaatsGeklikt);
 		        	this.tafelPaneel.add(legeButton, a, i);
 		        }
 	        }
@@ -101,9 +105,12 @@ public class SpelPaneel extends GridPane {
 		int YIndex=0;
 		for(List<RummiSteen> rij : domeinController.getSpel().getTijdelijkeTafel().getStenenOpTafel()) {
 			for(RummiSteen steen : rij) {
-				Button btnSteen = this.vanSteenEenButtonMaken(steen);
+				if (!(steen.getKleur().equals(""))) {
+					Button btnSteen = this.vanSteenEenButtonMaken(steen);
 				this.tafelPaneel.add(btnSteen, XIndex, YIndex);
+				}
 				XIndex++;
+				
 			}
 //ik wil 2 rijen steentjes op dezelfde rij laten zien met wat ruimte tussen, het lukt me niet
 			
@@ -215,10 +222,19 @@ public class SpelPaneel extends GridPane {
 		}
 	}
 	
-	private void opSteenGeklikt(ActionEvent event) { //geen idee hoe ik dit laat werken
+	private void opSteenGeklikt(ActionEvent event) {
 		Button btn = (Button) event.getSource();
 		String naam = btn.getId();
 		steenOmAanTeLeggenIsGekozen(naam);
+	}
+	
+	private void opLegePlaatsGeklikt(ActionEvent event) {
+		Button btn = (Button) event.getSource();
+		String positie = btn.getId();
+		if(positie.contains(",")) {
+			steenEnRijZijnGekozenOmAanTeLeggen(positie);
+
+		}
 	}
 	
 	private void resetLabel() {
@@ -253,19 +269,30 @@ public class SpelPaneel extends GridPane {
 		domeinController.jokerVervangen();
 	}
 	private void steenOmAanTeLeggenIsGekozen(String naam) {
-		if(lbl.getText().equals("Klik op de steen die je wilt leggen")) {
-			String label = domeinController.steenAanleggen(naam);
+		if(lbl.getId().equals("steenKiezen")) {
+			
+			lbl.setText("Kies nu waar je "+ naam + " wilt leggen");	
+			lbl.setId("rijKiezen");
+			
+		}
+		
+	}
+	private void steenEnRijZijnGekozenOmAanTeLeggen(String positie) {
+		if(lbl.getId().equals("rijKiezen")) {
+			String[] str = lbl.getText().split(" ");
+			String naam = str[4];
+			String label = domeinController.steenAanleggen(naam, positie);
 			reloadScherm();
-			if(!(label.equals(null))) {
+			if(!(label == null)) {
 				lbl.setText(label+", kies een actie");
 			} 
 				
 			
 		}
-		
 	}
 	private void steenAanleggen(ActionEvent event) {
 		lbl.setText("Klik op de steen die je wilt leggen");
+		lbl.setId("steenKiezen");
 	}
 	private void steenNaarWerkveld(ActionEvent event) {
 		domeinController.steenNaarWerkveld();

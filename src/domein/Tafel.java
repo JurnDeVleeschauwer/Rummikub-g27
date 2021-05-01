@@ -4,33 +4,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tafel {
-	private List<List<RummiSteen>> stenenOpTafel;
+	private List<ArrayList<RummiSteen>> stenenOpTafel;
 
 	public Tafel() {
-		this.stenenOpTafel= new ArrayList<>(10);
+		this.stenenOpTafel= new ArrayList<ArrayList<RummiSteen>>(10);
 		for(int i=0; i <10 ; i++) {
-		    stenenOpTafel.add(new ArrayList());
+		    ArrayList arr = new ArrayList<RummiSteen>(10);
+		    for(int a=0; a <10 ; a++) {
+		    	arr.add(new RummiSteen());
+		    }
+			stenenOpTafel.add(arr);
+		    
 		}
 		
 		
 	}
-	
 	public void legSteenOpTafel(RummiSteen steen, int rij) {
 		this.stenenOpTafel.get(rij).add(steen);
 	}
 	
-	public List<List<RummiSteen>> getStenenOpTafel() {
+	public void legSteenOpTafel(RummiSteen steen, int rij, int kolom) {
+		this.stenenOpTafel.get(rij).set(kolom, steen);
+	}
+	
+	public List<ArrayList<RummiSteen>> getStenenOpTafel() {
 		return stenenOpTafel;
 	}
 
-	public void reset(List<List<RummiSteen>> stenenVasteTafel, Speler spelerAanZet) {
+	public void reset(List<ArrayList<RummiSteen>> stenenVasteTafel, Speler spelerAanZet) {
 //		for (List<RummiSteen> l:this.stenenOpTafel) {
 //			for (RummiSteen s: l) {
 //				spelerAanZet.krijgtSteen(s);
 //			}
 //		}
 		
-		List<List<RummiSteen>> stenenOpTafel = new ArrayList<>(10);
+		List<ArrayList<RummiSteen>> stenenOpTafel = new ArrayList<>(10);
 		for(int i=0; i <10 ; i++) {
 		    stenenOpTafel.add(new ArrayList());
 		}

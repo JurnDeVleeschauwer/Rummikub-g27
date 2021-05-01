@@ -28,10 +28,10 @@ public class Spel {
 		setSpelerAanZet(spelers.get(0));
 		resetTijdelijkeTafel();
 		
-		for(int i=0;i<3;i++) {
-			steenOpTafelLeggen(this.spelerAanZet.getStenenInBezit().get(i), i);
-//			steenNaarWerkveld(this.spelerAanZet.getStenenInBezit().get(i+7));
-		}
+//		for(int i=0;i<3;i++) {
+//			steenOpTafelLeggen(this.spelerAanZet.getStenenInBezit().get(i), i);
+////			steenNaarWerkveld(this.spelerAanZet.getStenenInBezit().get(i+7));
+//		}
 		
 	}
 	
@@ -202,6 +202,11 @@ public class Spel {
 	 * @param steen gekozen steen
 	 * @param rij waar de speler de steen wil leggen op tafel
 	 */
+	public void steenOpTafelLeggen(RummiSteen steen, int rij, int kolom) {
+		this.tijdelijkeTafel.legSteenOpTafel(steen, rij, kolom);
+	}
+	
+	//is voorlopig, deze zal nog weg mogen
 	public void steenOpTafelLeggen(RummiSteen steen, int rij) {
 		this.tijdelijkeTafel.legSteenOpTafel(steen, rij);
 	}
@@ -245,8 +250,22 @@ public class Spel {
 		
 	}
 	
-	public String steenAanleggen(String naam) {
-				
+	public String steenAanleggen(String naam, String positie) {
+		String[] str = positie.split(",");
+		int rij=0;
+		int kolom=0;
+		for(int i = 0; i <10 ; i++) {
+			String s = "";
+			s+=i;
+			if (str[0].equals(s)) {
+				rij = i;
+			}
+			if (str[1].equals(s)) {
+				kolom = i;
+			}
+		}
+		
+		
 		boolean vanWerkveld = true;
 		RummiSteen steen = this.geefSteenMetNaam(naam);
 		if(steen==null) {
@@ -257,10 +276,10 @@ public class Spel {
 		if(steen != null) {
 			if(vanWerkveld) {
 				this.werkveld.remove(steen);
-				this.steenOpTafelLeggen(steen, 1/*rij*/);
+				this.steenOpTafelLeggen(steen, rij, kolom);
 			}else {
 				this.spelerAanZet.verwijderSteen(steen);
-				this.steenOpTafelLeggen(steen, 1/*rij*/);
+				this.steenOpTafelLeggen(steen, rij, kolom);
 				this.zetNeemSteen(false);
 			}
 		}else {
