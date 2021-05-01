@@ -40,7 +40,7 @@ public class HoeveelSpelersPaneel extends GridPane {
 
     private void configureerGrid() {
         setPadding(new Insets(10));
-        setHgap(10);
+        setHgap(20);
         setVgap(10);
         this.setAlignment(Pos.CENTER);
         BackgroundImage myBI= new BackgroundImage(new Image(getClass().getResourceAsStream("/images/Achtergrond_Poker.jpg")),

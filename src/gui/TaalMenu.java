@@ -34,7 +34,7 @@ public class TaalMenu extends GridPane
     {
         setPadding(new Insets(10));
         setHgap(30);
-        setVgap(10);
+        setVgap(0);
         this.setAlignment(Pos.CENTER);
         BackgroundImage myBI= new BackgroundImage(new Image(getClass().getResourceAsStream("/images/Achtergrond_Poker.jpg")),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
