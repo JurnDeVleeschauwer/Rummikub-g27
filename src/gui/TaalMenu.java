@@ -40,7 +40,6 @@ public class TaalMenu extends GridPane
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                   BackgroundSize.DEFAULT);
         this.setBackground(new Background(myBI));
-//        this.setStyle("-fx-background-color: #136032");
     }
 
     
@@ -51,46 +50,51 @@ public class TaalMenu extends GridPane
                 new Image(getClass().getResourceAsStream("/images/NL_Flag.png"))
     	);
     	nlImage.setFitWidth(200);
-    	nlImage.setFitHeight(133);
-    	add(nlImage, 2, 2);
+    	nlImage.setFitHeight(150);
+//    	add(nlImage, 2, 2);
     	
-    	ImageView frImage = new ImageView(
-                new Image(getClass().getResourceAsStream("/images/FR_Flag.png"))
-    	);
-    	frImage.setFitWidth(200);
-    	frImage.setFitHeight(133);
-    	add(frImage, 3, 2);
-    	
-    	ImageView enImage = new ImageView(
-                new Image(getClass().getResourceAsStream("/images/EN_Flag.png"))
-    	);
-    	enImage.setFitWidth(200);
-    	enImage.setFitHeight(133);
-    	add(enImage, 4, 2);
-    	
-        
-        Button nl = new Button("Nederlands");
+        Button nl = new Button("");
+        nl.setGraphic(nlImage);
         nl.setOnAction(this::taalkeuze);
-        nl.setUserData("nl");
         nl.setPrefHeight(150);
         nl.setPrefWidth(200);
+        nl.setPadding(new Insets(0, 0, 0, 0));
+        nl.setUserData("nl");
         nl.setFont(new Font(30));
         add(nl, 2, 3);
         
-        Button fr = new Button("Français");
+        ImageView frImage = new ImageView(
+                new Image(getClass().getResourceAsStream("/images/FR_Flag.png"))
+    	);
+    	frImage.setFitWidth(200);
+    	frImage.setFitHeight(150);
+    	add(frImage, 3, 2);
+    	
+        Button fr = new Button("");
+        fr.setGraphic(frImage);
         fr.setOnAction(this::taalkeuze);
-        fr.setUserData("fr");
         fr.setPrefHeight(150);
         fr.setPrefWidth(200);
-        fr.setFont(new Font(40));
+        fr.setPadding(new Insets(0, 0, 0, 0));
+        fr.setUserData("fr");
+        fr.setFont(new Font(30));
         add(fr, 3, 3);
         
-        Button en = new Button("English");
+        ImageView enImage = new ImageView(
+                new Image(getClass().getResourceAsStream("/images/EN_Flag.png"))
+    	);
+    	enImage.setFitWidth(200);
+    	enImage.setFitHeight(150);
+//    	add(enImage, 4, 2);
+    	
+        Button en = new Button("");
+        en.setGraphic(enImage);
         en.setOnAction(this::taalkeuze);
-        en.setUserData("en");
         en.setPrefHeight(150);
         en.setPrefWidth(200);
-        en.setFont(new Font(40));
+        en.setPadding(new Insets(0, 0, 0, 0));
+        en.setUserData("en");
+//        en.setFont(new Font(40));
         add(en, 4, 3);
     }
     

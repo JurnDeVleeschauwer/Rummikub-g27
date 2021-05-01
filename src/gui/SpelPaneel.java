@@ -11,6 +11,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -176,7 +177,6 @@ public class SpelPaneel extends GridPane {
 		switch (kleur){
 		case "Rood": 
 			btnSteen.setTextFill(Color.RED);
-			break;
 		case "Blauw":
 			btnSteen.setTextFill(Color.BLUE);
 			break;

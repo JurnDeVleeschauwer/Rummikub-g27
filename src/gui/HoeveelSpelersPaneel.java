@@ -14,6 +14,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 
 /**
  * 
@@ -56,14 +57,23 @@ public class HoeveelSpelersPaneel extends GridPane {
 
         Button spelers2 = new Button("2");
         spelers2.setOnAction(this::spelers2);
+        spelers2.setPrefHeight(40);
+        spelers2.setPrefWidth(40);
+        spelers2.setFont(new Font(15));
         add(spelers2, 0, 2, 1, 1);
         
         Button spelers3 = new Button("3");
         spelers3.setOnAction(this::spelers3);
+        spelers3.setPrefHeight(40);
+        spelers3.setPrefWidth(40);
+        spelers3.setFont(new Font(15));
         add(spelers3, 1, 2, 1, 1);
         
         Button spelers4 = new Button("4");
         spelers4.setOnAction(this::spelers4);
+        spelers4.setPrefHeight(40);
+        spelers4.setPrefWidth(40);
+        spelers4.setFont(new Font(15));
         add(spelers4, 2, 2, 1, 1);
         
 
