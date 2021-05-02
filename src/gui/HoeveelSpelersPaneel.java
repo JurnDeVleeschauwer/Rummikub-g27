@@ -55,16 +55,11 @@ public class HoeveelSpelersPaneel extends GridPane {
     private final Label foutbericht = new Label();
 
     private void voegComponentenToe() {
-<<<<<<< Upstream, based on branch 'main' of git@github.com:HoGentTIProjecten1/rummikub-g27.git
-        Label lblAantalSpelers = new Label(UITextHelper.UIText("Hoeveel.spelers.spelen.er.mee?.2-4.Spelers"));
-        lblAantalSpelers.setTextFill(Color.WHITE);
+        
+    	Label lblAantalSpelers = new Label(UITextHelper.UIText("Hoeveel.spelers.spelen.er.mee?.2-4.Spelers"));
+    	lblAantalSpelers.setTextFill(Color.WHITESMOKE);
+    	lblAantalSpelers.setFont(Font.font(null, FontWeight.BOLD, 18));
         add(lblAantalSpelers, 0, 1, 4, 1);
-=======
-    	Label spelersLabel = new Label(UITextHelper.UIText("Hoeveel.spelers.spelen.er.mee?.2-4.Spelers"));
-    	spelersLabel.setTextFill(Color.WHITESMOKE);
-    	spelersLabel.setFont(Font.font(null, FontWeight.BOLD, 18));
-        add(spelersLabel, 0, 1, 4, 1);
->>>>>>> 0307aa5 Opmaak van de moeilijk te lezen labels aangepast zodat ze te lezen zijn
 
         Button spelers2 = new Button("2");
         spelers2.setOnAction(this::spelers2);
