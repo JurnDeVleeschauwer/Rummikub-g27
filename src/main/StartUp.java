@@ -8,6 +8,8 @@ import exceptions.ExceptieSpelerAanmelden;
 import gui.HoofdPaneel;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class StartUp extends Application {
@@ -28,6 +30,8 @@ public class StartUp extends Application {
 
 	        Stage.setScene(scene);
 	        Stage.setTitle("Rummikub");
+	        Image iconImg =  new Image(getClass().getResourceAsStream("/images/RummIcon.png"));
+	        Stage.getIcons().add(iconImg);
 	        Stage.show();
 	    }
 	public static void main(String[] args) throws ExceptieSpelerAanmelden{
