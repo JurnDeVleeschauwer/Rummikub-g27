@@ -51,20 +51,20 @@ public class SpelPaneel extends GridPane {
 	        this.lbl.setTextFill(Color.WHITE);
 	        this.resetLabel();
 	        this.tafelPaneel = new GridPane();
-	        for(int i=0; i<11; i++) {
-	        	for(int a=0; a<13; a++) {
-		        	Button legeButton = new Button();
-		        	String str = "";
-		        	str=str + i + "," + a;
-		        	legeButton.setId(str);
-		        	legeButton.setMinSize(50, 70);
-		        	legeButton.setMaxSize(50, 70);
-		        	legeButton.setPrefSize(50,70);
-		        	legeButton.setPadding(new Insets(0, 4, 20, 0));
-		        	legeButton.setOnAction(this::opLegePlaatsGeklikt);
-		        	this.tafelPaneel.add(legeButton, a, i);
-		        }
-	        }
+//	        for(int i=0; i<11; i++) {
+//	        	for(int a=0; a<13; a++) {
+//		        	Button legeButton = new Button();
+//		        	String str = "";
+//		        	str=str + i + "," + a;
+//		        	legeButton.setId(str);
+//		        	legeButton.setMinSize(50, 70);
+//		        	legeButton.setMaxSize(50, 70);
+//		        	legeButton.setPrefSize(50,70);
+//		        	legeButton.setPadding(new Insets(0, 4, 20, 0));
+//		        	legeButton.setOnAction(this::opLegePlaatsGeklikt);
+//		        	this.tafelPaneel.add(legeButton, a, i);
+//		        }
+//	        }
 	        
 	        this.werkveldPaneel = new GridPane();
 	        this.spelerPaneel = new GridPane();
@@ -101,14 +101,27 @@ public class SpelPaneel extends GridPane {
     }
 
 	private void stenenOpTafelLeggen() {
-		
+		this.tafelPaneel.getChildren().clear();
 		int XIndex=0;
 		int YIndex=0;
 		for(List<RummiSteen> rij : domeinController.getSpel().getTijdelijkeTafel().getStenenOpTafel()) {
 			for(RummiSteen steen : rij) {
 				if (!(steen.getKleur().equals(""))) {
 					Button btnSteen = this.vanSteenEenButtonMaken(steen);
-				this.tafelPaneel.add(btnSteen, XIndex, YIndex);
+					btnSteen.setOnAction(this::opSteenOpTafelGeklikt);
+					this.tafelPaneel.add(btnSteen, XIndex, YIndex);
+				}
+				else { 
+					Button legeButton = new Button();
+		        	String str = "";
+		        	str=str + YIndex + "," + XIndex;
+		        	legeButton.setId(str);
+		        	legeButton.setMinSize(50, 70);
+		        	legeButton.setMaxSize(50, 70);
+		        	legeButton.setPrefSize(50,70);
+		        	legeButton.setPadding(new Insets(0, 4, 20, 0));
+		        	legeButton.setOnAction(this::opLegePlaatsGeklikt);
+		        	this.tafelPaneel.add(legeButton, XIndex, YIndex);
 				}
 				XIndex++;
 				
@@ -186,7 +199,6 @@ public class SpelPaneel extends GridPane {
 		btnSteen.setPrefSize(50,70);
 		btnSteen.setPadding(new Insets(0, 4, 20, 0));
 		btnSteen.setId(naam);
-		btnSteen.setOnAction(this::opSteenGeklikt);
 		return btnSteen;
 	}
 	
@@ -202,6 +214,7 @@ public class SpelPaneel extends GridPane {
 		
 		for(RummiSteen steen : stenen) {
 			Button btnSteen = this.vanSteenEenButtonMaken(steen);
+			btnSteen.setOnAction(this::opSteenVanSpelerGeklikt);
 			if(index < (stenen.size()%2 == 0? stenen.size()/2 : stenen.size()/2+1)) {
 				this.spelerPaneel.add(btnSteen, index, 1);
 			}else
@@ -210,12 +223,28 @@ public class SpelPaneel extends GridPane {
 		}
 	}
 	
-	private void opSteenGeklikt(ActionEvent event) {
+	private void opSteenVanSpelerGeklikt(ActionEvent event) {
 		Button btn = (Button) event.getSource();
 		String naam = btn.getId();
 		steenOmAanTeLeggenIsGekozen(naam);
+		
 	}
 	
+	private void opSteenOpTafelGeklikt(ActionEvent event) {
+		Button btn = (Button) event.getSource();
+		String naam = btn.getId();
+		steenNaarWerkveldIsGekozen(naam);
+	}
+	
+	private void steenNaarWerkveldIsGekozen(String naam) {
+		if(lbl.getId().equals("steenNaarWerkveldKiezen")) {
+			domeinController.steenNaarWerkveld(naam);
+			reloadScherm();
+		}
+			
+		
+	}
+
 	private void opLegePlaatsGeklikt(ActionEvent event) {
 		Button btn = (Button) event.getSource();
 		String positie = btn.getId();
@@ -283,9 +312,12 @@ public class SpelPaneel extends GridPane {
 		lbl.setText("Klik op de steen die je wilt leggen");
 		lbl.setId("steenKiezen");
 	}
+	
 	private void steenNaarWerkveld(ActionEvent event) {
-		domeinController.steenNaarWerkveld();
+		lbl.setText("Welke steen wil je naar het werkveld brengen");
+		lbl.setId("steenNaarWerkveldKiezen");
 	}
+	
 	private void rijSplitsen(ActionEvent event) {
 		domeinController.rijSplitsen();
 	}

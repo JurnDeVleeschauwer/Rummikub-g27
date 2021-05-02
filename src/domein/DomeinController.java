@@ -101,9 +101,12 @@ public class DomeinController {
 	public void jokerVervangen() {
 		spel.jokerVervangen();
 	}
-	
 	public void steenNaarWerkveld() {
 		spel.steenNaarWerkveld();
+	}
+	
+	public void steenNaarWerkveld(String naam) {
+		spel.steenNaarWerkveld(naam);
 	}
 	
 	public List<Speler> getSpelers(){

@@ -155,7 +155,9 @@ public class Tafel {
 		for(List<RummiSteen> r : this.stenenOpTafel) {
 			for(RummiSteen s : r) {
 				if(s.equals(steen)) {
+					r.add(r.indexOf(s), new RummiSteen());
 					r.remove(s);
+					
 					break;
 				}
 			}

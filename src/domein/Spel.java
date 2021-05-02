@@ -289,11 +289,20 @@ public class Spel {
 	}
 	/**
 	 * Neemt een steen van de tafel en verplaatst deze naar het werkveld
+	 * @param naam2 
 	 */
 	public void steenNaarWerkveld() {
 		System.out.printf("%s%n", UITextHelper.UIText("Geef.de.naam.van.de.steen.die.je.naar.het.werkveld.wil.brengen"));
 		String naam = sc.next();
 				
+		RummiSteen steen = this.tijdelijkeTafel.geefSteenMetNaam(naam);
+		if(steen != null) {
+			this.tijdelijkeTafel.verwijderSteen(steen);
+			this.werkveld.add(steen);
+		} else System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.ligt.niet.op.tafel"));
+	}
+	
+	public void steenNaarWerkveld(String naam) {	
 		RummiSteen steen = this.tijdelijkeTafel.geefSteenMetNaam(naam);
 		if(steen != null) {
 			this.tijdelijkeTafel.verwijderSteen(steen);
