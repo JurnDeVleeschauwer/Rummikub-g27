@@ -14,6 +14,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 /**
@@ -53,7 +54,9 @@ public class HoeveelSpelersPaneel extends GridPane {
     private final Label foutbericht = new Label();
 
     private void voegComponentenToe() {
-        add(new Label(UITextHelper.UIText("Hoeveel.spelers.spelen.er.mee?.2-4.Spelers")), 0, 1, 4, 1);
+        Label lblAantalSpelers = new Label(UITextHelper.UIText("Hoeveel.spelers.spelen.er.mee?.2-4.Spelers"));
+        lblAantalSpelers.setTextFill(Color.WHITE);
+        add(lblAantalSpelers, 0, 1, 4, 1);
 
         Button spelers2 = new Button("2");
         spelers2.setOnAction(this::spelers2);

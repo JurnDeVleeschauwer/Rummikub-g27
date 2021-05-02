@@ -7,10 +7,10 @@ public class Tafel {
 	private List<ArrayList<RummiSteen>> stenenOpTafel;
 
 	public Tafel() {
-		this.stenenOpTafel= new ArrayList<ArrayList<RummiSteen>>(10);
-		for(int i=0; i <10 ; i++) {
-		    ArrayList arr = new ArrayList<RummiSteen>(10);
-		    for(int a=0; a <10 ; a++) {
+		this.stenenOpTafel= new ArrayList<ArrayList<RummiSteen>>(11);
+		for(int i=0; i <11 ; i++) {
+		    ArrayList arr = new ArrayList<RummiSteen>(13);
+		    for(int a=0; a <13 ; a++) {
 		    	arr.add(new RummiSteen());
 		    }
 			stenenOpTafel.add(arr);
@@ -39,7 +39,7 @@ public class Tafel {
 //		}
 		
 		List<ArrayList<RummiSteen>> stenenOpTafel = new ArrayList<>(10);
-		for(int i=0; i <10 ; i++) {
+		for(int i=0; i <11 ; i++) {
 		    stenenOpTafel.add(new ArrayList());
 		}
 		

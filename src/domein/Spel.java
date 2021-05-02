@@ -224,11 +224,11 @@ public class Spel {
 	public void steenAanleggen() {
 		System.out.printf("%s%n",UITextHelper.UIText("Geef.de.naam.van.de.steen.die.je.wil.leggen"));
 		String naam = sc.next();
-		int rij = 11;
+		int rij = 12;
 		do {
 			System.out.printf("%s%n",UITextHelper.UIText("Geef.de.rij.waaraan.je.deze.steen.wilt.leggen"));
 			rij = sc.nextInt();
-		}while(rij > 10);
+		}while(rij > 11);
 		
 		boolean vanWerkveld = true;
 		RummiSteen steen = this.geefSteenMetNaam(naam);
@@ -254,7 +254,7 @@ public class Spel {
 		String[] str = positie.split(",");
 		int rij=0;
 		int kolom=0;
-		for(int i = 0; i <10 ; i++) {
+		for(int i = 0; i <this.tijdelijkeTafel.getStenenOpTafel().size()+this.tijdelijkeTafel.getStenenOpTafel().get(1).size() ; i++) {
 			String s = "";
 			s+=i;
 			if (str[0].equals(s)) {

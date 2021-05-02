@@ -6,7 +6,6 @@ import i18n.UITextHelper;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -21,6 +20,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class AanmeldPaneel extends GridPane
@@ -67,6 +67,7 @@ public class AanmeldPaneel extends GridPane
     private void voegComponentenToe()
     {
     	Text header = new Text();
+    	header.setFill(Color.WHITE);
     	switch (hoofdPaneel.getAantalSpelersIngelogt()) {
 		case 0:
 			header.setText(UITextHelper.UIText("Aanmelden.speler.1"));
@@ -84,11 +85,14 @@ public class AanmeldPaneel extends GridPane
         
         GridPane.setHalignment(header, HPos.LEFT);
         add(header, 0, 0, 2, 1);
-        
-        add(new Label(UITextHelper.UIText("Geef.je.gebruikersnaam.in")), 0, 1, 1, 1);
+        Label lblNaam = new Label(UITextHelper.UIText("Geef.je.gebruikersnaam.in"));
+    	lblNaam.setTextFill(Color.WHITE);
+        add(lblNaam, 0, 1, 1, 1);
         add(naam, 1, 1, 1, 1);
         
-        add(new Label(UITextHelper.UIText("Geef.je.wachtwoord.in")), 0, 2, 1, 1);
+        Label lblWachtwoord = new Label(UITextHelper.UIText("Geef.je.wachtwoord.in"));
+        lblWachtwoord.setTextFill(Color.WHITE);
+        add(lblWachtwoord, 0, 2, 1, 1);
         add(wachtwoord, 1, 2, 1, 1);
         
         Button aanmelden = new Button(UITextHelper.UIText("Aanmelden"));

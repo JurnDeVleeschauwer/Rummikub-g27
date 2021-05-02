@@ -11,7 +11,6 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -40,7 +39,7 @@ public class SpelPaneel extends GridPane {
 	private Button btnSteenNaarWerkveld = new Button("Steen naar werkveld brengen");
 	private Button btnRijSplitsen = new Button("Rij splitsen");
 	private Button btnReset = new Button("Reset tafel");
-	private Label lbl = new Label("Kies een actie");
+	private Label lbl = new Label();
 	
     
     
@@ -49,10 +48,11 @@ public class SpelPaneel extends GridPane {
 	    {
 	        this.domeinController = domeinController;
 	        this.hoofdPaneel = hoofdPaneel;
-	        
+	        this.lbl.setTextFill(Color.WHITE);
+	        this.resetLabel();
 	        this.tafelPaneel = new GridPane();
-	        for(int i=0; i<10; i++) {
-	        	for(int a=0; a<10; a++) {
+	        for(int i=0; i<11; i++) {
+	        	for(int a=0; a<13; a++) {
 		        	Button legeButton = new Button();
 		        	String str = "";
 		        	str=str + i + "," + a;
@@ -113,22 +113,8 @@ public class SpelPaneel extends GridPane {
 				XIndex++;
 				
 			}
-//ik wil 2 rijen steentjes op dezelfde rij laten zien met wat ruimte tussen, het lukt me niet
-			
-//			if (domeinController.getSpel().getTijdelijkeTafel().getStenenOpTafel().indexOf(rij) %2!=0) {
 				YIndex++;
 				XIndex=0;
-//			}
-//			else {
-//				Label leegLbl = new Label("");
-//				this.tafelPaneel.add(leegLbl, XIndex, YIndex);
-//				this.tafelPaneel.add(leegLbl, XIndex+1, YIndex);
-//				this.tafelPaneel.add(leegLbl, XIndex+2, YIndex);
-//				XIndex+=3;
-//			}
-
-				
-			
 		}
 		
 	}
@@ -177,6 +163,7 @@ public class SpelPaneel extends GridPane {
 		switch (kleur){
 		case "Rood": 
 			btnSteen.setTextFill(Color.RED);
+			break;
 		case "Blauw":
 			btnSteen.setTextFill(Color.BLUE);
 			break;
@@ -206,8 +193,9 @@ public class SpelPaneel extends GridPane {
 	private void spelerStenenGeven() {
 		this.spelerPaneel.getChildren().clear();
 		String label = domeinController.getSpel().getSpelerAanZet().getGebruikersnaam()+ " is aan de beurt";
-		Label spelerAanZet = new Label(label);
-		this.spelerPaneel.add(spelerAanZet, 0, 0, 5, 1);
+		Label lblSpelerAanZet = new Label(label);
+		lblSpelerAanZet.setTextFill(Color.WHITE);
+		this.spelerPaneel.add(lblSpelerAanZet, 0, 0, 5, 1);
 		List<RummiSteen> stenen = new ArrayList<>();
 		stenen = this.domeinController.getSpel().getSpelerAanZet().getStenenInBezit();
 		int index = 0;
@@ -239,6 +227,7 @@ public class SpelPaneel extends GridPane {
 	
 	private void resetLabel() {
 		lbl.setText("Kies een actie");
+		lbl.setId("actieKiezen");
 	}
 	
 	private void optiesGeven() {
@@ -269,7 +258,7 @@ public class SpelPaneel extends GridPane {
 		domeinController.jokerVervangen();
 	}
 	private void steenOmAanTeLeggenIsGekozen(String naam) {
-		if(lbl.getId().equals("steenKiezen")) {
+		if(lbl.getId().equals("steenKiezen") || lbl.getId().equals("rijKiezen")) {
 			
 			lbl.setText("Kies nu waar je "+ naam + " wilt leggen");	
 			lbl.setId("rijKiezen");
