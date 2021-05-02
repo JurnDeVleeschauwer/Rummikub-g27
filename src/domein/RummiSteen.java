@@ -47,7 +47,25 @@ public class RummiSteen {
 	
 	@Override
 	public String toString() {
-		return naam;
+		String returnString = getWaarde() + "\n";
+		switch (kleur) {
+		case "Zwart":
+			returnString += "Z";
+			break;
+		case "Geel":
+			returnString += "G";
+			break;
+		case "Rood":
+			returnString += "R";
+			break;
+		case "Blauw":
+			returnString += "B";
+			break;
+		case "Groen":
+			returnString = "J";
+			break;
+		}
+		return returnString;
 	}
 	
 	

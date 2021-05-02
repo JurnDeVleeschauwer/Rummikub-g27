@@ -170,7 +170,7 @@ public class SpelPaneel extends GridPane {
 	
 	private Button vanSteenEenButtonMaken(RummiSteen steen) {
 		String kleur = steen.getKleur();
-		String naam = steen.getNaam();
+		String naam = steen.toString();
 		Button btnSteen = new Button(naam);
 
 		switch (kleur){
@@ -193,11 +193,11 @@ public class SpelPaneel extends GridPane {
 			btnSteen.setTextFill(Color.CYAN);  // hier moet een exceptie: als de kleur cyan is klopt er iets niet!
 			break;
 		}
-		btnSteen.setFont(new Font(10));
+		btnSteen.setFont(new Font(17));
 		btnSteen.setMinSize(50, 70);
 		btnSteen.setMaxSize(50, 70);
 		btnSteen.setPrefSize(50,70);
-		btnSteen.setPadding(new Insets(0, 4, 20, 0));
+		btnSteen.setPadding(new Insets(4, 4, 0, 0));
 		btnSteen.setId(naam);
 		return btnSteen;
 	}
