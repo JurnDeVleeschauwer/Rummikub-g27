@@ -21,6 +21,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
+<<<<<<< Upstream, based on branch 'main' of git@github.com:HoGentTIProjecten1/rummikub-g27.git
+=======
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+>>>>>>> 0307aa5 Opmaak van de moeilijk te lezen labels aangepast zodat ze te lezen zijn
 import javafx.scene.text.Text;
 
 public class AanmeldPaneel extends GridPane
@@ -44,12 +49,15 @@ public class AanmeldPaneel extends GridPane
         setPadding(new Insets(10));
         setHgap(10);
         setVgap(10);
+
+        this.setAlignment(Pos.CENTER);
         
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setHalignment(HPos.RIGHT);
         
         ColumnConstraints col2 = new ColumnConstraints();
         col2.setHgrow(Priority.ALWAYS);
+        col2.setMaxWidth(400);
         
         getColumnConstraints().addAll(col1, col2);
 
@@ -67,7 +75,12 @@ public class AanmeldPaneel extends GridPane
     private void voegComponentenToe()
     {
     	Text header = new Text();
+<<<<<<< Upstream, based on branch 'main' of git@github.com:HoGentTIProjecten1/rummikub-g27.git
     	header.setFill(Color.WHITE);
+=======
+    	header.setFill(Color.WHITESMOKE);
+    	header.setFont(Font.font(null, FontWeight.BOLD, 18));
+>>>>>>> 0307aa5 Opmaak van de moeilijk te lezen labels aangepast zodat ze te lezen zijn
     	switch (hoofdPaneel.getAantalSpelersIngelogt()) {
 		case 0:
 			header.setText(UITextHelper.UIText("Aanmelden.speler.1"));
@@ -85,14 +98,29 @@ public class AanmeldPaneel extends GridPane
         
         GridPane.setHalignment(header, HPos.LEFT);
         add(header, 0, 0, 2, 1);
+<<<<<<< Upstream, based on branch 'main' of git@github.com:HoGentTIProjecten1/rummikub-g27.git
         Label lblNaam = new Label(UITextHelper.UIText("Geef.je.gebruikersnaam.in"));
     	lblNaam.setTextFill(Color.WHITE);
         add(lblNaam, 0, 1, 1, 1);
+=======
+        
+        Label gebruikersnaamLabel = new Label(UITextHelper.UIText("Geef.je.gebruikersnaam.in"));
+        gebruikersnaamLabel.setTextFill(Color.WHITESMOKE);
+        gebruikersnaamLabel.setFont(Font.font(null, FontWeight.BOLD, 14));
+        add(gebruikersnaamLabel, 0, 1, 1, 1);
+>>>>>>> 0307aa5 Opmaak van de moeilijk te lezen labels aangepast zodat ze te lezen zijn
         add(naam, 1, 1, 1, 1);
         
+<<<<<<< Upstream, based on branch 'main' of git@github.com:HoGentTIProjecten1/rummikub-g27.git
         Label lblWachtwoord = new Label(UITextHelper.UIText("Geef.je.wachtwoord.in"));
         lblWachtwoord.setTextFill(Color.WHITE);
         add(lblWachtwoord, 0, 2, 1, 1);
+=======
+        Label wwLabel = new Label(UITextHelper.UIText("Geef.je.wachtwoord.in"));
+        wwLabel.setTextFill(Color.WHITESMOKE);
+        wwLabel.setFont(Font.font(null, FontWeight.BOLD, 14));
+        add(wwLabel, 0, 2, 1, 1);
+>>>>>>> 0307aa5 Opmaak van de moeilijk te lezen labels aangepast zodat ze te lezen zijn
         add(wachtwoord, 1, 2, 1, 1);
         
         Button aanmelden = new Button(UITextHelper.UIText("Aanmelden"));
@@ -100,7 +128,7 @@ public class AanmeldPaneel extends GridPane
         aanmelden.setDefaultButton(true);
         HBox controls = new HBox(aanmelden, foutbericht);
         controls.setSpacing(10);
-        add(controls, 0, 3, 2, 1);
+        add(controls, 1, 3, 2, 1);
           
         //aanmelden.setVisible(false);
     }
