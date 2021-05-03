@@ -170,8 +170,8 @@ public class SpelPaneel extends GridPane {
 	
 	private Button vanSteenEenButtonMaken(RummiSteen steen) {
 		String kleur = steen.getKleur();
-		String naam = steen.toString();
-		Button btnSteen = new Button(naam);
+		String naam = steen.getNaam();
+		Button btnSteen = new Button(steen.toString());
 
 		switch (kleur){
 		case "Rood": 
@@ -277,6 +277,7 @@ public class SpelPaneel extends GridPane {
 		
 		this.optiesPaneel.setVgap(5);
 		opties.forEach(button -> button.setPrefWidth(200)); 
+		opties.forEach(button -> button.setPrefHeight(20)); 
 	}
 
 	private void beurtBeëindigen(ActionEvent event) {

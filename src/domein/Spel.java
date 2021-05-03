@@ -349,7 +349,7 @@ public class Spel {
 				}
 				int hoeveelsteJokerIsHet = 0;
 				List<RummiSteen> nieuweRij = new ArrayList();
-				for (RummiSteen rummisteen : this.tijdelijkeTafel.getStenenOpTafel().get(rij)) { //Dit werkt blijkbaar niet
+				for (RummiSteen rummisteen : this.tijdelijkeTafel.getStenenOpTafel().get(rij)) {
 					if(rummisteen.getKleur().equals("Groen")) {
 						hoeveelsteJokerIsHet++;
 						if(hoeveelste == hoeveelsteJokerIsHet) {
@@ -391,7 +391,7 @@ public class Spel {
 				List<RummiSteen> rij = new ArrayList();
 				for (List<RummiSteen> r : this.tijdelijkeTafel.getStenenOpTafel()) {
 					if (r.contains(s)) {
-						for (RummiSteen steen : r) {  //En dit blijkbaar ook niet
+						for (RummiSteen steen : r) {  
 							if(steen != s)
 								rij.add(steen);
 							else
@@ -423,7 +423,7 @@ public class Spel {
 		int index = 0;
 		List<RummiSteen> naSplitsing = new ArrayList();
 		List<RummiSteen> voorSplitsing = new ArrayList();
-		for(RummiSteen rummisteen : this.tijdelijkeTafel.getStenenOpTafel().get(rij)) { //en hier dus ook niet
+		for(RummiSteen rummisteen : this.tijdelijkeTafel.getStenenOpTafel().get(rij)) { 
 			if (splitsing <1) {
 				voorSplitsing.add(rummisteen);
 				if(rummisteen.getNaam().equals(naam)) {
