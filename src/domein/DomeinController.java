@@ -117,11 +117,6 @@ public class DomeinController {
 		spel.beeindigBeurt();
 	}
 	
-	/** Steen aanleggen in cui 
-	 */ 
-	public void steenAanleggen() {
-		spel.steenAanleggen();
-	}
 	
 	/** Steen aanleggen in gui
 	 */
@@ -147,11 +142,7 @@ public class DomeinController {
 		spel.jokerVervangen();
 	}
 	
-	/** Roept methode aan om een steen naar het werkveld te verplaatsen.
-	 */
-	public void steenNaarWerkveld() {
-		spel.steenNaarWerkveld();
-	}
+	
 	/** Roept methode aan om een vooraf gekozen steen naar het werkveld te verplaatsen.
 	 * @param naam kleur en nummer van de steen. 
 	 */

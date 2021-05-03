@@ -18,24 +18,26 @@ public class SpelCui {
 			case 1:
 				dc.beeindigBeurt();
 				break;
-			case 2:
-				dc.steenAanleggen();
-				break;
-			case 3:
-				dc.steenNaarWerkveld();
-				break;
-			case 4:
-				dc.SteenVervangenDoorJoker();
-				break;
-			case 5:
-				dc.jokerVervangen();
-				break;
-			case 6:
-				dc.rijSplitsen();
-				break;
-			case 7:
-				dc.reset();
-				break;
+//			case 2:
+//				dc.steenAanleggen();
+//				break;
+//			case 3:
+//				dc.steenNaarWerkveld(); 
+//				break;
+//			case 4:
+//				dc.SteenVervangenDoorJoker();
+//				break;
+//			case 5:
+//				dc.jokerVervangen();
+//				break;
+//			case 6:
+//				dc.rijSplitsen();
+//				break;
+//			case 7:
+//				dc.reset();
+//				break;
+			default:
+				dc.beeindigBeurt();
 			}
 		} while(!dc.checkWinst());
 	}

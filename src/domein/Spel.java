@@ -260,37 +260,6 @@ public class Spel {
 		return null;
 	}
 	
-	/** 
-	 * Legt een gekozen steen bij aan de gekozen rij
-	 */
-	public void steenAanleggen() {
-		System.out.printf("%s%n",UITextHelper.UIText("Geef.de.naam.van.de.steen.die.je.wil.leggen"));
-		String naam = sc.next();
-		int rij = 12;
-		do {
-			System.out.printf("%s%n",UITextHelper.UIText("Geef.de.rij.waaraan.je.deze.steen.wilt.leggen"));
-			rij = sc.nextInt();
-		}while(rij > 11);
-		
-		boolean vanWerkveld = true;
-		RummiSteen steen = this.geefSteenMetNaam(naam);
-		if(steen==null) {
-			steen = this.spelerAanZet.geefSteenMetNaam(naam);
-			vanWerkveld = false;
-		}
-		
-		if(steen != null) {
-			if(vanWerkveld) {
-				this.werkveld.remove(steen);
-				this.steenOpTafelLeggen(steen, rij);
-			}else {
-				this.spelerAanZet.verwijderSteen(steen);
-				this.steenOpTafelLeggen(steen, rij);
-				this.zetNeemSteen(false);
-			}
-		} else System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.heb.je.niet.in.je.bezit"));
-		
-	}
 	
 	/** Legt een steen aan op een specifieke plaats
 	 * @param naam kleur en waarde van de steen
@@ -335,19 +304,7 @@ public class Spel {
 		return null;
 	}
 	
-	/**
-	 * Vraagt de naam van een steen van de tafel en verplaatst deze naar het werkveld
-	 */
-	public void steenNaarWerkveld() {
-		System.out.printf("%s%n", UITextHelper.UIText("Geef.de.naam.van.de.steen.die.je.naar.het.werkveld.wil.brengen"));
-		String naam = sc.next();
-				
-		RummiSteen steen = this.tijdelijkeTafel.geefSteenMetNaam(naam);
-		if(steen != null) {
-			this.tijdelijkeTafel.verwijderSteen(steen);
-			this.werkveld.add(steen);
-		} else System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.ligt.niet.op.tafel"));
-	}
+
 	
 	/** Neemt een steen van de tafel en verplaatst deze naar het werkveld
 	 * @param naam kleur en waarde van de te verplaatsen steen
