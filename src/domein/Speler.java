@@ -153,7 +153,8 @@ public class Speler {
 		}
 		return null;
 	}
-
+	/** Retourneert het ID van de speler
+	 */
 	public int getID() {
 		return this.id;
 	}

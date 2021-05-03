@@ -6,6 +6,8 @@ import java.util.List;
 public class Tafel {
 	private List<ArrayList<RummiSteen>> stenenOpTafel;
 
+	/** Maakt een tafel aan van 11 op 13.
+	 */
 	public Tafel() {
 		this.stenenOpTafel= new ArrayList<ArrayList<RummiSteen>>(11);
 		for(int i=0; i <11 ; i++) {
@@ -19,18 +21,25 @@ public class Tafel {
 		
 		
 	}
-	public void legSteenOpTafel(RummiSteen steen, int rij) {
-		this.stenenOpTafel.get(rij).add(steen);
-	}
 	
+	/** Voegt een steen toe aan de tafel in een specifieke rij en kolom
+	 * @param steen de specifieke steen die de speler wil toevoegen
+	 * @param rij de rij waarin de speler de steen wil toevoegen
+	 * @param kolom de kolom waarin de speler de steen wil toevoegen */ 
 	public void legSteenOpTafel(RummiSteen steen, int rij, int kolom) {
 		this.stenenOpTafel.get(rij).set(kolom, steen);
 	}
 	
+	/** Geeft de stenen die op de tafel liggen
+	 * @return de array van de stenen op tafel */
 	public List<ArrayList<RummiSteen>> getStenenOpTafel() {
 		return stenenOpTafel;
 	}
-
+	
+	/** reset de tafel naar de beginpositie
+	 * @param stenenVasteTafel de stenen aawezig op tafel voor de reset
+	 * @param spelerAanZet de huidige speler die aan de beurt is
+	 */
 	public void reset(List<ArrayList<RummiSteen>> stenenVasteTafel, Speler spelerAanZet) {
 //		for (List<RummiSteen> l:this.stenenOpTafel) {
 //			for (RummiSteen s: l) {
@@ -54,6 +63,9 @@ public class Tafel {
 		
 	}
 	
+	/** Print een lijst van alle stenen op tafel
+	 * @return string van de tafel
+	 */
 	public String toonStenen() {
 		String returnString = "";
 		for (List<RummiSteen> steenGroep:stenenOpTafel) {
@@ -66,6 +78,9 @@ public class Tafel {
 		return returnString;
 	}
 
+	/** Controleert of de stenen op tafel liggen volgens de regels
+	 * @return true of false indien tafel juist of fout is
+	 */
 	public boolean controleerTafel() {
 		for (List<RummiSteen> steenGroep:stenenOpTafel) {
 			RummiSteen vorigeSteen = null;
@@ -141,6 +156,11 @@ public class Tafel {
 		}
 		return true;
 	}
+	
+	/** Retourneert een bepaalde steen met een naam indien die op tafel aanwezig is
+	 * @param naam kleur en waarde van de steen
+	 * @return de steen indien die op tafel ligt null indien niet aanwezig
+	 */
 	public RummiSteen geefSteenMetNaam(String naam) {
 		for(List<RummiSteen> r : this.stenenOpTafel) {
 			for(RummiSteen s : r) {
@@ -151,6 +171,9 @@ public class Tafel {
 		
 	}
 	
+	/** Verwijdert een bepaalde steen van de tafel
+	 * @param steen de steen die uit de tafel moet
+	 */
 	public void verwijderSteen(RummiSteen steen) {
 		for(List<RummiSteen> r : this.stenenOpTafel) {
 			for(RummiSteen s : r) {

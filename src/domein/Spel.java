@@ -17,6 +17,9 @@ public class Spel {
 	private Tafel tijdelijkeTafel;
 	private List<RummiSteen> werkveld;
 
+	/** Initialiseert alle benodigdheden voor een spel.
+	 * @param spelers een lijst van de spelers die meedoen aan het spel
+	 */
 	public Spel(List<Speler> spelers) {
 		this.pot = new Pot();
 		this.vasteTafel = new Tafel();
@@ -42,6 +45,9 @@ public class Spel {
 		return spelers;
 	}
 	
+	/** Haalt een werkveld op waar stenen vanuit de tafel tijdelijk van tafel kunnen genomen worden en in geplaatst worden.
+	 * @return geeft een leeg werkveld terug
+	 */
 	public List<RummiSteen> getWerkveld(){
 		return this.werkveld;
 	}
@@ -60,16 +66,29 @@ public class Spel {
 		return spelerAanZet;
 	}
 	
-	
+	/** Haalt een kopie op van de vaste tafel
+	 * @return de kopie
+	 */
 	public Tafel getTijdelijkeTafel() {
 		return tijdelijkeTafel;
 	}
+	
+	/** Stelt in wat er in de tijdelijke tafel staat
+	 * @param tijdelijkeTafel de inhoud van de tijdelijke tafel */
 	public void setTijdelijkeTafel(Tafel tijdelijkeTafel) {
 		this.tijdelijkeTafel = tijdelijkeTafel;
 	}
+	
+	/** Stelt een vaste speeltafel in voor het gehele spel
+	 * @return de speeltafel
+	 */
 	public Tafel getVasteTafel() {
 		return vasteTafel;
 	}
+	
+	/** Voegt de veranderingen van de tijdelijke tafel door naar de vaste tafel
+	 * @param tijdelijkeTafel de aanpassingen die aan de vaste tafel moeten gedaan worden
+	 */ 
 	public void setVasteTafel(Tafel tijdelijkeTafel) {
 		this.vasteTafel = tijdelijkeTafel;
 	}
@@ -91,18 +110,30 @@ public class Spel {
 		}
 	}
 	
+	/** Verwijdert een steen uit de pot.
+	 * @return aanroeping van methode om eerste steen uit de pot te verwijderen en die aan de speler te geven.
+	 */
 	private RummiSteen steenUitPotHalen() {
 		return pot.verwijderSteen();
 	}
 	
+	/** Stelt een bepaalde speler aan zet
+	 * @param spelerAanZet gekozen speler aan wie het de beurt is.
+	 */
 	private void setSpelerAanZet(Speler spelerAanZet) {
 		this.spelerAanZet = spelerAanZet;
 	}
 	
+	/** Toont de stenen van de speler aan zet.
+	 * @return roept methode aan om stenen van een speler te geven.
+	 */
 	public String toonStenenSpeler() {
 		return spelerAanZet.toonStenen();
 	}
 	
+	/** Toont het werkveld als een string
+	 * @return het werkveld
+	 */
 	public String toonWerkveld() {
 		String returnString = "";
 		for (RummiSteen steen: this.werkveld) {
@@ -186,6 +217,9 @@ public class Spel {
 		}
 	}
 	
+	/** Controleert of de tijdelijke tafel klopt 
+	 *  @return roept methode aan om de tafel te controleren
+	 */
 	private boolean controleerTafel() {
 		return true;//tijdelijkeTafel.controleerTafel();
 	}
@@ -206,11 +240,12 @@ public class Spel {
 		this.tijdelijkeTafel.legSteenOpTafel(steen, rij, kolom);
 	}
 	
-	//is voorlopig, deze zal nog weg mogen
-	public void steenOpTafelLeggen(RummiSteen steen, int rij) {
-		this.tijdelijkeTafel.legSteenOpTafel(steen, rij);
-	}
 	
+	
+	/** Geeft een steen terug met een bepaalde naam uit het werkveld
+	 * @param naam de kleur en waarde van de steen
+	 * @return de naam van de steen indien die in het werkveld ligt
+	 */
 	public RummiSteen geefSteenMetNaam(String naam) {
 		for(RummiSteen s : this.werkveld) {
 			if(s.getNaam().equals(naam)) return s;
@@ -250,6 +285,11 @@ public class Spel {
 		
 	}
 	
+	/** Legt een steen aan op een specifieke plaats
+	 * @param naam kleur en waarde van de steen
+	 * @param positie rij en kolom waar steen moet komen
+	 * @return wanneer je deze steen niet hebt 
+	 */
 	public String steenAanleggen(String naam, String positie) {
 		String[] str = positie.split(",");
 		int rij=0;
@@ -287,6 +327,7 @@ public class Spel {
 		}
 		return null;
 	}
+	
 	/**
 	 * Neemt een steen van de tafel en verplaatst deze naar het werkveld
 	 * @param naam2 
@@ -374,6 +415,7 @@ public class Spel {
 		}
 		
 	}
+	
 	/**
 	 * Vervangt een door de speler gekozen steen door een joker
 	 */
@@ -411,6 +453,7 @@ public class Spel {
 			System.out.printf("%s%n", UITextHelper.UIText("Je.hebt.geen.Joker"));
 		}
 	}
+	
 	/**
 	 * Methode om rij te splitsen
 	 */
