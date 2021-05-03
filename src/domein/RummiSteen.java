@@ -15,6 +15,9 @@ public class RummiSteen {
 		this.naam = "";
 		
 	}
+	/** Legt voor elke steen de kleur en waarde vast en vervangt de kleur groen door de joker.
+	 * @param waarde het getal van de steen
+	 * @param kleur de kleur van de steen */
 	public RummiSteen(int waarde, String kleur) {
 		this.waarde=waarde;
 		this.kleur=kleur;
@@ -46,6 +49,9 @@ public class RummiSteen {
 	}
 	
 	@Override
+	/** Geeft elke kleur of joker een korte notatie voor bij gebruik van kleurblindheid in gui.
+	 * @return verkorte notatie 
+	 */
 	public String toString() {
 		String returnString = getWaarde() + "\n";
 		switch (kleur) {

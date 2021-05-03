@@ -190,6 +190,10 @@ public class Spel {
 		return spelerAanZet.getStenenInBezit().isEmpty();
 	}
 
+	/** Toont de stenen op tafel
+	 * @param tafel parameter die beslist of vaste tafel of tijdelijke tafel word getoond
+	 * @return de stenen op de tijdelijke tafel of vaste tafel.
+	 */
 	public String toonStenenTafel(int tafel) {
 		if (tafel<10) {
 			return vasteTafel.toonStenen();
@@ -198,6 +202,9 @@ public class Spel {
 			return tijdelijkeTafel.toonStenen();
 	}
 	
+	/** Stelt in of de speler een steen moet nemen of niet
+	 * @param b true of false of de speler een steen moet nemen of niet
+	 */ 
 	public void zetNeemSteen(boolean b) {
 		spelerAanZet.setNeemSteen(b);
 	}
@@ -329,8 +336,7 @@ public class Spel {
 	}
 	
 	/**
-	 * Neemt een steen van de tafel en verplaatst deze naar het werkveld
-	 * @param naam2 
+	 * Vraagt de naam van een steen van de tafel en verplaatst deze naar het werkveld
 	 */
 	public void steenNaarWerkveld() {
 		System.out.printf("%s%n", UITextHelper.UIText("Geef.de.naam.van.de.steen.die.je.naar.het.werkveld.wil.brengen"));
@@ -343,6 +349,9 @@ public class Spel {
 		} else System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.ligt.niet.op.tafel"));
 	}
 	
+	/** Neemt een steen van de tafel en verplaatst deze naar het werkveld
+	 * @param naam kleur en waarde van de te verplaatsen steen
+	 */
 	public void steenNaarWerkveld(String naam) {	
 		RummiSteen steen = this.tijdelijkeTafel.geefSteenMetNaam(naam);
 		if(steen != null) {

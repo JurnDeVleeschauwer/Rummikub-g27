@@ -117,33 +117,50 @@ public class DomeinController {
 		spel.beeindigBeurt();
 	}
 	
-	
+	/** Steen aanleggen in cui 
+	 */ 
 	public void steenAanleggen() {
 		spel.steenAanleggen();
 	}
+	
+	/** Steen aanleggen in gui
+	 */
 	public String steenAanleggen(String naam, String positie) {
 		return spel.steenAanleggen(naam, positie);
 	}
 	
+	/** Roept methode aan om een steen te vervangen door joker.
+	 */
 	public void SteenVervangenDoorJoker() {
 		spel.SteenVervangenDoorJoker();
 	}
 	
+	/** Roept methode aan om een rij te splitsen. 
+	 */
 	public void rijSplitsen() {
 		spel.rijSplitsen();
 	}
 	
+	/** Roept methode aan om een joker te vervangen door een steen. 
+	 */
 	public void jokerVervangen() {
 		spel.jokerVervangen();
 	}
+	
+	/** Roept methode aan om een steen naar het werkveld te verplaatsen.
+	 */
 	public void steenNaarWerkveld() {
 		spel.steenNaarWerkveld();
 	}
-	
+	/** Roept methode aan om een vooraf gekozen steen naar het werkveld te verplaatsen.
+	 * @param naam kleur en nummer van de steen. 
+	 */
 	public void steenNaarWerkveld(String naam) {
 		spel.steenNaarWerkveld(naam);
 	}
 	
+	/** Retourneert een lijst van alle spelers die meespelen
+	 * @return lijst van spelers.*/
 	public List<Speler> getSpelers(){
 		return spelers;
 	}

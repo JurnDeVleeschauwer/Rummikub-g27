@@ -36,6 +36,9 @@ public class Speler {
 		return wachtwoord;
 	}
 	
+	/** Stelt het wachtwoord in voor een bepaalde speler
+	 * @param wachtwoord het nieuwe wachtwoord voor deze speler.
+	 */
 	public void setWachtwoord(String wachtwoord) {
 		this.wachtwoord = wachtwoord;
 	}

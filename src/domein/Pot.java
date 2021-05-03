@@ -7,7 +7,8 @@ import java.util.List;
 public class Pot {
 	private List<RummiSteen> stenen;
 	
-	/** maakt pot aan met 106 door elkaar geschudde Rummistenen.*/
+	/** maakt pot aan met 106 door elkaar geschudde Rummistenen.
+	 */
 	public Pot() {
 		String[] kleuren = {"Rood","Zwart","Blauw","Geel"};
 		stenen = new ArrayList<RummiSteen>(106);
@@ -23,6 +24,9 @@ public class Pot {
 		Collections.shuffle(stenen);
 	}
 	
+	/** Vraagt de lijst op met alle stenen in de pot
+	 * @return alle stenen in de pot
+	 */
 	public List<RummiSteen> getStenen() {
 		return stenen;
 	}
