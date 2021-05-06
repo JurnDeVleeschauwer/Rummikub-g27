@@ -132,9 +132,11 @@ public class DomeinController {
 	}
 	
 	/** Roept methode aan om een joker te vervangen door een steen. 
+	 * @param naam 
+	 * @param waarde 
 	 */
-	public void jokerVervangen() {
-		spel.jokerVervangen();
+	public void jokerVervangen(int waarde, String naam) {
+		spel.jokerVervangen(waarde, naam);
 	}
 	
 	

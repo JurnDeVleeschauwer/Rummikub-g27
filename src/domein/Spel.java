@@ -206,7 +206,7 @@ public class Spel {
 	 * @param b true of false of de speler een steen moet nemen of niet
 	 */ 
 	public void zetNeemSteen(boolean b) {
-		spelerAanZet.setNeemSteen(b);
+		spelerAanZet.setNeemSteen(/*b*/true);//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
 	
 	/**
@@ -228,7 +228,7 @@ public class Spel {
 	 *  @return roept methode aan om de tafel te controleren
 	 */
 	private boolean controleerTafel() {
-		return /*true;//*/tijdelijkeTafel.controleerTafel();
+		return true;//tijdelijkeTafel.controleerTafel();
 	}
 	
 	/** 
@@ -296,7 +296,7 @@ public class Spel {
 			}else {
 				this.spelerAanZet.verwijderSteen(steen);
 				this.steenOpTafelLeggen(steen, rij, kolom);
-				this.zetNeemSteen(false);
+				/*this.zetNeemSteen(false);*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			}
 		}else {
 			return UITextHelper.UIText("Deze.steen.heb.je.niet.in.je.bezit");
@@ -319,66 +319,47 @@ public class Spel {
 	
 	/** 
 	 * Vervangt de joker door een door de speler gekozen steen
+	 * @param naam
+	 * @param waarde 
 	 */
-	public void jokerVervangen() {
-		System.out.printf("%s%n", UITextHelper.UIText("Op.welke.rij.ligt.de.joker?"));
-		int rij = sc.nextInt();
-		int aantalJokers = 0;
-		for(RummiSteen steen : this.tijdelijkeTafel.getStenenOpTafel().get(rij)) {
-			if(steen.getKleur().equals("Groen")) aantalJokers++;
+	public void jokerVervangen(int waarde, String naam) {
+		RummiSteen joker = null;
+		int Xindex = 0;
+		int Yindex = 0;
+		int XindexJoker = 0;
+		int YindexJoker = 0;
+		for (List<RummiSteen> steengroep : this.tijdelijkeTafel.getStenenOpTafel()) {
+			for (RummiSteen rummisteen : steengroep) {
+				if(rummisteen.getWaarde() == waarde) {
+					joker = rummisteen;
+					XindexJoker = Xindex;
+					YindexJoker = Yindex;
+				}
+				Xindex++;
+			}
+			Xindex=0;
+			Yindex++;
 		}
-		int hoeveelste = 0;
-		if(aantalJokers<1) 
-			System.out.printf("%s%n", UITextHelper.UIText("Er.ligt.geen.Joker.in.deze.rij"));
-		else if(aantalJokers > 1) {
-			System.out.printf("%s%n", UITextHelper.UIText("De.hoeveelste.Joker.in.deze.rij.wil.je.vervangen?"));
-			hoeveelste = sc.nextInt();
+		boolean vanWerkveld = true;
+		RummiSteen steen = this.geefSteenMetNaam(naam);
+		if(steen==null) {
+			steen = this.spelerAanZet.geefSteenMetNaam(naam);
+			vanWerkveld = false;
+		}
+		if(steen != null) {
+			if(vanWerkveld) {
+				this.werkveld.remove(steen);
+			}else {
+				this.spelerAanZet.verwijderSteen(steen);
+				//this.zetNeemSteen(false);///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			}
+			this.tijdelijkeTafel.getStenenOpTafel().get(YindexJoker).add(XindexJoker, steen);
+			this.tijdelijkeTafel.getStenenOpTafel().get(YindexJoker).remove(joker);
+			this.werkveld.add(joker);
 			
 		}
-		if(aantalJokers == 1) 
-			hoeveelste = 1;
-		if(!(aantalJokers<1)) {
-			System.out.printf("%s%n", UITextHelper.UIText("Geef.de.naam.van.de.steen.die.je.wil.leggen"));
-			String naam = sc.next();
-			
-			boolean vanWerkveld = true;
-			RummiSteen steenOmTeLeggen = this.geefSteenMetNaam(naam);
-			if(steenOmTeLeggen==null) {
-				steenOmTeLeggen = this.spelerAanZet.geefSteenMetNaam(naam);
-				vanWerkveld = false;
-			}
-			if(steenOmTeLeggen != null) {
-				if(vanWerkveld) {
-					this.werkveld.remove(steenOmTeLeggen);
-				}else {
-					this.spelerAanZet.verwijderSteen(steenOmTeLeggen);
-					this.zetNeemSteen(false);
-				}
-				int hoeveelsteJokerIsHet = 0;
-				List<RummiSteen> nieuweRij = new ArrayList();
-				for (RummiSteen rummisteen : this.tijdelijkeTafel.getStenenOpTafel().get(rij)) {
-					if(rummisteen.getKleur().equals("Groen")) {
-						hoeveelsteJokerIsHet++;
-						if(hoeveelste == hoeveelsteJokerIsHet) {
-							
-							nieuweRij.add(steenOmTeLeggen);
-							this.werkveld.add(rummisteen);
-						}else {
-							nieuweRij.add(rummisteen);
-						}
-					}	
-					else
-						nieuweRij.add(rummisteen);
-				}
-				this.tijdelijkeTafel.getStenenOpTafel().get(rij).clear();
-					
-				for(RummiSteen rummisteen: nieuweRij) {
-					this.tijdelijkeTafel.getStenenOpTafel().get(rij).add(rummisteen);
-				}
-				
-			}
-			else System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.heb.je.niet.in.je.bezit"));
-		}
+		else System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.heb.je.niet.in.je.bezit"));
+	
 		
 	}
 	

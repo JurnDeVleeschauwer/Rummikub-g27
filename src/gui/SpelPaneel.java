@@ -235,28 +235,43 @@ public class SpelPaneel extends GridPane {
 	private void opSteenVanSpelerGeklikt(ActionEvent event) {
 		Button btn = (Button) event.getSource();
 		String naam = btn.getId();
-		steenOmAanTeLeggenIsGekozen(naam);
+		if(lbl.getId().equals("vijventwintig"))
+			jokerEnSteenZijnGekozen(25, naam);
+		else if(lbl.getId().equals("zessentwintig"))
+			jokerEnSteenZijnGekozen(26, naam);
+		
+		if(naam.equals("vijventwintig") || naam.equals("zessentwintig"))
+			steenOmAanTeLeggenIsGekozen("Joker");
+		else
+			steenOmAanTeLeggenIsGekozen(naam);
 		
 	}
 	
 	private void opSteenVanWerkveldGeklikt(ActionEvent event) {
 		Button btn = (Button) event.getSource();
 		String naam = btn.getId();
-		steenOmAanTeLeggenIsGekozen(naam);
+		if(naam.equals("vijventwintig") || naam.equals("zessentwintig"))
+			steenOmAanTeLeggenIsGekozen("Joker");
+		else
+			steenOmAanTeLeggenIsGekozen(naam);
 	}
 	
 	private void opSteenOpTafelGeklikt(ActionEvent event) {
 		Button btn = (Button) event.getSource();
 		String naam = btn.getId();
-		if(btn.getId().equals("jokerKiezen")) {
+		if(lbl.getId().equals("jokerKiezen")) {
 			jokerIsGekozen(naam);
-		}else
-			steenNaarWerkveldIsGekozen(naam);
+		}else {
+			if(naam.equals("vijventwintig") || naam.equals("zessentwintig"))
+				steenNaarWerkveldIsGekozen("Joker");
+			else
+				steenNaarWerkveldIsGekozen(naam);
+		}
 	}
 	
 	private void jokerIsGekozen(String nummer) {
 		lbl.setText("Welke steen wil je leggen?");
-		lbl.setId("jokerIsGekozen");
+		lbl.setId(nummer);
 		
 	}
 
@@ -317,6 +332,13 @@ public class SpelPaneel extends GridPane {
 			lbl.setText("Er ligt geen Joker op tafel, kies een optie");
 		
 	}
+	
+	private void jokerEnSteenZijnGekozen(int waarde, String naam) {
+		domeinController.jokerVervangen(waarde, naam);
+		reloadScherm();
+	}
+	
+	
 	private void steenOmAanTeLeggenIsGekozen(String naam) {
 		if(lbl.getId().equals("steenKiezen") || lbl.getId().equals("rijKiezen")) {
 			
