@@ -90,9 +90,11 @@ public class SpelPaneel extends GridPane {
 	    }
     
     private void werkveldLeggen() {
+    	this.werkveldPaneel.getChildren().clear();
     	int XIndex=0;
 		for(RummiSteen steen : domeinController.getSpel().getWerkveld()) {
 			Button btnSteen = this.vanSteenEenButtonMaken(steen);
+			btnSteen.setOnAction(this::opSteenVanWerkveldGeklikt);
 			this.werkveldPaneel.add(btnSteen, XIndex, 0);
 			XIndex++;
 		}
@@ -198,7 +200,14 @@ public class SpelPaneel extends GridPane {
 		btnSteen.setMaxSize(50, 70);
 		btnSteen.setPrefSize(50,70);
 		btnSteen.setPadding(new Insets(4, 4, 0, 0));
-		btnSteen.setId(naam);
+		
+		if(naam.equals("Joker")) {
+			if(steen.getWaarde() == 25)
+				btnSteen.setId("vijventwintig");
+			else
+				btnSteen.setId("zessentwintig");
+		}else
+			btnSteen.setId(naam);
 		return btnSteen;
 	}
 	
@@ -230,12 +239,27 @@ public class SpelPaneel extends GridPane {
 		
 	}
 	
+	private void opSteenVanWerkveldGeklikt(ActionEvent event) {
+		Button btn = (Button) event.getSource();
+		String naam = btn.getId();
+		steenOmAanTeLeggenIsGekozen(naam);
+	}
+	
 	private void opSteenOpTafelGeklikt(ActionEvent event) {
 		Button btn = (Button) event.getSource();
 		String naam = btn.getId();
-		steenNaarWerkveldIsGekozen(naam);
+		if(btn.getId().equals("jokerKiezen")) {
+			jokerIsGekozen(naam);
+		}else
+			steenNaarWerkveldIsGekozen(naam);
 	}
 	
+	private void jokerIsGekozen(String nummer) {
+		lbl.setText("Welke steen wil je leggen?");
+		lbl.setId("jokerIsGekozen");
+		
+	}
+
 	private void steenNaarWerkveldIsGekozen(String naam) {
 		if(lbl.getId().equals("steenNaarWerkveldKiezen")) {
 			domeinController.steenNaarWerkveld(naam);
@@ -285,7 +309,13 @@ public class SpelPaneel extends GridPane {
 		reloadScherm();
 	}
 	private void jokerVervangen(ActionEvent event) {
-		domeinController.jokerVervangen();
+		if(domeinController.heeftTafelEenJoker()) {
+			lbl.setText("Klik op de joker die je wilt vervangen");
+			lbl.setId("jokerKiezen");
+		}
+		else
+			lbl.setText("Er ligt geen Joker op tafel, kies een optie");
+		
 	}
 	private void steenOmAanTeLeggenIsGekozen(String naam) {
 		if(lbl.getId().equals("steenKiezen") || lbl.getId().equals("rijKiezen")) {

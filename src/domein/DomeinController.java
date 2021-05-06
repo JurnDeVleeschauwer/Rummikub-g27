@@ -124,11 +124,6 @@ public class DomeinController {
 		return spel.steenAanleggen(naam, positie);
 	}
 	
-	/** Roept methode aan om een steen te vervangen door joker.
-	 */
-	public void SteenVervangenDoorJoker() {
-		spel.SteenVervangenDoorJoker();
-	}
 	
 	/** Roept methode aan om een rij te splitsen. 
 	 */
@@ -154,6 +149,10 @@ public class DomeinController {
 	 * @return lijst van spelers.*/
 	public List<Speler> getSpelers(){
 		return spelers;
+	}
+	
+	public boolean heeftTafelEenJoker() {
+		return spel.heeftTafelEenJoker();
 	}
 	
 }

@@ -220,7 +220,7 @@ public class Spel {
 			this.vasteTafel.reset(this.tijdelijkeTafel.getStenenOpTafel(), this.spelerAanZet);
 		}
 		else {
-			
+			System.out.println("fout in tafel");
 		}
 	}
 	
@@ -228,7 +228,7 @@ public class Spel {
 	 *  @return roept methode aan om de tafel te controleren
 	 */
 	private boolean controleerTafel() {
-		return true;//tijdelijkeTafel.controleerTafel();
+		return /*true;//*/tijdelijkeTafel.controleerTafel();
 	}
 	
 	/** 
@@ -383,44 +383,6 @@ public class Spel {
 	}
 	
 	/**
-	 * Vervangt een door de speler gekozen steen door een joker
-	 */
-	public void SteenVervangenDoorJoker() {
-		RummiSteen joker = this.spelerAanZet.geefSteenMetNaam("Joker");
-		if(joker!=null) {
-			System.out.printf("%s%n", UITextHelper.UIText("Geef.de.naam.van.de.steen.die.je.wil.vervangen"));
-			String naam = sc.next();
-			RummiSteen s = this.tijdelijkeTafel.geefSteenMetNaam(naam);
-			
-			if (s==null) {
-				System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.ligt.niet.op.tafel"));
-			}
-			else {
-				List<RummiSteen> rij = new ArrayList();
-				for (List<RummiSteen> r : this.tijdelijkeTafel.getStenenOpTafel()) {
-					if (r.contains(s)) {
-						for (RummiSteen steen : r) {  
-							if(steen != s)
-								rij.add(steen);
-							else
-								rij.add(joker);
-						}
-						r.clear();
-					}
-					for(RummiSteen rummisteen: rij) {
-					r.add(rummisteen);
-				}
-				rij.clear();
-				}
-				this.werkveld.add(s);
-			}
-		} 
-		else {
-			System.out.printf("%s%n", UITextHelper.UIText("Je.hebt.geen.Joker"));
-		}
-	}
-	
-	/**
 	 * Methode om rij te splitsen
 	 */
 	public void rijSplitsen(){
@@ -460,5 +422,15 @@ public class Spel {
 
 		
 		
+	}
+
+	public boolean heeftTafelEenJoker() {
+		for(List<RummiSteen> steengroep : this.tijdelijkeTafel.getStenenOpTafel()) {
+			for(RummiSteen steen : steengroep) {
+				if(steen.getKleur().equals("Groen"))
+					return true;
+			}
+		}
+		return false;
 	}
 }

@@ -18,9 +18,10 @@ public class Pot {
 				stenen.add(new RummiSteen(i,kleuren[j]));
 			}
 		}
-		for (int i=0;i<2;i++) {
-			stenen.add(new RummiSteen(25,"Groen")); //Groen = kleur van Joker
-		}
+		
+		stenen.add(new RummiSteen(25,"Groen")); //Groen = kleur van Joker
+		stenen.add(new RummiSteen(26,"Groen")); //Groen = kleur van Joker
+		
 		Collections.shuffle(stenen);
 	}
 	

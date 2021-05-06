@@ -91,7 +91,8 @@ public class Tafel {
 			boolean straat = false;
 			boolean gelijkeNummers = false;
 			for (RummiSteen steen: steenGroep) {
-				if (straat == true | gelijkeNummers == true) {
+				if(steen.getWaarde()!=0) {
+					if (straat == true | gelijkeNummers == true) {
 					if (straat) {
 						if (steen.getKleur() == vorigeSteen.getKleur() & steen.getWaarde() == vorigeSteen.getWaarde()+1) {
 							laatsteWaarde = steen.getWaarde();
@@ -150,7 +151,22 @@ public class Tafel {
 				vorigeSteen = steen;
 				aantalStenen++;
 			}
-			if (!steenGroep.isEmpty() & aantalStenen < 3) {
+				else if(aantalStenen!=0 & aantalStenen < 3) {
+					return false;
+					
+				}
+				else if(aantalStenen >=3) {
+					vorigeSteen = null;
+					kleuren = new ArrayList<>();
+					laatsteWaarde = 0;
+					laatsteKleur = "";
+					aantalStenen =0;
+					straat = false;
+					gelijkeNummers = false;
+				}
+			}
+				
+			if (aantalStenen!=0 & aantalStenen < 3) {
 				return false;
 			}
 		}
