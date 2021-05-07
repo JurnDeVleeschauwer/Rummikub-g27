@@ -398,15 +398,16 @@ public class Spel {
 			else {
 				int aantal = 0;
 				
+				int	a=0;
 				for(int i : vrijePlaatsen) {
-					if(i < Xindex) {
+					if(a < Xindex) {
 						
 						if(i == 1)
 							aantal++;
 						else 
 							aantal =0;
-						if(aantal >= 3) {
-							index = i;
+						if(aantal == 3) {
+							index = a;
 							drieLegePlaatsenVoor=true;
 						}
 							
@@ -415,11 +416,12 @@ public class Spel {
 							aantal++;
 						else 
 							aantal =0;
-						if(aantal >= 3) {
-							index = i;
+						if(aantal == 3) {
+							index = a;
 							drieLegePlaatsenNa=true;
 						}	
 					}
+					a++;
 				}
 			}
 			
@@ -451,12 +453,14 @@ public class Spel {
 		boolean legePlaatsGehad = false;
 		ArrayList<String> naarWerkveld = new ArrayList<>();
 		for(RummiSteen steen : this.tijdelijkeTafel.getStenenOpTafel().get(Yindex)) {
-			if(this.tijdelijkeTafel.getStenenOpTafel().get(Yindex).indexOf(steen)>Xindex) {
+			if(this.tijdelijkeTafel.getStenenOpTafel().get(Yindex).indexOf(steen)>=Xindex) {
+				
 				if(steen.getWaarde() == 0) {
 					legePlaatsGehad = true;
 				}else if(!legePlaatsGehad) {
-					naarWerkveld.add(naam2);
+					naarWerkveld.add(steen.getNaam());
 				}
+		
 			}
 		}
 		naarWerkveld.forEach(naam -> this.steenNaarWerkveld(naam));
