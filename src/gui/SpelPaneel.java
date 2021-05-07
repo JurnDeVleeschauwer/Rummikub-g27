@@ -110,6 +110,9 @@ public class SpelPaneel extends GridPane {
 			for(RummiSteen steen : rij) {
 				if (!(steen.getKleur().equals(""))) {
 					Button btnSteen = this.vanSteenEenButtonMaken(steen);
+					String id = btnSteen.getId();
+					id = id + ", " + XIndex +", "+ YIndex; 
+					btnSteen.setId(id);
 					btnSteen.setOnAction(this::opSteenOpTafelGeklikt);
 					this.tafelPaneel.add(btnSteen, XIndex, YIndex);
 				}
@@ -259,6 +262,9 @@ public class SpelPaneel extends GridPane {
 	private void opSteenOpTafelGeklikt(ActionEvent event) {
 		Button btn = (Button) event.getSource();
 		String naam = btn.getId();
+		if (lbl.getId().equals("RijSplitsen")){
+			plaatsOmTeSplitsenIsGekozen(naam);
+		}
 		if(lbl.getId().equals("jokerKiezen")) {
 			jokerIsGekozen(naam);
 		}else {
@@ -271,13 +277,15 @@ public class SpelPaneel extends GridPane {
 	
 	private void jokerIsGekozen(String nummer) {
 		lbl.setText("Welke steen wil je leggen?");
-		lbl.setId(nummer);
+		String[] r = nummer.split(", ");
+		lbl.setId(r[0]);
 		
 	}
 
 	private void steenNaarWerkveldIsGekozen(String naam) {
 		if(lbl.getId().equals("steenNaarWerkveldKiezen")) {
-			domeinController.steenNaarWerkveld(naam);
+			String[] r = naam.split(", ");
+			domeinController.steenNaarWerkveld(r[0]);
 			reloadScherm();
 		}
 			
@@ -372,8 +380,18 @@ public class SpelPaneel extends GridPane {
 	}
 	
 	private void rijSplitsen(ActionEvent event) {
-		domeinController.rijSplitsen();
+		lbl.setText("Klik op de steen waarachter je wil splitsen");
+		lbl.setId("RijSplitsen");
+		
+		
 	}
+	
+	private void plaatsOmTeSplitsenIsGekozen(String naam) {
+		String[] r = naam.split(", ");
+		domeinController.rijSplitsen(r[0], r[1], r[2]);
+		reloadScherm();
+	}
+	
 	private void reset(ActionEvent event) {
 		domeinController.reset();
 	}

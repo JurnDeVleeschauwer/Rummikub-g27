@@ -126,9 +126,12 @@ public class DomeinController {
 	
 	
 	/** Roept methode aan om een rij te splitsen. 
+	 * @param naam 
+	 * @param Yindex 
+	 * @param Xindex 
 	 */
-	public void rijSplitsen() {
-		spel.rijSplitsen();
+	public void rijSplitsen(String naam, String Xindex, String Yindex) {
+		spel.rijSplitsen(naam, Xindex, Yindex);
 	}
 	
 	/** Roept methode aan om een joker te vervangen door een steen. 
