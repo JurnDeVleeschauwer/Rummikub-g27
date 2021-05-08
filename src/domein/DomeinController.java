@@ -68,7 +68,7 @@ public class DomeinController {
 	/** Initialiseert een nieuw spel
 	 */
 	public void startSpel() {
-		this.spel = new Spel(spelers);
+		this.spel = new Spel(spelers, this);
 	}
 	
 	/** Toont een overzicht van de scores van de huidige spelers
@@ -165,6 +165,14 @@ public class DomeinController {
 			return "Het werkveld moet ook leeg!";
 		}
 		return null;
+	}
+	
+	public List<Speler> berekenScore(String gebruikersnaamWinaar){
+		return spel.berekenScore(gebruikersnaamWinaar);
+	}
+	
+	public String getSpelerAanZetGebruikersnaam() {
+		return spel.getSpelerAanZet().getGebruikersnaam();
 	}
 	
 }

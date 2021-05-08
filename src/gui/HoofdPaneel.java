@@ -1,9 +1,9 @@
 package gui;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.List;
 
 import domein.DomeinController;
+import domein.Speler;
 import javafx.scene.layout.BorderPane;
 
 public class HoofdPaneel extends BorderPane {
@@ -14,7 +14,7 @@ public class HoofdPaneel extends BorderPane {
 	private TaalMenu taalMenu;
 	private HoeveelSpelersPaneel hoeveelSpelers;
 	private ToonOverzichtPaneel toonOverzicht;
-	private ResourceBundle bundle;
+	private ToonScorePaneel toonScore;
 	private int aantalSpelers;
 	private int aantalSpelersIngelogt = 0;
 
@@ -38,7 +38,7 @@ public class HoofdPaneel extends BorderPane {
 	public void createPanelen() {
 		this.aanmelden = new AanmeldPaneel(domeinController, this);
 		this.hoofdMenu = new HoofdMenu(domeinController, this);
-		this.hoeveelSpelers = new HoeveelSpelersPaneel(domeinController, this);
+		this.hoeveelSpelers = new HoeveelSpelersPaneel(this);
 
 	}
 	
@@ -79,5 +79,11 @@ public class HoofdPaneel extends BorderPane {
 		this.toonOverzicht = new ToonOverzichtPaneel(domeinController, this);
 		setCenter(toonOverzicht);
 	}
+	
+	public void toonScorePaneel(String gebruikersnaamWinaar) {
+		toonScore.voegComponentenToe(gebruikersnaamWinaar);
+		setCenter(toonScore);
+	}
+	
 
 }

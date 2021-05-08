@@ -31,6 +31,11 @@ public class Speler {
 		kopie = new ArrayList<>();
 	}
 	
+	public Speler(String gebruikersnaam, int score) {
+		setGebruikersnaam(gebruikersnaam);
+		setScore(score);
+	}
+	
 	/** Haalt wachtwoord van de speler op
 	 * @return wachtwoord speler
 	 */

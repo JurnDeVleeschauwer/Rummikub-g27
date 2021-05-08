@@ -19,5 +19,9 @@ public class SpelerRepo {
 		return spelerMapper.geefSpeler(gebruikersnaam, wachtwoord);
 	}
 	
+	public void updateScore(int score, int id) {
+		spelerMapper.updateScore(score, id);
+	}
+	
 }
 

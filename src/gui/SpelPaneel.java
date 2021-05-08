@@ -5,6 +5,7 @@ import java.util.List;
 
 import domein.DomeinController;
 import domein.RummiSteen;
+import i18n.UITextHelper;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -33,12 +34,12 @@ public class SpelPaneel extends GridPane {
     
     
 	
-    private Button btnBeurtBeëindigen = new Button("Beurt beëindigen");
-	private Button btnSteenAanleggen = new Button("Steen aanleggen");
-	private Button btnJokerVervangen = new Button("Joker vervangen");
-	private Button btnSteenNaarWerkveld = new Button("Steen naar werkveld brengen");
-	private Button btnRijSplitsen = new Button("Rij splitsen");
-	private Button btnReset = new Button("Reset tafel");
+    private Button btnBeurtBeëindigen = new Button(UITextHelper.UIText("Beurt.beëindigen"));
+	private Button btnSteenAanleggen = new Button(UITextHelper.UIText("Steen.aanleggen"));
+	private Button btnJokerVervangen = new Button(UITextHelper.UIText("Joker.vervangen"));
+	private Button btnSteenNaarWerkveld = new Button(UITextHelper.UIText("Steen.naar.werkveld.brengen"));
+	private Button btnRijSplitsen = new Button(UITextHelper.UIText("Rij.splitsen"));
+	private Button btnReset = new Button(UITextHelper.UIText("Reset.tafel"));
 	private Label lbl = new Label();
 	
     
@@ -216,7 +217,7 @@ public class SpelPaneel extends GridPane {
 	
 	private void spelerStenenGeven() {
 		this.spelerPaneel.getChildren().clear();
-		String label = domeinController.getSpel().getSpelerAanZet().getGebruikersnaam()+ " is aan de beurt";
+		String label = domeinController.getSpel().getSpelerAanZet().getGebruikersnaam()+ UITextHelper.UIText("is.aan.de.beurt");
 		Label lblSpelerAanZet = new Label(label);
 		lblSpelerAanZet.setTextFill(Color.WHITE);
 		this.spelerPaneel.add(lblSpelerAanZet, 0, 0, 5, 1);
@@ -276,7 +277,7 @@ public class SpelPaneel extends GridPane {
 	}
 	
 	private void jokerIsGekozen(String nummer) {
-		lbl.setText("Welke steen wil je leggen?");
+		lbl.setText(UITextHelper.UIText("Welke.steen.wil.je.leggen"));
 		String[] r = nummer.split(", ");
 		lbl.setId(r[0]);
 		
@@ -305,7 +306,7 @@ public class SpelPaneel extends GridPane {
 	}
 	
 	private void resetLabel() {
-		lbl.setText("Kies een actie");
+		lbl.setText(UITextHelper.UIText("Kies.een.actie"));
 		lbl.setId("actieKiezen");
 	}
 	
@@ -332,17 +333,17 @@ public class SpelPaneel extends GridPane {
 
 	private void beurtBeëindigen(ActionEvent event) {
 		if(!domeinController.beeindigBeurt()) {
-			lbl.setText("Fout in tafel");
+			lbl.setText(UITextHelper.UIText("Fout.in.tafel"));
 		}
 		reloadScherm();
 	}
 	private void jokerVervangen(ActionEvent event) {
 		if(domeinController.heeftTafelEenJoker()) {
-			lbl.setText("Klik op de joker die je wilt vervangen");
+			lbl.setText(UITextHelper.UIText("Klik.op.de.joker.die.je.wilt.vervangen"));
 			lbl.setId("jokerKiezen");
 		}
 		else
-			lbl.setText("Er ligt geen Joker op tafel, kies een optie");
+			lbl.setText(UITextHelper.UIText("Er.ligt.geen.Joker.op.tafel.kies.een.optie"));
 		
 	}
 	
@@ -355,7 +356,7 @@ public class SpelPaneel extends GridPane {
 	private void steenOmAanTeLeggenIsGekozen(String naam) {
 		if(lbl.getId().equals("steenKiezen") || lbl.getId().equals("rijKiezen")) {
 			
-			lbl.setText("Kies nu waar je "+ naam + " wilt leggen");	
+			lbl.setText(UITextHelper.UIText("Kies.nu.waar.je")+ naam + UITextHelper.UIText("wilt.leggen"));	
 			lbl.setId("rijKiezen");
 			
 		}
@@ -370,27 +371,28 @@ public class SpelPaneel extends GridPane {
 			reloadScherm();
 			if(gedaan!=null) {
 				lbl.setText(gedaan);
+				hoofdPaneel.toonScorePaneel(domeinController.getSpelerAanZetGebruikersnaam());
 			}
-			
+		
 			if(!(label == null)) {
-				lbl.setText(label+", kies een actie");
+				lbl.setText(label+UITextHelper.UIText("kies.een.actie"));
 			} 
 				
 			
 		}
 	}
 	private void steenAanleggen(ActionEvent event) {
-		lbl.setText("Klik op de steen die je wilt leggen");
+		lbl.setText(UITextHelper.UIText("Klik.op.de.steen.die.je.wilt.leggen"));
 		lbl.setId("steenKiezen");
 	}
 	
 	private void steenNaarWerkveld(ActionEvent event) {
-		lbl.setText("Welke steen wil je naar het werkveld brengen");
+		lbl.setText(UITextHelper.UIText("Welke.steen.wil.je.naar.het.werkveld.brengen"));
 		lbl.setId("steenNaarWerkveldKiezen");
 	}
 	
 	private void rijSplitsen(ActionEvent event) {
-		lbl.setText("Klik op de steen waarachter je wil splitsen");
+		lbl.setText(UITextHelper.UIText("Klik.op.de.steen.waarachter.je.wil.splitsen"));
 		lbl.setId("RijSplitsen");
 		
 		

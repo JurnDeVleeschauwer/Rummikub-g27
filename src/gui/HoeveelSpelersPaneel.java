@@ -24,7 +24,6 @@ import javafx.scene.text.FontWeight;
  *
  */
 public class HoeveelSpelersPaneel extends GridPane {
-    private final DomeinController domeinController;
     private final HoofdPaneel hoofdPaneel;
 
     /**
@@ -32,8 +31,7 @@ public class HoeveelSpelersPaneel extends GridPane {
      * @param domeinController
      * @param hoofdPaneel
      */
-    public HoeveelSpelersPaneel(DomeinController domeinController, HoofdPaneel hoofdPaneel) {
-        this.domeinController = domeinController;
+    public HoeveelSpelersPaneel(HoofdPaneel hoofdPaneel) {
         this.hoofdPaneel = hoofdPaneel;
 
         configureerGrid();
@@ -51,8 +49,6 @@ public class HoeveelSpelersPaneel extends GridPane {
         this.setBackground(new Background(myBI));
     }
 
-    private int aantalSpelers = 0;
-    private final Label foutbericht = new Label();
 
     private void voegComponentenToe() {
         

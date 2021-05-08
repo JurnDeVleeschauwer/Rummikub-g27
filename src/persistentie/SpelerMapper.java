@@ -37,4 +37,15 @@ public class SpelerMapper {
 
 		return speler;
 	}
+	
+	public void updateScore(int Score, int id) {
+		try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+				PreparedStatement query = conn.prepareStatement("UPDATE Speler SET score = ? WHERE spelerID = ?")) {
+			query.setInt(1, Score);
+			query.setInt(2, id);
+			query.executeUpdate();
+		} catch (SQLException ex) {
+			throw new RuntimeException(ex);
+		}
+	}
 }

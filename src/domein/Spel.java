@@ -15,11 +15,13 @@ public class Spel {
 	private Tafel vasteTafel;
 	private Tafel tijdelijkeTafel;
 	private List<RummiSteen> werkveld;
+	private DomeinController domeinController;
 
 	/** Initialiseert alle benodigdheden voor een spel.
 	 * @param spelers een lijst van de spelers die meedoen aan het spel
 	 */
-	public Spel(List<Speler> spelers) {
+	public Spel(List<Speler> spelers, DomeinController domeinController) {
+		this.domeinController = domeinController;
 		this.pot = new Pot();
 		this.vasteTafel = new Tafel();
 		this.tijdelijkeTafel = new Tafel();
@@ -143,19 +145,34 @@ public class Spel {
 	/** 
 	 * Berekent de scores van alle spelers
 	 */
-	public void berekenScore(Speler winnaar) {
+	public List<Speler> berekenScore(String gebruikersnaamWinaar) {
 		int winscore = 0;
+		List<Speler> spelersListScore = new ArrayList<>();
 		for (Speler speler : spelers) {
 			int score = 0;
 			for (RummiSteen steen : speler.getStenenInBezit()) {
 				score -= steen.getWaarde();
 				winscore += steen.getWaarde();
 			}
-			speler.setScore(score);
+			if(speler.getGebruikersnaam() != gebruikersnaamWinaar) {
+				domeinController.getSpelerRepo().updateScore(score, speler.getID());
+				spelersListScore.add(new Speler(speler.getGebruikersnaam(), score));
+			}
 		}
-		winnaar.setScore(winscore);
+		domeinController.getSpelerRepo().updateScore(winscore, this.getSpelerID(gebruikersnaamWinaar));
+		spelersListScore.add(new Speler(gebruikersnaamWinaar, winscore));
+		return spelersListScore;
 	}
 	
+	private int getSpelerID(String gebruikersnaamWinaar) {
+		for (Speler speler : spelers) {
+			if(speler.getGebruikersnaam() == gebruikersnaamWinaar) {
+				return speler.getID();
+			}
+		}
+		return -1;
+	}
+
 	/** 
 	 * Kijkt of de speler aan zet gewonnen is of niet
 	 * */
@@ -355,7 +372,7 @@ public class Spel {
 		Xindex++;
 		int Yindex = VanStringEenIntMaken(yindex);
 		if(Xindex <0 || Yindex < 0) {
-			throw new IllegalArgumentException("String was geen getal");
+			throw new IllegalArgumentException(UITextHelper.UIText("String.was.geen.getal"));
 		}else {
 			
 			boolean tweeVrijAchter = false;
