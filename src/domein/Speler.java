@@ -10,6 +10,7 @@ public class Speler {
 	private int score;
 	private boolean isSpelerAanDeBeurt;
 	private List<RummiSteen> stenenInBezit;
+	private List<RummiSteen> kopie;
 	private boolean isEersteBeurt;
 	private boolean neemSteen;
 	
@@ -27,6 +28,7 @@ public class Speler {
 		setIsEersteBeurt(true);
 		setNeemSteen(true);
 		stenenInBezit = new ArrayList<>();
+		kopie = new ArrayList<>();
 	}
 	
 	/** Haalt wachtwoord van de speler op
@@ -117,9 +119,6 @@ public class Speler {
 		return stenenInBezit;
 	}
 	
-	public void speelBeurt() {
-		
-	}
 	
 	/** Speler krijgt een extra steen
 	 * @param steen random steen uit de pot word gegeven aan de speler
@@ -160,6 +159,20 @@ public class Speler {
 	 */
 	public int getID() {
 		return this.id;
+	}
+	
+	public void kopieInstellen() {
+		this.kopie.clear();
+		for(RummiSteen steen : this.stenenInBezit) {
+			this.kopie.add(steen);
+		}
+	}
+	
+	public void reset() {
+		this.stenenInBezit.clear();
+		for(RummiSteen steen : this.kopie) {
+			this.stenenInBezit.add(steen);
+		}
 	}
 	
 	

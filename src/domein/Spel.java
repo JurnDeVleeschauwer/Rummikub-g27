@@ -1,7 +1,6 @@
 package domein;
 
 import java.util.ArrayList;
-//import org.apache.commons.lang.SerializationUtils;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
@@ -30,11 +29,6 @@ public class Spel {
 		geefEerste14Stenen();
 		setSpelerAanZet(spelers.get(0));
 		resetTijdelijkeTafel();
-		
-//		for(int i=0;i<3;i++) {
-//			steenOpTafelLeggen(this.spelerAanZet.getStenenInBezit().get(i), i);
-////			steenNaarWerkveld(this.spelerAanZet.getStenenInBezit().get(i+7));
-//		}
 		
 	}
 	
@@ -107,7 +101,9 @@ public class Spel {
 			for (int i=0;i<14;i++) {
 				speler.krijgtSteen(steenUitPotHalen());
 			}
+			speler.kopieInstellen();
 		}
+		
 	}
 	
 	/** Verwijdert een steen uit de pot.
@@ -143,29 +139,6 @@ public class Spel {
 	
 	}
 	
-//	public void testWinst() {
-//		boolean test=true;
-//		Speler winnaar = null;
-//		do {
-//			for (Speler speler : spelers) {
-//			
-//				for (int i=0;i<(Math.random()*(speler.getStenenInBezit().size()+1));i++) {
-//					speler.verwijderSteen();
-//				}
-//				if (speler.getStenenInBezit().isEmpty()) {
-//					System.out.println(speler.getGebruikersnaam());
-//					winnaar = speler;
-//					test=false;
-//					break;
-//				}
-//				toonStenenSpeler();
-//			}
-//		} while (test);
-//		berekenScore(winnaar);
-//		for (Speler speler : spelers) {
-//			System.out.printf("%s heeft score van %d%n",speler.getGebruikersnaam(),speler.getScore());
-//		}
-//	}
 	
 	/** 
 	 * Berekent de scores van alle spelers
@@ -187,7 +160,8 @@ public class Spel {
 	 * Kijkt of de speler aan zet gewonnen is of niet
 	 * */
 	public boolean checkWinst() {
-		return spelerAanZet.getStenenInBezit().isEmpty();
+			return (spelerAanZet.getStenenInBezit().isEmpty()&& this.controleerTafel());
+		
 	}
 
 	/** Toont de stenen op tafel
@@ -206,21 +180,24 @@ public class Spel {
 	 * @param b true of false of de speler een steen moet nemen of niet
 	 */ 
 	public void zetNeemSteen(boolean b) {
-		spelerAanZet.setNeemSteen(/*b*/true);//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		spelerAanZet.setNeemSteen(b);
 	}
 	
 	/**
 	 * Beëindigt beurt van speler die momenteel aan de beurt is
 	 */ 
-	public void beeindigBeurt() {
+	public boolean beeindigBeurt() {
 		if (controleerTafel()) {
 			if (spelerAanZet.getNeemSteen())
 				spelerAanZet.krijgtSteen(steenUitPotHalen());
 			bepaalSpelerAanZet();
+			this.zetNeemSteen(true);
 			this.vasteTafel.reset(this.tijdelijkeTafel.getStenenOpTafel(), this.spelerAanZet);
+			this.kopieSpelerStenenInstellen();
+			return true;
 		}
 		else {
-			System.out.println("fout in tafel");
+			return false;
 		}
 	}
 	
@@ -228,7 +205,7 @@ public class Spel {
 	 *  @return roept methode aan om de tafel te controleren
 	 */
 	private boolean controleerTafel() {
-		return true;//tijdelijkeTafel.controleerTafel();
+		return /*true;*/tijdelijkeTafel.controleerTafel();
 	}
 	
 	/** 
@@ -296,7 +273,7 @@ public class Spel {
 			}else {
 				this.spelerAanZet.verwijderSteen(steen);
 				this.steenOpTafelLeggen(steen, rij, kolom);
-				/*this.zetNeemSteen(false);*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				this.zetNeemSteen(false);
 			}
 		}else {
 			return UITextHelper.UIText("Deze.steen.heb.je.niet.in.je.bezit");
@@ -309,12 +286,20 @@ public class Spel {
 	/** Neemt een steen van de tafel en verplaatst deze naar het werkveld
 	 * @param naam kleur en waarde van de te verplaatsen steen
 	 */
-	public void steenNaarWerkveld(String naam) {	
-		RummiSteen steen = this.tijdelijkeTafel.geefSteenMetNaam(naam);
+	public String steenNaarWerkveld(int Xindex, int Yindex) {	
+		RummiSteen steen = this.tijdelijkeTafel.verwijderSteen(Xindex, Yindex);
+		if(steen != null) {
+			this.werkveld.add(steen);
+		} else return UITextHelper.UIText("Deze.steen.ligt.niet.op.tafel");
+		return null;
+	}
+	
+	public String steenNaarWerkveld(RummiSteen steen) {	
 		if(steen != null) {
 			this.tijdelijkeTafel.verwijderSteen(steen);
 			this.werkveld.add(steen);
-		} else System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.ligt.niet.op.tafel"));
+		} else return UITextHelper.UIText("Deze.steen.ligt.niet.op.tafel");
+		return null;
 	}
 	
 	/** 
@@ -351,25 +336,21 @@ public class Spel {
 				this.werkveld.remove(steen);
 			}else {
 				this.spelerAanZet.verwijderSteen(steen);
-				//this.zetNeemSteen(false);///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				this.zetNeemSteen(false);
 			}
 			this.tijdelijkeTafel.getStenenOpTafel().get(YindexJoker).add(XindexJoker, steen);
 			this.tijdelijkeTafel.getStenenOpTafel().get(YindexJoker).remove(joker);
 			this.werkveld.add(joker);
 			
 		}
-		else System.out.printf("%s%n", UITextHelper.UIText("Deze.steen.heb.je.niet.in.je.bezit"));
-	
-		
 	}
 	
 	/**
 	 * Methode om rij te splitsen
-	 * @param naam2 
 	 * @param yindex 
 	 * @param xindex 
 	 */
-	public void rijSplitsen(String naam2, String xindex, String yindex){
+	public void rijSplitsen(String xindex, String yindex){
 		int Xindex = VanStringEenIntMaken(xindex);
 		Xindex++;
 		int Yindex = VanStringEenIntMaken(yindex);
@@ -426,21 +407,21 @@ public class Spel {
 			}
 			
 			if(tweeVrijAchter)
-				this.rijSplitsenTweeVrijAchter(naam2, Xindex, Yindex);
+				this.rijSplitsenTweeVrijAchter(Xindex, Yindex);
 			else if(tweeVrijVoor) 
-				this.rijSplitsenTweeVrijVoor(naam2, Xindex, Yindex);
+				this.rijSplitsenTweeVrijVoor(Xindex, Yindex);
 			else if(drieLegePlaatsenVoor)
-				this.rijSplitsenDrieLegePlaatsenVoor(naam2, Xindex, Yindex, index);
+				this.rijSplitsenDrieLegePlaatsenVoor(Xindex, Yindex, index);
 			else if(drieLegePlaatsenNa)
-				this.rijSplitsenDrieLegePlaatsenNa(naam2, Xindex, Yindex, index);
+				this.rijSplitsenDrieLegePlaatsenNa(Xindex, Yindex, index);
 			else
-				this.rijSplitsenNaarWerkveld(naam2, Xindex, Yindex);
+				this.rijSplitsenNaarWerkveld(Xindex, Yindex);
 			
 			
 		}
 	}
 	
-	private void rijSplitsenDrieLegePlaatsenVoor(String naam2, int Xindex, int Yindex, int index) {
+	private void rijSplitsenDrieLegePlaatsenVoor(int Xindex, int Yindex, int index) {
 		Xindex-=2;
 		RummiSteen steen1 = this.tijdelijkeTafel.getStenenOpTafel().get(Yindex).remove(index-1);
 		RummiSteen steen2 = this.tijdelijkeTafel.getStenenOpTafel().get(Yindex).remove(index-2);
@@ -449,25 +430,25 @@ public class Spel {
 		
 	}
 
-	private void rijSplitsenNaarWerkveld(String naam2, int Xindex, int Yindex) {
+	private void rijSplitsenNaarWerkveld(int Xindex, int Yindex) {
 		boolean legePlaatsGehad = false;
-		ArrayList<String> naarWerkveld = new ArrayList<>();
+		ArrayList<RummiSteen> naarWerkveld = new ArrayList<>();
 		for(RummiSteen steen : this.tijdelijkeTafel.getStenenOpTafel().get(Yindex)) {
 			if(this.tijdelijkeTafel.getStenenOpTafel().get(Yindex).indexOf(steen)>=Xindex) {
 				
 				if(steen.getWaarde() == 0) {
 					legePlaatsGehad = true;
 				}else if(!legePlaatsGehad) {
-					naarWerkveld.add(steen.getNaam());
+					naarWerkveld.add(steen);
 				}
 		
 			}
 		}
-		naarWerkveld.forEach(naam -> this.steenNaarWerkveld(naam));
+		naarWerkveld.forEach(steen -> this.steenNaarWerkveld(steen));
 		
 	}
 
-	private void rijSplitsenDrieLegePlaatsenNa(String naam2, int Xindex, int Yindex, int index) {
+	private void rijSplitsenDrieLegePlaatsenNa(int Xindex, int Yindex, int index) {
 		RummiSteen steen1 = this.tijdelijkeTafel.getStenenOpTafel().get(Yindex).remove(index-2);
 		RummiSteen steen2 = this.tijdelijkeTafel.getStenenOpTafel().get(Yindex).remove(index-1);
 		this.tijdelijkeTafel.getStenenOpTafel().get(Yindex).add(Xindex, steen1);
@@ -476,7 +457,7 @@ public class Spel {
 		
 	}
 
-	private void rijSplitsenTweeVrijVoor(String naam2, int Xindex, int Yindex) {
+	private void rijSplitsenTweeVrijVoor(int Xindex, int Yindex) {
 		Xindex-=2;
 		RummiSteen steen1 = this.tijdelijkeTafel.getStenenOpTafel().get(Yindex).remove(1);
 		RummiSteen steen2 = this.tijdelijkeTafel.getStenenOpTafel().get(Yindex).remove(0);
@@ -485,14 +466,14 @@ public class Spel {
 		
 	}
 
-	private void rijSplitsenTweeVrijAchter(String naam2, int Xindex, int Yindex) {
+	private void rijSplitsenTweeVrijAchter(int Xindex, int Yindex) {
 		RummiSteen steen1 = this.tijdelijkeTafel.getStenenOpTafel().get(Yindex).remove(12);
 		RummiSteen steen2 = this.tijdelijkeTafel.getStenenOpTafel().get(Yindex).remove(11);
 		this.tijdelijkeTafel.getStenenOpTafel().get(Yindex).add(Xindex, steen1);
 		this.tijdelijkeTafel.getStenenOpTafel().get(Yindex).add(Xindex, steen2);
 	}
 
-	private int VanStringEenIntMaken(String s) {
+	public int VanStringEenIntMaken(String s) {
 		for(int i = 0;  i <100; i++) {
 			String getal = "";
 			getal+=i;
@@ -511,5 +492,18 @@ public class Spel {
 			}
 		}
 		return false;
+	}
+	
+
+	public void kopieSpelerStenenInstellen() {
+		this.spelerAanZet.kopieInstellen();
+	}
+
+	
+	public void reset() {
+		this.resetTijdelijkeTafel();
+		this.spelerAanZet.reset();
+		this.zetNeemSteen(true);
+		this.werkveld.clear();
 	}
 }

@@ -14,9 +14,6 @@ public class DomeinController {
 	Speler speler = null;
 	private Spel spel;
 
-//	public void addSpelerAanLijst(String naam, String wachtwoord) {
-//	  spelers.add(new Speler(naam,wachtwoord));
-//	}
 
 	/** Start een nieuwe instantie van spel
 	 * @return roept de spel instantie aan
@@ -100,8 +97,7 @@ public class DomeinController {
 	/** roept methode aan om de tijdelijke tafel te legen en zet het nemen van een steen op true.
 	 */
 	public void reset() {
-		spel.resetTijdelijkeTafel();
-		zetNeemSteen(true);
+		spel.reset();
 	}
 	
 	/** Stelt het nemen van een steen in op true of false
@@ -113,8 +109,8 @@ public class DomeinController {
 
 	/** roept methode aan om beurt huidige speler te beïndigen
 	 */
-	public void beeindigBeurt() {
-		spel.beeindigBeurt();
+	public boolean beeindigBeurt() {
+		return spel.beeindigBeurt();
 	}
 	
 	
@@ -126,12 +122,11 @@ public class DomeinController {
 	
 	
 	/** Roept methode aan om een rij te splitsen. 
-	 * @param naam 
 	 * @param Yindex 
 	 * @param Xindex 
 	 */
-	public void rijSplitsen(String naam, String Xindex, String Yindex) {
-		spel.rijSplitsen(naam, Xindex, Yindex);
+	public void rijSplitsen(String Xindex, String Yindex) {
+		spel.rijSplitsen(Xindex, Yindex);
 	}
 	
 	/** Roept methode aan om een joker te vervangen door een steen. 
@@ -146,8 +141,10 @@ public class DomeinController {
 	/** Roept methode aan om een vooraf gekozen steen naar het werkveld te verplaatsen.
 	 * @param naam kleur en nummer van de steen. 
 	 */
-	public void steenNaarWerkveld(String naam) {
-		spel.steenNaarWerkveld(naam);
+	public String steenNaarWerkveld(String xindex, String yindex) {
+		int Xindex = spel.VanStringEenIntMaken(xindex);
+		int Yindex = spel.VanStringEenIntMaken(yindex);
+		return spel.steenNaarWerkveld(Xindex, Yindex);
 	}
 	
 	/** Retourneert een lijst van alle spelers die meespelen
@@ -158,6 +155,16 @@ public class DomeinController {
 	
 	public boolean heeftTafelEenJoker() {
 		return spel.heeftTafelEenJoker();
+	}
+
+	public String isGedaan() {
+		if(spel.checkWinst()) {
+			if(spel.getWerkveld().isEmpty()) {
+				return "Je bent gewonnen!";
+			}
+			return "Het werkveld moet ook leeg!";
+		}
+		return null;
 	}
 	
 }

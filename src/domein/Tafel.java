@@ -94,12 +94,12 @@ public class Tafel {
 				if(steen.getWaarde()!=0) {
 					if (straat == true | gelijkeNummers == true) {
 					if (straat) {
-						if (steen.getKleur() == vorigeSteen.getKleur() & steen.getWaarde() == vorigeSteen.getWaarde()+1) {
+						if (steen.getKleur().equals(vorigeSteen.getKleur()) & steen.getWaarde() == vorigeSteen.getWaarde()+1) {
 							laatsteWaarde = steen.getWaarde();
 							laatsteKleur = steen.getKleur();
 						}
-						else if (vorigeSteen.getKleur()=="Groen"|steen.getKleur()=="Groen") {
-							if (steen.getKleur() == laatsteKleur & steen.getWaarde() == laatsteWaarde+2) {
+						else if (vorigeSteen.getKleur().equals("Groen")|steen.getKleur().equals("Groen")) {
+							if (steen.getKleur().equals(laatsteKleur) & steen.getWaarde() == laatsteWaarde+2) {
 								laatsteWaarde = steen.getWaarde();
 								laatsteKleur = steen.getKleur();
 							}
@@ -114,7 +114,7 @@ public class Tafel {
 								kleuren.add(steen.getKleur());
 								laatsteWaarde = steen.getWaarde();
 							}
-							else if (vorigeSteen.getKleur()=="Groen"|steen.getKleur()=="Groen") {
+							else if (vorigeSteen.getKleur().equals("Groen")|steen.getKleur().equals("Groen")) {
 								if (steen.getWaarde() == laatsteWaarde & !(kleuren.contains(steen.getKleur()))) {
 									laatsteWaarde = steen.getWaarde();
 									laatsteKleur = steen.getKleur();
@@ -130,8 +130,8 @@ public class Tafel {
 					}
 				}
 				else if (!(vorigeSteen == null)) {
-					if (!(vorigeSteen.getKleur()=="Groen"|steen.getKleur()=="Groen")) {
-						if (steen.getKleur() == vorigeSteen.getKleur() & steen.getWaarde() == vorigeSteen.getWaarde()+1) {
+					if (!(vorigeSteen.getKleur().equals("Groen")|steen.getKleur().equals("Groen"))) {
+						if (steen.getKleur().equals( vorigeSteen.getKleur()) & steen.getWaarde() == vorigeSteen.getWaarde()+1) {
 							laatsteWaarde = steen.getWaarde();
 							laatsteKleur = steen.getKleur();
 							straat = true;
@@ -202,5 +202,12 @@ public class Tafel {
 			}
 		}
 	}
+
+	public RummiSteen verwijderSteen(int Xindex, int Yindex) {
+		RummiSteen steen = this.stenenOpTafel.get(Yindex).remove(Xindex);
+		this.stenenOpTafel.get(Yindex).add(Xindex, new RummiSteen());
+		return steen;
+	}
+	
 
 }

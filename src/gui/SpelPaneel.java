@@ -285,7 +285,10 @@ public class SpelPaneel extends GridPane {
 	private void steenNaarWerkveldIsGekozen(String naam) {
 		if(lbl.getId().equals("steenNaarWerkveldKiezen")) {
 			String[] r = naam.split(", ");
-			domeinController.steenNaarWerkveld(r[0]);
+			String label = domeinController.steenNaarWerkveld(r[1], r[2]);
+			if(!(label == null)) {
+				lbl.setText(label);
+			}
 			reloadScherm();
 		}
 			
@@ -328,7 +331,9 @@ public class SpelPaneel extends GridPane {
 	}
 
 	private void beurtBeëindigen(ActionEvent event) {
-		domeinController.beeindigBeurt();
+		if(!domeinController.beeindigBeurt()) {
+			lbl.setText("Fout in tafel");
+		}
 		reloadScherm();
 	}
 	private void jokerVervangen(ActionEvent event) {
@@ -361,7 +366,12 @@ public class SpelPaneel extends GridPane {
 			String[] str = lbl.getText().split(" ");
 			String naam = str[4];
 			String label = domeinController.steenAanleggen(naam, positie);
+			String gedaan = domeinController.isGedaan();
 			reloadScherm();
+			if(gedaan!=null) {
+				lbl.setText(gedaan);
+			}
+			
 			if(!(label == null)) {
 				lbl.setText(label+", kies een actie");
 			} 
@@ -388,12 +398,13 @@ public class SpelPaneel extends GridPane {
 	
 	private void plaatsOmTeSplitsenIsGekozen(String naam) {
 		String[] r = naam.split(", ");
-		domeinController.rijSplitsen(r[0], r[1], r[2]);
+		domeinController.rijSplitsen(r[1], r[2]);
 		reloadScherm();
 	}
 	
 	private void reset(ActionEvent event) {
 		domeinController.reset();
+		reloadScherm();
 	}
 
 }
