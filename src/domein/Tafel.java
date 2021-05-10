@@ -145,12 +145,12 @@ public class Tafel {
 							}
 						}
 					}
-				else {
-					kleuren.add(steen.getKleur());
+					else {
+						kleuren.add(steen.getKleur());
+					}
+					vorigeSteen = steen;
+					aantalStenen++;
 				}
-				vorigeSteen = steen;
-				aantalStenen++;
-			}
 				else if(aantalStenen!=0 & aantalStenen < 3) {
 					return false;
 					
@@ -203,7 +203,7 @@ public class Tafel {
 		}
 	}
 
-	public RummiSteen verwijderSteen(int Xindex, int Yindex) {
+	public RummiSteen verwijderSteen(int Xindex, int Yindex) { //Xindex = kolom, Yindex = rij
 		RummiSteen steen = this.stenenOpTafel.get(Yindex).remove(Xindex);
 		this.stenenOpTafel.get(Yindex).add(Xindex, new RummiSteen());
 		return steen;

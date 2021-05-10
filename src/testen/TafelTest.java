@@ -67,9 +67,9 @@ class TafelTest {
 			else
 				t.legSteenOpTafel(new RummiSteen(i,"Blauw"), 0, i-1);
 		}
-		t.legSteenOpTafel(new RummiSteen(7,"Groen"), 1, 0);
+		t.legSteenOpTafel(new RummiSteen(7,"Blauw"), 1, 0);
 		t.legSteenOpTafel(new RummiSteen(7,"Rood"), 1, 1);
-		t.legSteenOpTafel(new RummiSteen(7,"Zwart"), 1, 2);
+		t.legSteenOpTafel(new RummiSteen(7,"Groen"), 1, 2);
 		t.legSteenOpTafel(new RummiSteen(7,"Geel"), 1, 3);
 		Assertions.assertTrue(t.controleerTafel());
 	}
@@ -97,5 +97,11 @@ class TafelTest {
 		t.legSteenOpTafel(new RummiSteen(7,"Geel"), 1, 1);
 		Assertions.assertFalse(t.controleerTafel());
 	}
-	
+	@Test
+	void verwijderSteen_geldig_verwijderdtSteen() {
+		RummiSteen r = new RummiSteen(25, "Groen");
+		t.legSteenOpTafel(r, 6, 4);
+		Assertions.assertEquals("Joker", t.verwijderSteen(4, 6).getNaam());
+		Assertions.assertEquals("", t.getStenenOpTafel().get(6).get(4).getNaam());
+	}
 }
