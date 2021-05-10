@@ -143,7 +143,7 @@ public class SpelPaneel extends GridPane {
 		add(this.werkveldPaneel, 1, 0);
 		add(this.spelerPaneel, 1, 1, 2, 1);
 		add(this.optiesPaneel, 2, 0);
-		add(this.lbl,1, 2 );
+		add(this.lbl,1, 2, 2,1 );
 		
 	}
 	
@@ -376,12 +376,12 @@ public class SpelPaneel extends GridPane {
 	
 	
 	private void steenOmAanTeLeggenIsGekozen(String naam) {
-		if(lbl.getId().equals("steenKiezen") || lbl.getId().equals("rijKiezen")) {
+		//if(lbl.getId().equals("steenKiezen") || lbl.getId().equals("rijKiezen")) {
 			
 			lbl.setText(UITextHelper.UIText("Kies.nu.waar.je")+ naam +" "+ UITextHelper.UIText("wilt.leggen"));	
 			lbl.setId("rijKiezen");
 			
-		}
+		//}
 		
 	}
 	private void steenEnRijZijnGekozenOmAanTeLeggen(String positie) {
