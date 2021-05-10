@@ -203,18 +203,30 @@ public class Spel {
 	/**
 	 * Beëindigt beurt van speler die momenteel aan de beurt is
 	 */ 
-	public boolean beeindigBeurt() {
+	public String beeindigBeurt() {
 		if (controleerTafel()) {
-			if (spelerAanZet.getNeemSteen())
-				spelerAanZet.krijgtSteen(steenUitPotHalen());
-			bepaalSpelerAanZet();
-			this.zetNeemSteen(true);
-			this.vasteTafel.reset(this.tijdelijkeTafel.getStenenOpTafel(), this.spelerAanZet);
-			this.kopieSpelerStenenInstellen();
-			return true;
+			if(this.spelerAanZet.eersteBeurt()) {
+				if (spelerAanZet.getNeemSteen())
+					spelerAanZet.krijgtSteen(steenUitPotHalen());
+				bepaalSpelerAanZet();
+				this.zetNeemSteen(true);
+				this.vasteTafel.reset(this.tijdelijkeTafel.getStenenOpTafel(), this.spelerAanZet);
+				this.kopieSpelerStenenInstellen();
+				return null;
+			}else {
+				if (spelerAanZet.getNeemSteen()) {
+					spelerAanZet.krijgtSteen(steenUitPotHalen());
+					bepaalSpelerAanZet();
+					this.zetNeemSteen(true);
+					this.vasteTafel.reset(this.tijdelijkeTafel.getStenenOpTafel(), this.spelerAanZet);
+					this.kopieSpelerStenenInstellen();
+					return null;
+				}else
+					return "EersteBeurt";
+			}
 		}
 		else {
-			return false;
+			return "Tafel";
 		}
 	}
 	

@@ -109,7 +109,7 @@ public class DomeinController {
 
 	/** roept methode aan om beurt huidige speler te beïndigen
 	 */
-	public boolean beeindigBeurt() {
+	public String beeindigBeurt() {
 		return spel.beeindigBeurt();
 	}
 	

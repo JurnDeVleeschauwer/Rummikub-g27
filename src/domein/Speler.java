@@ -180,5 +180,27 @@ public class Speler {
 		}
 	}
 	
+	public boolean eersteBeurt() {
+		if(this.getIsEersteBeurt()) {
+			int waarde=0;
+			boolean heeftSteenNog=false;
+			for(RummiSteen steenKopie : kopie) {
+				for(RummiSteen steenSpeler : this.getStenenInBezit()) {
+					if(steenKopie.equals(steenSpeler))
+						heeftSteenNog=true;
+				}
+				if(heeftSteenNog == false)
+					if (steenKopie.getWaarde() < 20)
+						waarde += steenKopie.getWaarde();
+				heeftSteenNog=false;
+			}
+			if(waarde >= 30) {
+				this.setIsEersteBeurt(false);
+				return true;
+			}
+			else return false;
+		} return true;
+	}
+	
 	
 }

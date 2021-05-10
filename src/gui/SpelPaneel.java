@@ -217,7 +217,7 @@ public class SpelPaneel extends GridPane {
 	
 	private void spelerStenenGeven() {
 		this.spelerPaneel.getChildren().clear();
-		String label = domeinController.getSpel().getSpelerAanZet().getGebruikersnaam()+ UITextHelper.UIText("is.aan.de.beurt");
+		String label = domeinController.getSpel().getSpelerAanZet().getGebruikersnaam()+" "+ UITextHelper.UIText("is.aan.de.beurt");
 		Label lblSpelerAanZet = new Label(label);
 		lblSpelerAanZet.setTextFill(Color.WHITE);
 		this.spelerPaneel.add(lblSpelerAanZet, 0, 0, 5, 1);
@@ -228,10 +228,27 @@ public class SpelPaneel extends GridPane {
 		for(RummiSteen steen : stenen) {
 			Button btnSteen = this.vanSteenEenButtonMaken(steen);
 			btnSteen.setOnAction(this::opSteenVanSpelerGeklikt);
-			if(index < (stenen.size()%2 == 0? stenen.size()/2 : stenen.size()/2+1)) {
+
+			if(index < 10)
 				this.spelerPaneel.add(btnSteen, index, 1);
-			}else
-				this.spelerPaneel.add(btnSteen, index-(stenen.size()%2 == 0? stenen.size()/2 : stenen.size()/2+1), 2);
+			else if(index < 20)
+				this.spelerPaneel.add(btnSteen, index-10, 2);
+			else if(index < 30)
+				this.spelerPaneel.add(btnSteen, index-20, 3); 
+			else if(index < 40)
+				this.spelerPaneel.add(btnSteen, index-30, 4);
+			else if(index < 50)
+				this.spelerPaneel.add(btnSteen, index-40, 5);
+			else if(index < 60)
+				this.spelerPaneel.add(btnSteen, index-50, 6);
+			
+			
+//			if(index < (stenen.size()%2 == 0? stenen.size()/2 : stenen.size()/2+1)) {
+//				this.spelerPaneel.add(btnSteen, index, 1);
+//			}else
+//				this.spelerPaneel.add(btnSteen, index-(stenen.size()%2 == 0? stenen.size()/2 : stenen.size()/2+1), 2);
+			
+			//ik weet niet goed welke methode handiger is
 			index++;
 		}
 	}
@@ -332,10 +349,15 @@ public class SpelPaneel extends GridPane {
 	}
 
 	private void beurtBeëindigen(ActionEvent event) {
-		if(!domeinController.beeindigBeurt()) {
-			lbl.setText(UITextHelper.UIText("Fout.in.tafel"));
-		}
-		reloadScherm();
+		String label = domeinController.beeindigBeurt();
+		
+		if(label != null) {
+			if(label.equals("Tafel"))
+				lbl.setText(UITextHelper.UIText("Fout.in.tafel"));
+			else
+				lbl.setText(UITextHelper.UIText("Je.eerste.beurt.moet.30.punten.zijn"));
+		}else 
+			reloadScherm();
 	}
 	private void jokerVervangen(ActionEvent event) {
 		if(domeinController.heeftTafelEenJoker()) {
@@ -356,7 +378,7 @@ public class SpelPaneel extends GridPane {
 	private void steenOmAanTeLeggenIsGekozen(String naam) {
 		if(lbl.getId().equals("steenKiezen") || lbl.getId().equals("rijKiezen")) {
 			
-			lbl.setText(UITextHelper.UIText("Kies.nu.waar.je")+ naam + UITextHelper.UIText("wilt.leggen"));	
+			lbl.setText(UITextHelper.UIText("Kies.nu.waar.je")+ naam +" "+ UITextHelper.UIText("wilt.leggen"));	
 			lbl.setId("rijKiezen");
 			
 		}

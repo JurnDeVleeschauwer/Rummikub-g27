@@ -19,8 +19,8 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -109,7 +109,9 @@ public class AanmeldPaneel extends GridPane
         Button aanmelden = new Button(UITextHelper.UIText("Aanmelden"));
         aanmelden.setOnAction(this::aanmelden);
         aanmelden.setDefaultButton(true);
-        HBox controls = new HBox(aanmelden, foutbericht);
+        VBox controls = new VBox(aanmelden, foutbericht);
+        foutbericht.setMinWidth(100);
+        foutbericht.setTextFill(Color.WHITE);
         controls.setSpacing(10);
         add(controls, 1, 3, 2, 1);
           
