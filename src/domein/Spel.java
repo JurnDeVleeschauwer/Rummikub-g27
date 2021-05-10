@@ -323,6 +323,9 @@ public class Spel {
 		return null;
 	}
 	
+	/** Verplaatst een steen van de tafel naar het werkveld.
+	 * @param steen waarde en kleur van de steen die van tafel gehaald word
+	 * @return indien de steen niet op tafel ligt retourneert dit een bericht.*/
 	public String steenNaarWerkveld(RummiSteen steen) {	
 		if(steen != null) {
 			this.tijdelijkeTafel.verwijderSteen(steen);
@@ -501,7 +504,10 @@ public class Spel {
 		this.tijdelijkeTafel.getStenenOpTafel().get(Yindex).add(Xindex, steen1);
 		this.tijdelijkeTafel.getStenenOpTafel().get(Yindex).add(Xindex, steen2);
 	}
-
+	
+	/** Maakt van een String een Integer
+	 * @param s de string die moet omgezet worden
+	 * @return de verkregen int bij succes of -1 bij mislukking */ 
 	public int VanStringEenIntMaken(String s) {
 		for(int i = 0;  i <100; i++) {
 			String getal = "";
@@ -512,7 +518,9 @@ public class Spel {
 		}
 		return -1;
 	}
-
+	
+	/** Controleert of er op de tijdelijke tafel een joker aanwezig is
+	 * @return true of false indien joker aanwezig is of niet. */
 	public boolean heeftTafelEenJoker() {
 		for(List<RummiSteen> steengroep : this.tijdelijkeTafel.getStenenOpTafel()) {
 			for(RummiSteen steen : steengroep) {
@@ -528,7 +536,8 @@ public class Spel {
 		this.spelerAanZet.kopieInstellen();
 	}
 
-	
+	/** Doet een volledige reset van alle wijzigingen van de huidige speler.
+	*/
 	public void reset() {
 		this.resetTijdelijkeTafel();
 		this.spelerAanZet.reset();

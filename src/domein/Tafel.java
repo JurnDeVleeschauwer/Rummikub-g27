@@ -202,8 +202,12 @@ public class Tafel {
 			}
 		}
 	}
-
-	public RummiSteen verwijderSteen(int Xindex, int Yindex) { //Xindex = kolom, Yindex = rij
+	/** Verwijdert een steen van een bepaalde plaats op tafel
+	 * @param Xindex de kolom waarin de steen zich bevind
+	 * @param Yindex de rij waarin de steen zich bevind
+	 * @return de net verwijderde steen
+	 */
+	public RummiSteen verwijderSteen(int Xindex, int Yindex) { 
 		RummiSteen steen = this.stenenOpTafel.get(Yindex).remove(Xindex);
 		this.stenenOpTafel.get(Yindex).add(Xindex, new RummiSteen());
 		return steen;

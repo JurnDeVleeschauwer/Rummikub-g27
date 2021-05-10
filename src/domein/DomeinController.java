@@ -153,10 +153,16 @@ public class DomeinController {
 		return spelers;
 	}
 	
+	/** Roept de methode aan die zoekt of er een joker op tafel ligt
+	 * @return methode die kijkt of er een joker op tafel ligt.
+	 */
 	public boolean heeftTafelEenJoker() {
 		return spel.heeftTafelEenJoker();
 	}
 
+	/** Geeft gepaste boodschap als speler wint en doet extra controle voor een leeg werkveld.
+	 * @return boodschap dat je gewonnen hebt of dat het werkveld nog leeg moet.
+	 */
 	public String isGedaan() {
 		if(spel.checkWinst()) {
 			if(spel.getWerkveld().isEmpty()) {
@@ -167,10 +173,17 @@ public class DomeinController {
 		return null;
 	}
 	
+	/** Roept de methode aan om de score te berekenen van de winnaar
+	 * @param gebruikersnaamWinnaar naam van de winnaar
+	 * @return de methode om de score te berekenen met de naam van de winnaar meegegeven.
+	 */
 	public List<Speler> berekenScore(String gebruikersnaamWinaar){
 		return spel.berekenScore(gebruikersnaamWinaar);
 	}
 	
+	/** Geeft de gebruikersnaam van de speler aan zet.
+	 * @return roept methode aan om speler aan zet te krijgen en vraagt daarvan dan de gebruikersnaam op.
+	 */
 	public String getSpelerAanZetGebruikersnaam() {
 		return spel.getSpelerAanZet().getGebruikersnaam();
 	}

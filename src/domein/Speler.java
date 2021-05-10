@@ -14,7 +14,7 @@ public class Speler {
 	private boolean isEersteBeurt;
 	private boolean neemSteen;
 	
-	/** Initialiseert een speler object 
+	/** Initialiseert een speler object met id, gebruikersnaam, wachtwoord, score
 	 * @param id 
 	 * @param gebruikersnaam naam van de speler in het spel
 	 * @param wachtwoord van de speler
@@ -31,6 +31,10 @@ public class Speler {
 		kopie = new ArrayList<>();
 	}
 	
+	/** Initialiseert een speler object met een gebruikersnaam, score
+	 * @param gebruikersnaam de naam van de speler in het spel
+	 * @param score totaal score van de de speler doorheen al de spellen
+	 */
 	public Speler(String gebruikersnaam, int score) {
 		setGebruikersnaam(gebruikersnaam);
 		setScore(score);
@@ -166,6 +170,8 @@ public class Speler {
 		return this.id;
 	}
 	
+	/** Maakt een kopie van alle stenen van de speler die momenteel bezig is
+	 */
 	public void kopieInstellen() {
 		this.kopie.clear();
 		for(RummiSteen steen : this.stenenInBezit) {
@@ -173,6 +179,8 @@ public class Speler {
 		}
 	}
 	
+	/** Verwijdert alle stenen van de speler aan beurt en voegt de stenen toe van de laatst genomen kopie
+	 */
 	public void reset() {
 		this.stenenInBezit.clear();
 		for(RummiSteen steen : this.kopie) {
@@ -180,6 +188,9 @@ public class Speler {
 		}
 	}
 	
+	/** Controleert of de speler voor de eerste beurt meer dan 3O legt.
+	 * @return true of false indien speler meer of minder heeft gelegd dan 30.
+	 */
 	public boolean eersteBeurt() {
 		if(this.getIsEersteBeurt()) {
 			int waarde=0;
