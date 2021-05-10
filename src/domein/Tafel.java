@@ -93,29 +93,13 @@ public class Tafel {
 			for (RummiSteen steen: steenGroep) {
 				if(steen.getWaarde()!=0) {
 					if (straat == true | gelijkeNummers == true) {
-					if (straat) {
-						if (steen.getKleur().equals(vorigeSteen.getKleur()) & steen.getWaarde() == vorigeSteen.getWaarde()+1) {
-							laatsteWaarde = steen.getWaarde();
-							laatsteKleur = steen.getKleur();
-						}
-						else if (vorigeSteen.getKleur().equals("Groen")|steen.getKleur().equals("Groen")) {
-							if (steen.getKleur().equals(laatsteKleur) & steen.getWaarde() == laatsteWaarde+2) {
+						if (straat) {
+							if (steen.getKleur().equals(vorigeSteen.getKleur()) & steen.getWaarde() == vorigeSteen.getWaarde()+1) {
 								laatsteWaarde = steen.getWaarde();
 								laatsteKleur = steen.getKleur();
 							}
-						}
-						else {
-							return false;
-						}
-					}
-					if (gelijkeNummers) {
-						if (aantalStenen<=4) {
-							if ((steen.getWaarde() == vorigeSteen.getWaarde() & !(kleuren.contains(steen.getKleur())))) {
-								kleuren.add(steen.getKleur());
-								laatsteWaarde = steen.getWaarde();
-							}
 							else if (vorigeSteen.getKleur().equals("Groen")|steen.getKleur().equals("Groen")) {
-								if (steen.getWaarde() == laatsteWaarde & !(kleuren.contains(steen.getKleur()))) {
+								if (steen.getKleur().equals(laatsteKleur) & steen.getWaarde() == laatsteWaarde+2) {
 									laatsteWaarde = steen.getWaarde();
 									laatsteKleur = steen.getKleur();
 								}
@@ -124,27 +108,43 @@ public class Tafel {
 								return false;
 							}
 						}
-						else {
-							return false;
+						if (gelijkeNummers) {
+							if (aantalStenen<=4) {
+								if ((steen.getWaarde() == vorigeSteen.getWaarde() & !(kleuren.contains(steen.getKleur())))) {
+									kleuren.add(steen.getKleur());
+									laatsteWaarde = steen.getWaarde();
+								}
+								else if (vorigeSteen.getKleur().equals("Groen")|steen.getKleur().equals("Groen")) {
+									if (steen.getWaarde() == laatsteWaarde & !(kleuren.contains(steen.getKleur()))) {
+										laatsteWaarde = steen.getWaarde();
+										laatsteKleur = steen.getKleur();
+									}
+								}
+								else {
+									return false;
+								}
+							}
+							else {
+								return false;
+							}
 						}
 					}
-				}
-				else if (!(vorigeSteen == null)) {
-					if (!(vorigeSteen.getKleur().equals("Groen")|steen.getKleur().equals("Groen"))) {
-						if (steen.getKleur().equals( vorigeSteen.getKleur()) & steen.getWaarde() == vorigeSteen.getWaarde()+1) {
-							laatsteWaarde = steen.getWaarde();
-							laatsteKleur = steen.getKleur();
-							straat = true;
-						}
-						else if ((steen.getWaarde() == vorigeSteen.getWaarde() & !(kleuren.contains(steen.getKleur())))||aantalStenen<=4) {
-							kleuren.add(steen.getKleur());
-							gelijkeNummers = true;
-						}
-						else {
-							return false;
+					else if (!(vorigeSteen == null)) {
+						if (!(vorigeSteen.getKleur().equals("Groen")|steen.getKleur().equals("Groen"))) {
+							if (steen.getKleur().equals( vorigeSteen.getKleur()) & steen.getWaarde() == vorigeSteen.getWaarde()+1) {
+								laatsteWaarde = steen.getWaarde();
+								laatsteKleur = steen.getKleur();
+								straat = true;
+							}
+							else if ((steen.getWaarde() == vorigeSteen.getWaarde() & !(kleuren.contains(steen.getKleur())))||aantalStenen<=4) {
+								kleuren.add(steen.getKleur());
+								gelijkeNummers = true;
+							}
+							else {
+								return false;
+							}
 						}
 					}
-				}
 				else {
 					kleuren.add(steen.getKleur());
 				}
