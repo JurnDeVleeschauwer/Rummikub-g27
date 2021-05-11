@@ -261,7 +261,7 @@ public class SpelPaneel extends GridPane {
 		else if(lbl.getId().equals("zessentwintig"))
 			jokerEnSteenZijnGekozen(26, naam);
 		
-		if(naam.equals("vijventwintig") || naam.equals("zessentwintig"))
+		else if(naam.equals("vijventwintig") || naam.equals("zessentwintig"))
 			steenOmAanTeLeggenIsGekozen("Joker");
 		else
 			steenOmAanTeLeggenIsGekozen(naam);
@@ -271,7 +271,11 @@ public class SpelPaneel extends GridPane {
 	private void opSteenVanWerkveldGeklikt(ActionEvent event) {
 		Button btn = (Button) event.getSource();
 		String naam = btn.getId();
-		if(naam.equals("vijventwintig") || naam.equals("zessentwintig"))
+		if(lbl.getId().equals("vijventwintig"))
+			jokerEnSteenZijnGekozen(25, naam);
+		else if(lbl.getId().equals("zessentwintig"))
+			jokerEnSteenZijnGekozen(26, naam);
+		else if(naam.equals("vijventwintig") || naam.equals("zessentwintig"))
 			steenOmAanTeLeggenIsGekozen("Joker");
 		else
 			steenOmAanTeLeggenIsGekozen(naam);
@@ -354,6 +358,8 @@ public class SpelPaneel extends GridPane {
 		if(label != null) {
 			if(label.equals("Tafel"))
 				lbl.setText(UITextHelper.UIText("Fout.in.tafel"));
+			else if (label.equals("Werkveld"))
+				lbl.setText(UITextHelper.UIText("Het.werkveld.moet.leeg.zijn"));
 			else
 				lbl.setText(UITextHelper.UIText("Je.eerste.beurt.moet.30.punten.zijn"));
 		}else 

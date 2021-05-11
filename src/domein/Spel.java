@@ -204,7 +204,10 @@ public class Spel {
 	 * Beëindigt beurt van speler die momenteel aan de beurt is
 	 */ 
 	public String beeindigBeurt() {
-		if (controleerTafel()) {
+		if(!this.werkveld.isEmpty()) {
+			return "Werkveld";
+		}
+		else if (controleerTafel()) {
 			if(this.spelerAanZet.eersteBeurt()) {
 				if (spelerAanZet.getNeemSteen())
 					spelerAanZet.krijgtSteen(steenUitPotHalen());
