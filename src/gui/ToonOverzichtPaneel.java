@@ -72,11 +72,11 @@ public class ToonOverzichtPaneel extends GridPane {
 
     
         TableColumn<Speler, String> column1 = new TableColumn<>(UITextHelper.UIText("gebruikersnaam"));
-        column1.setCellValueFactory(new PropertyValueFactory<>(UITextHelper.UIText("gebruikersnaam")));
+        column1.setCellValueFactory(new PropertyValueFactory<>("gebruikersnaam"));
 
 
         TableColumn<Speler, Integer> column2 = new TableColumn<>(UITextHelper.UIText("score"));
-        column2.setCellValueFactory(new PropertyValueFactory<>(UITextHelper.UIText("score")));
+        column2.setCellValueFactory(new PropertyValueFactory<>("score"));
 
         tableView.getColumns().add(column1);
         tableView.getColumns().add(column2);

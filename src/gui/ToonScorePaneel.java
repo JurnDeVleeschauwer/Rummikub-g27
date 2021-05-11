@@ -58,7 +58,9 @@ public class ToonScorePaneel extends GridPane {
 	}
 
 	public void voegComponentenToe(String gebruikersnaamWinaar) {
-		this.tableView.getItems().clear();
+		if(this.tableView != null) {
+			this.tableView.getItems().clear();
+		}
 		maakTableView(domeinController.berekenScore(gebruikersnaamWinaar));
 
 	}
@@ -70,10 +72,10 @@ public class ToonScorePaneel extends GridPane {
 		tableView = new TableView();
 
 		TableColumn<Speler, String> column1 = new TableColumn<>(UITextHelper.UIText("gebruikersnaam"));
-		column1.setCellValueFactory(new PropertyValueFactory<>(UITextHelper.UIText("gebruikersnaam")));
+		column1.setCellValueFactory(new PropertyValueFactory<>("gebruikersnaam"));
 
 		TableColumn<Speler, Integer> column2 = new TableColumn<>(UITextHelper.UIText("score"));
-		column2.setCellValueFactory(new PropertyValueFactory<>(UITextHelper.UIText("score")));
+		column2.setCellValueFactory(new PropertyValueFactory<>("score"));
 
 		tableView.getColumns().add(column1);
 		tableView.getColumns().add(column2);
