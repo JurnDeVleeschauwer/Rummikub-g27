@@ -109,7 +109,7 @@ public class Tafel {
 							}
 						}
 						if (gelijkeNummers) {
-							if (aantalStenen<=4) {
+							if (aantalStenen<4) {
 								if ((steen.getWaarde() == vorigeSteen.getWaarde() & !(kleuren.contains(steen.getKleur())))) {
 									kleuren.add(steen.getKleur());
 									laatsteWaarde = steen.getWaarde();
@@ -136,7 +136,7 @@ public class Tafel {
 								laatsteKleur = steen.getKleur();
 								straat = true;
 							}
-							else if ((steen.getWaarde() == vorigeSteen.getWaarde() & !(kleuren.contains(steen.getKleur())))||aantalStenen<=4) {
+							else if ((steen.getWaarde() == vorigeSteen.getWaarde() & !(kleuren.contains(steen.getKleur())))&aantalStenen<=4) {
 								kleuren.add(steen.getKleur());
 								gelijkeNummers = true;
 							}
