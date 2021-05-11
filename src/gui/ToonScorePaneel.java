@@ -28,7 +28,6 @@ import javafx.scene.layout.GridPane;
  *
  */
 public class ToonScorePaneel extends GridPane {
-	private final DomeinController domeinController;
 	private final HoofdPaneel hoofdPaneel;
 	private TableView<Speler> tableView;
 
@@ -38,7 +37,6 @@ public class ToonScorePaneel extends GridPane {
 	 * @param hoofdPaneel
 	 */
 	public ToonScorePaneel(HoofdPaneel hoofdPaneel) {
-		this.domeinController = domeinController;
 		this.hoofdPaneel = hoofdPaneel;
 
 		configureerGrid();
