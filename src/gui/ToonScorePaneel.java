@@ -37,7 +37,7 @@ public class ToonScorePaneel extends GridPane {
 	 * @param domeinController
 	 * @param hoofdPaneel
 	 */
-	public ToonScorePaneel(DomeinController domeinController, HoofdPaneel hoofdPaneel) {
+	public ToonScorePaneel(HoofdPaneel hoofdPaneel) {
 		this.domeinController = domeinController;
 		this.hoofdPaneel = hoofdPaneel;
 
