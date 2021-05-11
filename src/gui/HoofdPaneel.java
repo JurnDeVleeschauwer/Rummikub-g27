@@ -39,6 +39,7 @@ public class HoofdPaneel extends BorderPane {
 		this.aanmelden = new AanmeldPaneel(domeinController, this);
 		this.hoofdMenu = new HoofdMenu(domeinController, this);
 		this.hoeveelSpelers = new HoeveelSpelersPaneel(this);
+		this.toonScore = new ToonScorePaneel(this);
 
 	}
 	
