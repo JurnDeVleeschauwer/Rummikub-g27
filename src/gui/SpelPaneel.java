@@ -96,7 +96,10 @@ public class SpelPaneel extends GridPane {
 		for(RummiSteen steen : domeinController.getSpel().getWerkveld()) {
 			Button btnSteen = this.vanSteenEenButtonMaken(steen);
 			btnSteen.setOnAction(this::opSteenVanWerkveldGeklikt);
-			this.werkveldPaneel.add(btnSteen, XIndex, 0);
+			if (XIndex<9)
+				this.werkveldPaneel.add(btnSteen, XIndex, 0);
+			else
+				this.werkveldPaneel.add(btnSteen, XIndex-9, 1);
 			XIndex++;
 		}
 		XIndex=0;

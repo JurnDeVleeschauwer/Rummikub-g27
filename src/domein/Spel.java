@@ -218,7 +218,7 @@ public class Spel {
 		}
 		else if (controleerTafel()) {
 			if(this.spelerAanZet.eersteBeurt()) {
-				if (spelerAanZet.getNeemSteen())
+				if (spelerAanZet.getNeemSteen() && (!(this.pot.getStenen().isEmpty())))
 					spelerAanZet.krijgtSteen(steenUitPotHalen());
 				bepaalSpelerAanZet();
 				this.zetNeemSteen(true);
@@ -227,7 +227,8 @@ public class Spel {
 				return null;
 			}else {
 				if (spelerAanZet.getNeemSteen()) {
-					spelerAanZet.krijgtSteen(steenUitPotHalen());
+					if(!this.pot.getStenen().isEmpty()) 	
+						spelerAanZet.krijgtSteen(steenUitPotHalen());
 					bepaalSpelerAanZet();
 					this.zetNeemSteen(true);
 					this.vasteTafel.reset(this.tijdelijkeTafel.getStenenOpTafel(), this.spelerAanZet);
