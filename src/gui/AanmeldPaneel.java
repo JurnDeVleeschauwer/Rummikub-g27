@@ -48,6 +48,7 @@ public class AanmeldPaneel extends GridPane
         setHgap(10);
         setVgap(10);
 
+        //this.foutbericht.setText(UITextHelper.UIText());
         this.setAlignment(Pos.CENTER);
         
         ColumnConstraints col1 = new ColumnConstraints();
@@ -68,7 +69,7 @@ public class AanmeldPaneel extends GridPane
 
     private final TextField naam = new TextField();
     private final PasswordField wachtwoord = new PasswordField();
-    private final Label foutbericht = new Label();
+    private final Label foutbericht = new Label("");
     
     private void voegComponentenToe()
     {
@@ -110,7 +111,7 @@ public class AanmeldPaneel extends GridPane
         aanmelden.setOnAction(this::aanmelden);
         aanmelden.setDefaultButton(true);
         VBox controls = new VBox(aanmelden, foutbericht);
-        foutbericht.setMinWidth(100);
+        foutbericht.setPrefWidth(440);
         foutbericht.setTextFill(Color.WHITE);
         controls.setSpacing(10);
         add(controls, 1, 3, 2, 1);
