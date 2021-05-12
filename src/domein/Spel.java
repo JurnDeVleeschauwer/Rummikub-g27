@@ -155,13 +155,22 @@ public class Spel {
 				winscore += steen.getWaarde();
 			}
 			if(speler.getGebruikersnaam() != gebruikersnaamWinaar) {
-				domeinController.getSpelerRepo().updateScore(score, speler.getID());
+				domeinController.getSpelerRepo().updateScore(score + speler.getScore(), speler.getID());
 				spelersListScore.add(new Speler(speler.getGebruikersnaam(), score));
 			}
 		}
-		domeinController.getSpelerRepo().updateScore(winscore, this.getSpelerID(gebruikersnaamWinaar));
+		domeinController.getSpelerRepo().updateScore(winscore+ this.getSpeler(gebruikersnaamWinaar).getScore() , this.getSpelerID(gebruikersnaamWinaar));
 		spelersListScore.add(new Speler(gebruikersnaamWinaar, winscore));
 		return spelersListScore;
+	}
+	
+	private Speler getSpeler(String gebruikersnaamWinaar) {
+		for (Speler speler : spelers) {
+			if(speler.getGebruikersnaam() == gebruikersnaamWinaar) {
+				return speler;
+			}
+		}
+		return null;
 	}
 	
 	private int getSpelerID(String gebruikersnaamWinaar) {
