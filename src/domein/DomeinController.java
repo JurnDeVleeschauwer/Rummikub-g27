@@ -188,4 +188,7 @@ public class DomeinController {
 		return spel.getSpelerAanZet().getGebruikersnaam();
 	}
 	
+	public void replaceSpelerInList(int i) {
+		this.spelers.set(i, this.speler);
+	}
 }

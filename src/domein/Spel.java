@@ -159,6 +159,7 @@ public class Spel {
 				domeinController.getSpelerRepo().updateScore(score + speler.getScore(), speler.getID());
 				try {
 					domeinController.controleerSpeler(speler.getGebruikersnaam(), speler.getWachtwoord());
+					domeinController.replaceSpelerInList(spelers.indexOf(speler));
 				} catch (ExceptieSpelerAanmelden e) {
 					e.printStackTrace();
 				}
@@ -168,6 +169,7 @@ public class Spel {
 		domeinController.getSpelerRepo().updateScore(winscore+ this.getSpeler(gebruikersnaamWinaar).getScore() , this.getSpelerID(gebruikersnaamWinaar));
 		try {
 			domeinController.controleerSpeler(gebruikersnaamWinaar, this.getSpeler(gebruikersnaamWinaar).getWachtwoord());
+			domeinController.replaceSpelerInList(spelers.indexOf(this.getSpeler(gebruikersnaamWinaar)));
 		} catch (ExceptieSpelerAanmelden e) {
 			e.printStackTrace();
 		}
