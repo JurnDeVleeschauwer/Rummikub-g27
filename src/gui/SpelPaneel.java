@@ -352,7 +352,7 @@ public class SpelPaneel extends GridPane {
 		
 		this.optiesPaneel.setVgap(5);
 		opties.forEach(button -> button.setPrefWidth(200)); 
-		opties.forEach(button -> button.setPrefHeight(20)); 
+		opties.forEach(button -> button.setPrefHeight(25)); 
 	}
 
 	private void beurtBeëindigen(ActionEvent event) {
