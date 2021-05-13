@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import exceptions.ExceptieSpelerAanmelden;
 import i18n.UITextHelper;
 
 public class Spel {
@@ -156,10 +157,20 @@ public class Spel {
 			}
 			if(speler.getGebruikersnaam() != gebruikersnaamWinaar) {
 				domeinController.getSpelerRepo().updateScore(score + speler.getScore(), speler.getID());
+				try {
+					domeinController.controleerSpeler(speler.getGebruikersnaam(), speler.getWachtwoord());
+				} catch (ExceptieSpelerAanmelden e) {
+					e.printStackTrace();
+				}
 				spelersListScore.add(new Speler(speler.getGebruikersnaam(), score));
 			}
 		}
 		domeinController.getSpelerRepo().updateScore(winscore+ this.getSpeler(gebruikersnaamWinaar).getScore() , this.getSpelerID(gebruikersnaamWinaar));
+		try {
+			domeinController.controleerSpeler(gebruikersnaamWinaar, this.getSpeler(gebruikersnaamWinaar).getWachtwoord());
+		} catch (ExceptieSpelerAanmelden e) {
+			e.printStackTrace();
+		}
 		spelersListScore.add(new Speler(gebruikersnaamWinaar, winscore));
 		return spelersListScore;
 	}
