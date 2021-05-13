@@ -1,6 +1,5 @@
 module Rummikub {
 	exports persistentie;
-	exports cui;
 	exports gui;
 	exports main;
 	exports domein;
