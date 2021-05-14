@@ -28,6 +28,9 @@ public class Spel {
 		this.tijdelijkeTafel = new Tafel();
 		this.spelers = spelers;
 		this.werkveld = new ArrayList<>();
+		for(Speler speler :this.spelers) {
+			speler.getStenenInBezit().clear();
+		}
 		Collections.shuffle(spelers);
 		geefEerste14Stenen();
 		setSpelerAanZet(spelers.get(0));
