@@ -330,7 +330,7 @@ public class SpelPaneel extends GridPane {
 	}
 	
 	private void resetLabel() {
-		lbl.setText(UITextHelper.UIText("Kies.een.actie"));
+		lbl.setText(UITextHelper.UIText("Kies.een.actie")); 
 		lbl.setId("actieKiezen");
 	}
 	
