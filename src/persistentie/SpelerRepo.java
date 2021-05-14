@@ -1,14 +1,5 @@
 package persistentie;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
 import domein.Speler;
 
 public class SpelerRepo {
@@ -25,7 +16,7 @@ public class SpelerRepo {
 	}
 	
 	/**Update de score in de databank
-	 * @param Score de in te geven score
+	 * @param score de in te geven score
 	 * @param id het id van de speler 
 	 */
 	public void updateScore(int score, int id) {

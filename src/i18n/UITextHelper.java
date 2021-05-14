@@ -1,7 +1,8 @@
 package i18n;
 
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * 
@@ -18,10 +19,10 @@ public class UITextHelper {
 
     private static Locale locale = LOCALE_NL;
 
-    /**
+    /**locale instellen
      * 
-     * @param taal
-     * @return true als locale is ge set is geworden
+     * @param taal taal
+     * @return true als locale gezet is geworden
      */
     public static boolean setLocale(String taal) {
         switch (taal) {
@@ -44,9 +45,9 @@ public class UITextHelper {
         return true;
     }
 
-    /**
+    /** key omzetten in string
      * 
-     * @param key
+     * @param key key
      * @return string van key
      */
     public static String UIText(String key) {
@@ -55,10 +56,10 @@ public class UITextHelper {
         return bundle.getString(key);
     }
 
-    /**
+    /** meerdere keys omzetten in meerdere strings
      * 
-     * @param key
-     * @param placeholders
+     * @param key key
+     * @param placeholders placeholders
      * @return List of strings van keys
      */
     public static String UIText(String key, Object[] placeholders) {

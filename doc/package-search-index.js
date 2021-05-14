@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"m":"Rummikub","l":"domein"},{"m":"Rummikub","l":"exceptions"},{"m":"Rummikub","l":"i18n"},{"m":"Rummikub","l":"persistentie"}]

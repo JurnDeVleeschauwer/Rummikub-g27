@@ -183,7 +183,7 @@ public class DomeinController {
 	}
 	
 	/** Vervangt huidige speler op plaats i
-	 * @oaram i de locatie van de speler in de lijst
+	 * @param i de locatie van de speler in de lijst
 	 */
 	public void replaceSpelerInList(int i) {
 		this.spelers.set(i, this.speler);

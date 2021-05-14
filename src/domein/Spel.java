@@ -20,6 +20,7 @@ public class Spel {
 
 	/** Initialiseert alle benodigdheden voor een spel.
 	 * @param spelers een lijst van de spelers die meedoen aan het spel
+	 * @param domeinController de domeincontroller
 	 */
 	public Spel(List<Speler> spelers, DomeinController domeinController) {
 		this.domeinController = domeinController;

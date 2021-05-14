@@ -18,7 +18,7 @@ public class Speler {
 	 * @param id id van de speler
 	 * @param gebruikersnaam naam van de speler in het spel
 	 * @param wachtwoord van de speler
-	 * @score totaal score van de speler doorheen al de spellen
+	 * @param score totaal score van de speler doorheen al de spellen
 	 */
 	public Speler(int id, String gebruikersnaam, String wachtwoord , int score) {
 		this.id = id;
@@ -55,6 +55,7 @@ public class Speler {
 	}
 	
 	/** Haalt op of speler een steen moet nemen of niet
+	 * @return true of false als speler een steen moet nemen of niet
 	 */
 	public boolean getNeemSteen() {
 		return neemSteen;
@@ -95,6 +96,7 @@ public class Speler {
 	}
 	
 	/** Haalt de score op van de speler
+	 * @return de score van de speler
 	 */
 	public int getScore() {
 		return score;
@@ -155,6 +157,7 @@ public class Speler {
 		return null;
 	}
 	/** Retourneert het ID van de speler
+	 * @return het id
 	 */
 	public int getID() {
 		return this.id;
