@@ -400,9 +400,11 @@ public class SpelPaneel extends GridPane {
 			String label = domeinController.steenAanleggen(naam, positie);
 			String gedaan = domeinController.isGedaan();
 			reloadScherm();
-			if(gedaan!=null) {
+			if(gedaan.equals("Je bent gewonnen!")) {
 				lbl.setText(gedaan);
 				hoofdPaneel.toonScorePaneel(domeinController.getSpelerAanZetGebruikersnaam());
+			}else if(gedaan!=null) {
+				lbl.setText(gedaan);
 			}
 		
 			if(!(label == null)) {
