@@ -15,7 +15,7 @@ public class Speler {
 	private boolean neemSteen;
 	
 	/** Initialiseert een speler object met id, gebruikersnaam, wachtwoord, score
-	 * @param id 
+	 * @param id id van de speler
 	 * @param gebruikersnaam naam van de speler in het spel
 	 * @param wachtwoord van de speler
 	 * @score totaal score van de speler doorheen al de spellen
@@ -144,19 +144,9 @@ public class Speler {
 		stenenInBezit.remove(index);
 	}
 	
-	/** Toont de stenen van de speler
-	 * @return toont de stenen in een string 
-	 */ 
-	public String toonStenen() {
-		String returnString = "";
-			for (RummiSteen steen: stenenInBezit) {
-				returnString +=  String.format("%s ",steen.toString());
-			}
-		return returnString;
-	}
-	
 	/** Retourneert een steen
 	 * @param naam  naam die word gezocht in de hand van de speler
+	 * @return naam van de steen of null indien die steen niet bestaat.
 	 */
 	public RummiSteen geefSteenMetNaam(String naam) {
 		for(RummiSteen s : this.stenenInBezit) {

@@ -15,8 +15,8 @@ public class DomeinController {
 	private Spel spel;
 
 
-	/** Start een nieuwe instantie van spel
-	 * @return roept de spel instantie aan
+	/** Haalt het spel op
+	 * @return het spel
 	 */
 	public Spel getSpel() {
 		return this.spel;
@@ -29,8 +29,11 @@ public class DomeinController {
 		return spelerRepo;
 	}
 	
-	/** Controleert of de naam en het wachtwoord van de speler voorkomen, gelijk zijn.
+	/** Controleert of de naam en het wachtwoord van de speler voorkomen, gelijk zijn. Indien aanwezig word hij opgeslagen.
+	 * @param gebruikersnaam naam van de speler
+	 * @param wachtwoord wachtwoord van de speler
 	 * @return true indien naam en wachtwoord voorkomen in database en gelijk zijn.
+	 * @throws ExceptieSpelerAanmelden wanneer speler niet bestaat of wachtwoord verkeerd is of al ingelogd is.
 	 */
 	public boolean controleerSpeler(String gebruikersnaam, String wachtwoord) throws ExceptieSpelerAanmelden {
 	     speler = null;
@@ -71,30 +74,14 @@ public class DomeinController {
 		this.spel = new Spel(spelers, this);
 	}
 	
-	/** Toont een overzicht van de scores van de huidige spelers
-	 */
-	public String toonOverzicht() {
-		String overzicht = String.format("Speler\tScore%n");
-		for (Speler speler : spelers) {
-			overzicht += String.format("%s\t%d%n",speler.getGebruikersnaam(),speler.getScore());
-		}
-		return overzicht;
-	}
-	
-	/** Toont de stenen op de tafel, het werkveld en van de speler aan zet
-	 * @return een string met daarin de stenen van tafel, werkveld en speler aan zet
-	 */
-	public String toonStenen() {
-		return String.format("VTafel:%n%s%nTTafel:%n%sWerkveld: %s%n%s:%n%s", spel.toonStenenTafel(1), spel.toonStenenTafel(50), spel.toonWerkveld(),spel.getSpelerAanZet().getGebruikersnaam(), spel.toonStenenSpeler());
-	}
-	
 	/** roept de methode aan om te controleren of de speler aan beurt gewonnen is.
-	 * @return aanroepen van de methode om winst te checken.*/
+	 * @return aanroepen van de methode om winst te checken en resultaat doorgeven.
+	 */
 	public boolean checkWinst() {
 		return spel.checkWinst();
 	}
 
-	/** roept methode aan om de tijdelijke tafel te legen en zet het nemen van een steen op true.
+	/** roept de functie reset aan in spel.
 	 */
 	public void reset() {
 		spel.reset();
@@ -108,13 +95,17 @@ public class DomeinController {
 	}
 
 	/** roept methode aan om beurt huidige speler te beïndigen
+	 * @return het resultaat van beeindigBeurt in spel.
 	 */
 	public String beeindigBeurt() {
 		return spel.beeindigBeurt();
 	}
 	
 	
-	/** Steen aanleggen in gui
+	/** Steen aanleggen
+	 * @param naam kleur en naam van steen.
+	 * @param positie plaats waar steen moet aangelegd worden
+	 * @return het resultaat van de functie steenAanleggen in spel.
 	 */
 	public String steenAanleggen(String naam, String positie) {
 		return spel.steenAanleggen(naam, positie);
@@ -122,16 +113,16 @@ public class DomeinController {
 	
 	
 	/** Roept methode aan om een rij te splitsen. 
-	 * @param Yindex 
-	 * @param Xindex 
+	 * @param Yindex de rij
+	 * @param Xindex de kolom 
 	 */
 	public void rijSplitsen(String Xindex, String Yindex) {
 		spel.rijSplitsen(Xindex, Yindex);
 	}
 	
 	/** Roept methode aan om een joker te vervangen door een steen. 
-	 * @param naam 
-	 * @param waarde 
+	 * @param naam de naam van de steen die je wil leggen ipv de joker
+	 * @param waarde de waarde van de te vervangen joker
 	 */
 	public void jokerVervangen(int waarde, String naam) {
 		spel.jokerVervangen(waarde, naam);
@@ -139,7 +130,9 @@ public class DomeinController {
 	
 	
 	/** Roept methode aan om een vooraf gekozen steen naar het werkveld te verplaatsen.
-	 * @param naam kleur en nummer van de steen. 
+	 * @param xindex de kolom
+	 * @param yindex de rij
+	 * @return het resultaat van de functie steenNaarWerkVeld van spel
 	 */
 	public String steenNaarWerkveld(String xindex, String yindex) {
 		int Xindex = spel.VanStringEenIntMaken(xindex);
@@ -148,13 +141,14 @@ public class DomeinController {
 	}
 	
 	/** Retourneert een lijst van alle spelers die meespelen
-	 * @return lijst van spelers.*/
+	 * @return lijst van spelers.
+	 */
 	public List<Speler> getSpelers(){
 		return spelers;
 	}
 	
 	/** Roept de methode aan die zoekt of er een joker op tafel ligt
-	 * @return methode die kijkt of er een joker op tafel ligt.
+	 * @return het resultaat van de functie heeftTafelEenJoker van spel.
 	 */
 	public boolean heeftTafelEenJoker() {
 		return spel.heeftTafelEenJoker();
@@ -173,12 +167,12 @@ public class DomeinController {
 		return null;
 	}
 	
-	/** Roept de methode aan om de score te berekenen van de winnaar
+	/** Roept de methode aan om de score te berekenen van de spelers
 	 * @param gebruikersnaamWinnaar naam van de winnaar
-	 * @return de methode om de score te berekenen met de naam van de winnaar meegegeven.
+	 * @return een lijst met spelers en hun score van het huidig spel.
 	 */
-	public List<Speler> berekenScore(String gebruikersnaamWinaar){
-		return spel.berekenScore(gebruikersnaamWinaar);
+	public List<Speler> berekenScore(String gebruikersnaamWinnaar){
+		return spel.berekenScore(gebruikersnaamWinnaar);
 	}
 	
 	/** Geeft de gebruikersnaam van de speler aan zet.
@@ -188,6 +182,9 @@ public class DomeinController {
 		return spel.getSpelerAanZet().getGebruikersnaam();
 	}
 	
+	/** Vervangt huidige speler op plaats i
+	 * @oaram i de locatie van de speler in de lijst
+	 */
 	public void replaceSpelerInList(int i) {
 		this.spelers.set(i, this.speler);
 	}

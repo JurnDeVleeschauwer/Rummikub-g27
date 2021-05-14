@@ -81,8 +81,8 @@ public class HoofdPaneel extends BorderPane {
 		setCenter(toonOverzicht);
 	}
 	
-	public void toonScorePaneel(String gebruikersnaamWinaar) {
-		toonScore.voegComponentenToe(gebruikersnaamWinaar);
+	public void toonScorePaneel(String gebruikersnaamWinnaar) {
+		toonScore.voegComponentenToe(gebruikersnaamWinnaar);
 		setCenter(toonScore);
 	}
 	

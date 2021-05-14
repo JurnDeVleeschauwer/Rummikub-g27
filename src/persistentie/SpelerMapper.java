@@ -9,6 +9,12 @@ import java.sql.SQLException;
 import domein.Speler;
 
 public class SpelerMapper {
+	
+	/** Vraagt een speler op van de databank
+	 * @param gebruikersnaam naam van de speler
+	 * @param wachtwoord wachtwoord van de speler
+	 * @return speler
+	 */
 	public Speler geefSpeler(String gebruikersnaam, String wachtwoord) {
 		Speler speler = null;
 		String queryStatement = "SELECT * FROM " + Connectie.DB + ".Speler WHERE naam = ? and wachtwoord = ?";
@@ -35,6 +41,10 @@ public class SpelerMapper {
 		return speler;
 	}
 	
+	/**Update de score in de databank
+	 * @param Score de in te geven score
+	 * @param id het id van de speler 
+	 */
 	public void updateScore(int Score, int id) {
 		try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
 				PreparedStatement query = conn.prepareStatement("UPDATE Speler SET score = ? WHERE spelerID = ?")) {

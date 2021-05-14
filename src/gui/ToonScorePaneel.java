@@ -57,11 +57,11 @@ public class ToonScorePaneel extends GridPane {
 
 	}
 
-	public void voegComponentenToe(String gebruikersnaamWinaar) {
+	public void voegComponentenToe(String gebruikersnaamWinnaar) {
 		if(this.tableView != null) {
 			this.tableView.getItems().clear();
 		}
-		maakTableView(domeinController.berekenScore(gebruikersnaamWinaar));
+		maakTableView(domeinController.berekenScore(gebruikersnaamWinnaar));
 
 	}
 

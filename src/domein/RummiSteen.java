@@ -5,9 +5,7 @@ public class RummiSteen {
 	private final String kleur;
 	private final String naam;
 	
-	/** Zet waarden en kleur van steen om in een string volgens die variabelen.
-	 * @param waarde het getal van de steen
-	 * @param kleur van de steen waarbij groen = joker
+	/** Maakt een lege steen op. (Voor de tafel)
 	 * */
 	public RummiSteen() {
 		this.waarde = 0;
@@ -49,7 +47,7 @@ public class RummiSteen {
 	}
 	
 	@Override
-	/** Geeft elke kleur of joker een korte notatie voor bij gebruik van kleurblindheid in gui.
+	/** Geeft elke kleur of joker een korte notatie voor bij gebruik van kleurblindheid.
 	 * @return verkorte notatie 
 	 */
 	public String toString() {

@@ -40,13 +40,7 @@ public class Tafel {
 	 * @param stenenVasteTafel de stenen aawezig op tafel voor de reset
 	 * @param spelerAanZet de huidige speler die aan de beurt is
 	 */
-	public void reset(List<ArrayList<RummiSteen>> stenenVasteTafel, Speler spelerAanZet) {
-//		for (List<RummiSteen> l:this.stenenOpTafel) {
-//			for (RummiSteen s: l) {
-//				spelerAanZet.krijgtSteen(s);
-//			}
-//		}
-		
+	public void reset(List<ArrayList<RummiSteen>> stenenVasteTafel, Speler spelerAanZet) {		
 		List<ArrayList<RummiSteen>> stenenOpTafel = new ArrayList<>(10);
 		for(int i=0; i <11 ; i++) {
 		    stenenOpTafel.add(new ArrayList());
@@ -61,21 +55,6 @@ public class Tafel {
 		}
 		this.stenenOpTafel = stenenOpTafel;
 		
-	}
-	
-	/** Print een lijst van alle stenen op tafel
-	 * @return string van de tafel
-	 */
-	public String toonStenen() {
-		String returnString = "";
-		for (List<RummiSteen> steenGroep:stenenOpTafel) {
-			for (RummiSteen steen: steenGroep) {
-				if (steen != null)
-					returnString +=  String.format("%s, ",steen.toString());
-			}
-			returnString += String.format("%n");
-		}
-		return returnString;
 	}
 
 	/** Controleert of de stenen op tafel liggen volgens de regels
