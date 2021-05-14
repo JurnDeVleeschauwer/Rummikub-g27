@@ -200,7 +200,8 @@ public class Speler {
 				return true;
 			}
 			else return false;
-		} return true;
+		} 
+		return true;
 	}
 	
 	
