@@ -43,5 +43,5 @@ class RummiSteenTest {
 		r = new RummiSteen(25,"Groen");
 		Assertions.assertEquals("J", r.toString());
 	}
-
+ 
 }
