@@ -26,7 +26,7 @@ class SpelerTest {
 		Assertions.assertEquals(true, p.getNeemSteen());
 	}
 	@Test
-	void verwijderSteen_steen_spelerKrijgtSteen() {
+	void verwijderSteen_steen_spelerKrijgtSteen() { 
 		RummiSteen r = new RummiSteen(25, "Groen");
 		p.krijgtSteen(r);
 		Assertions.assertEquals(1, p.getStenenInBezit().size());
