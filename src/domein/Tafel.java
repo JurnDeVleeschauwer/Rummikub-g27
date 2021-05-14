@@ -11,7 +11,7 @@ public class Tafel {
 	public Tafel() {
 		this.stenenOpTafel= new ArrayList<ArrayList<RummiSteen>>(11);
 		for(int i=0; i <11 ; i++) {
-		    ArrayList arr = new ArrayList<RummiSteen>(13);
+		    ArrayList<RummiSteen> arr = new ArrayList<RummiSteen>(13);
 		    for(int a=0; a <13 ; a++) {
 		    	arr.add(new RummiSteen());
 		    }
@@ -43,7 +43,7 @@ public class Tafel {
 	public void reset(List<ArrayList<RummiSteen>> stenenVasteTafel, Speler spelerAanZet) {		
 		List<ArrayList<RummiSteen>> stenenOpTafel = new ArrayList<>(10);
 		for(int i=0; i <11 ; i++) {
-		    stenenOpTafel.add(new ArrayList());
+		    stenenOpTafel.add(new ArrayList<>());
 		}
 		
 		int tellerRij = 0;
