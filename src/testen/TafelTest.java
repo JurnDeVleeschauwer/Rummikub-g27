@@ -98,10 +98,27 @@ class TafelTest {
 		Assertions.assertFalse(t.controleerTafel());
 	}
 	@Test
-	void verwijderSteen_geldig_verwijderdtSteen() {
+	void geefSteenMetNaam_geldigeSteen_returnedSteen() {
+		RummiSteen r = new RummiSteen(25, "Groen");
+		t.legSteenOpTafel(r, 6, 4);
+		Assertions.assertEquals(r, t.geefSteenMetNaam("Joker"));
+	}
+	@Test
+	void geefSteenMetNaam_ongeldigeSteen_returnedNull() {
+		Assertions.assertEquals(null, t.geefSteenMetNaam("Joker"));
+	}
+	@Test
+	void verwijderSteen_geldigPositie_verwijderdtSteen() {
 		RummiSteen r = new RummiSteen(25, "Groen");
 		t.legSteenOpTafel(r, 6, 4);
 		Assertions.assertEquals("Joker", t.verwijderSteen(4, 6).getNaam());
+		Assertions.assertEquals("", t.getStenenOpTafel().get(6).get(4).getNaam());
+	}
+	@Test
+	void verwijderSteen_geldigeSteen_verwijderdtSteen() {
+		RummiSteen r = new RummiSteen(25, "Groen");
+		t.legSteenOpTafel(r, 6, 4);
+		t.verwijderSteen(r);
 		Assertions.assertEquals("", t.getStenenOpTafel().get(6).get(4).getNaam());
 	}
 }
