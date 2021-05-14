@@ -404,7 +404,7 @@ public class SpelPaneel extends GridPane {
 				lbl.setText(gedaan);
 				hoofdPaneel.toonScorePaneel(domeinController.getSpelerAanZetGebruikersnaam());
 			}else if(gedaan!=null) {
-				lbl.setText(gedaan);
+				lbl.setText(gedaan); 
 			}
 		
 			if(!(label == null)) {
