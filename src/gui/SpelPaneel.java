@@ -93,7 +93,7 @@ public class SpelPaneel extends GridPane {
     private void werkveldLeggen() {
     	this.werkveldPaneel.getChildren().clear();
     	int XIndex=0;
-		for(RummiSteen steen : domeinController.getSpel().getWerkveld()) {
+		for(RummiSteen steen : domeinController.getWerkveld()) {
 			Button btnSteen = this.vanSteenEenButtonMaken(steen);
 			btnSteen.setOnAction(this::opSteenVanWerkveldGeklikt);
 			if (XIndex<9)
@@ -110,7 +110,7 @@ public class SpelPaneel extends GridPane {
 		this.tafelPaneel.getChildren().clear();
 		int XIndex=0;
 		int YIndex=0;
-		for(List<RummiSteen> rij : domeinController.getSpel().getTijdelijkeTafel().getStenenOpTafel()) {
+		for(List<RummiSteen> rij : domeinController.getStenenOpTafel()) {
 			for(RummiSteen steen : rij) {
 				if (!(steen.getKleur().equals(""))) {
 					Button btnSteen = this.vanSteenEenButtonMaken(steen);
@@ -220,12 +220,12 @@ public class SpelPaneel extends GridPane {
 	
 	private void spelerStenenGeven() {
 		this.spelerPaneel.getChildren().clear();
-		String label = domeinController.getSpel().getSpelerAanZet().getGebruikersnaam()+" "+ UITextHelper.UIText("is.aan.de.beurt");
+		String label = domeinController.getSpelerAanZetGebruikersnaam()+" "+ UITextHelper.UIText("is.aan.de.beurt");
 		Label lblSpelerAanZet = new Label(label);
 		lblSpelerAanZet.setTextFill(Color.WHITE);
 		this.spelerPaneel.add(lblSpelerAanZet, 0, 0, 5, 1);
 		List<RummiSteen> stenen = new ArrayList<>();
-		stenen = this.domeinController.getSpel().getSpelerAanZet().getStenenInBezit();
+		stenen = this.domeinController.getStenenInBezit();
 		int index = 0;
 		
 		for(RummiSteen steen : stenen) {
@@ -385,14 +385,10 @@ public class SpelPaneel extends GridPane {
 	
 	
 	private void steenOmAanTeLeggenIsGekozen(String naam) {
-		//if(lbl.getId().equals("steenKiezen") || lbl.getId().equals("rijKiezen")) {
-			
-			lbl.setText(UITextHelper.UIText("Kies.nu.waar.je")+ naam +" "+ UITextHelper.UIText("wilt.leggen"));	
-			lbl.setId("rijKiezen");
-			
-		//}
-		
+		lbl.setText(UITextHelper.UIText("Kies.nu.waar.je")+ naam +" "+ UITextHelper.UIText("wilt.leggen"));	
+		lbl.setId("rijKiezen");
 	}
+	
 	private void steenEnRijZijnGekozenOmAanTeLeggen(String positie) {
 		if(lbl.getId().equals("rijKiezen")) {
 			String[] str = lbl.getText().split(" ");
@@ -400,15 +396,18 @@ public class SpelPaneel extends GridPane {
 			String label = domeinController.steenAanleggen(naam, positie);
 			String gedaan = domeinController.isGedaan();
 			reloadScherm();
-			if(gedaan.equals("Je bent gewonnen!")) {
-				lbl.setText(gedaan);
-				hoofdPaneel.toonScorePaneel(domeinController.getSpelerAanZetGebruikersnaam());
-			}else if(gedaan!=null) {
-				lbl.setText(gedaan); 
+			if(gedaan!=null) {
+				if(gedaan.equals("Je bent gewonnen!")) {
+					lbl.setText(gedaan);
+					hoofdPaneel.toonScorePaneel(domeinController.getSpelerAanZetGebruikersnaam());
+				}else {
+					lbl.setText(gedaan); 
+				}
 			}
+			
 		
 			if(!(label == null)) {
-				lbl.setText(label+UITextHelper.UIText("kies.een.actie"));
+				lbl.setText(label/*+UITextHelper.UIText("kies.een.actie")*/);
 			} 
 				
 			

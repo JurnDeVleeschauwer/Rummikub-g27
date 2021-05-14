@@ -188,4 +188,16 @@ public class DomeinController {
 	public void replaceSpelerInList(int i) {
 		this.spelers.set(i, this.speler);
 	}
+	
+	public List<RummiSteen> getStenenInBezit(){
+		return this.spel.getSpelerAanZet().getStenenInBezit();
+	}
+	
+	public List<RummiSteen> getWerkveld(){
+		return this.spel.getWerkveld();
+	}
+	
+	public List<ArrayList<RummiSteen>> getStenenOpTafel(){
+		return this.spel.getTijdelijkeTafel().getStenenOpTafel();
+	}
 }

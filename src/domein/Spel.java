@@ -284,6 +284,12 @@ public class Spel {
 	 * @return wanneer je deze steen niet hebt 
 	 */
 	public String steenAanleggen(String naam, String positie) {
+		if(this.spelerAanZet.getIsEersteBeurt()) {
+			if(naam.equals("Joker")){
+				return UITextHelper.UIText("Je.mag.geen.joker.leggen.in.je.eerste.beurt");
+			}
+		}
+		
 		String[] str = positie.split(",");
 		int rij=0;
 		int kolom=0;
