@@ -1,7 +1,5 @@
 package gui;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import domein.DomeinController;
@@ -88,6 +86,8 @@ public class ToonScorePaneel extends GridPane {
 		add(tableView, 0, 0);
 
 		Button exit = new Button(UITextHelper.UIText("exit"));
+		exit.setPrefWidth(50);
+        exit.setPrefHeight(30);
 		exit.setOnAction(this::exit);
 		add(exit, 5, 3);
 	}

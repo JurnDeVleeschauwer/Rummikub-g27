@@ -149,20 +149,22 @@ public class Spel {
 				domeinController.getSpelerRepo().updateScore(score + speler.getScore(), speler.getID());
 				try {
 					domeinController.controleerSpeler(speler.getGebruikersnaam(), speler.getWachtwoord());
-					domeinController.replaceSpelerInList(spelers.indexOf(speler));
+					
 				} catch (ExceptieSpelerAanmelden e) {
 					e.printStackTrace();
 				}
+				domeinController.replaceSpelerInList(spelers.indexOf(speler));
 				spelersListScore.add(new Speler(speler.getGebruikersnaam(), score));
 			}
 		}
 		domeinController.getSpelerRepo().updateScore(winscore+ this.getSpeler(gebruikersnaamWinnaar).getScore() , this.getSpelerID(gebruikersnaamWinnaar));
 		try {
 			domeinController.controleerSpeler(gebruikersnaamWinnaar, this.getSpeler(gebruikersnaamWinnaar).getWachtwoord());
-			domeinController.replaceSpelerInList(spelers.indexOf(this.getSpeler(gebruikersnaamWinnaar)));
+			
 		} catch (ExceptieSpelerAanmelden e) {
 			e.printStackTrace();
 		}
+		domeinController.replaceSpelerInList(spelers.indexOf(this.getSpeler(gebruikersnaamWinnaar)));
 		spelersListScore.add(new Speler(gebruikersnaamWinnaar, winscore));
 		return spelersListScore;
 	}

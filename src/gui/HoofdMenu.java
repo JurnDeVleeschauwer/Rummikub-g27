@@ -41,19 +41,19 @@ public class HoofdMenu extends GridPane {
 	private void voegComponentenToe() {
 
 		Button speelSpel = new Button(UITextHelper.UIText("Speel.spel"));
-		speelSpel.setPrefWidth(100); 
+		speelSpel.setPrefWidth(120); 
 		speelSpel.setPrefHeight(25);
 		speelSpel.setOnAction(this::speelSpel);
 		add(speelSpel, 0, 0, 2, 1);
 		
 		Button toonOverzicht = new Button(UITextHelper.UIText("Toon.overzicht"));
-		toonOverzicht.setPrefWidth(100); 
+		toonOverzicht.setPrefWidth(120); 
 		toonOverzicht.setPrefHeight(25);
 		toonOverzicht.setOnAction(this::toonOverzicht);
 		add(toonOverzicht, 0, 1, 2, 1);
 
 		Button stoppen = new Button(UITextHelper.UIText("Stop.met.spelen"));
-		stoppen.setPrefWidth(100); 
+		stoppen.setPrefWidth(120); 
 		stoppen.setPrefHeight(25);
 		stoppen.setOnAction(this::stoppen);
 		add(stoppen, 0, 2, 2, 1);

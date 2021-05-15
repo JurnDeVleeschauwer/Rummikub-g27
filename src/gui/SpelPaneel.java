@@ -351,7 +351,7 @@ public class SpelPaneel extends GridPane {
 		this.optiesPaneel.add(btnSteenNaarWerkveld, 0, 5);
 		
 		this.optiesPaneel.setVgap(5);
-		opties.forEach(button -> button.setPrefWidth(200)); 
+		opties.forEach(button -> button.setPrefWidth(250)); 
 		opties.forEach(button -> button.setPrefHeight(25)); 
 	}
 

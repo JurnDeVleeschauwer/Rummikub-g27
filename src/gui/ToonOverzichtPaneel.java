@@ -11,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -84,7 +83,8 @@ public class ToonOverzichtPaneel extends GridPane {
         List<Speler> spelers = domeinController.getSpelers();
         
         Collections.sort(spelers, new Comparator<Speler>() {
-		    public int compare(Speler o1, Speler o2) {
+		    @Override
+			public int compare(Speler o1, Speler o2) {
 		        if(0 != -(Integer.compare(o1.getScore(), o2.getScore()))) {
 		        	System.out.println(Integer.compare(o1.getScore(), o2.getScore()));
 		        	return -(Integer.compare(o1.getScore(), o2.getScore()));
@@ -103,6 +103,8 @@ public class ToonOverzichtPaneel extends GridPane {
         add(tableView, 0, 0);
         
         Button exit = new Button(UITextHelper.UIText("exit"));
+        exit.setPrefWidth(50);
+        exit.setPrefHeight(30);
         exit.setOnAction(this::exit);
         add(exit, 5, 3);
 	  }
